@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "OnulDamso";
+    src: url("https://example.com/path/to/OnulDamso.woff") format("woff");
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+  }
