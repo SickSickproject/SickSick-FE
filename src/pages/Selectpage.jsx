@@ -2,11 +2,10 @@ import {themes} from "../styles/themes.jsx"
 import "../styles/fonts.css"
 import styled from "styled-components"
 import sicksicklogo from "../assets/SelectpageImg/sicksicklogo.png"
-import {useNavigate } from "react-router-dom"
+import {Outlet, useLocation, useNavigate } from "react-router-dom"
 import { useState,useEffect } from "react"
 import SplashScreen from "./SplashScreen.jsx";
 
-const NavPage = ["/one", "/two"];
 
 const Selectpage = ()=>{
 
@@ -26,15 +25,6 @@ const Selectpage = ()=>{
         }
       }, []);
 
-    const btnclick = (i)=>{
-        if(i){
-            navigate(`/two`,{replace : false});
-        }
-        else {  
-            navigate(`/one`,{replace : false});
-        }
-    }
-
     return <>
         {showSplash ? (<SplashScreen/>) : (
         <div style={{width:"100%",height:"100%",backgroundColor:"yellow",position:"relative"}}>
@@ -42,9 +32,9 @@ const Selectpage = ()=>{
             <img src={img1} style={{width:"100%",height:"100%"}} alt="sicksick1"></img>
         </div>
         <Textbox>식식은 섭식장애 인식 확산을 위한 당사자 고백 프로젝트입니다.</Textbox>
-        <Circle style={{left:"20%"}} onClick={()=>{btnclick(0)}}>섭식 장애란 무엇일까?</Circle>
+        <Circle style={{left:"20%"}} onClick={()=>navigate(`/main/one`,{replace : false})}>섭식 장애란 무엇일까?</Circle>
         
-        <Circle style={{left:"53%"}} onClick={()=>{btnclick(1)}}>고백 들으러 가기</Circle>
+        <Circle style={{left:"53%"}} onClick={()=>navigate(`/main/two`,{replace : false})}>고백 들으러 가기</Circle>
     </div>
     )}
     </>
