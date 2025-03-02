@@ -28,13 +28,13 @@ const Selectpage = ()=>{
     return <>
         {showSplash ? (<SplashScreen/>) : (
         <div style={{width:"100%",height:"100%",backgroundColor:"yellow",position:"relative"}}>
-        <div style={{position:"absolute",width:"40%",height:"20%",left:"30%",backgroundColor:"red",top:"2%"}}>
+        <div style={{position:"absolute",width:"700px",height:"180px",left:"610px",backgroundColor:"red",top:"47px"}}>
             <img src={img1} style={{width:"100%",height:"100%"}} alt="sicksick1"></img>
         </div>
         <Textbox>식식은 섭식장애 인식 확산을 위한 당사자 고백 프로젝트입니다.</Textbox>
-        <Circle style={{left:"20%"}} onClick={()=>navigate(`/main/one`,{replace : false})}>섭식 장애란 무엇일까?</Circle>
+        <Circle style={{left:"400px"}} onClick={()=>navigate(`/main/one`,{replace : false})}>섭식 장애란 무엇일까?</Circle>
         
-        <Circle style={{left:"53%"}} onClick={()=>navigate(`/main/two`,{replace : false})}>고백 들으러 가기</Circle>
+        <Circle style={{left:"1002px"}} onClick={()=>navigate(`/main/two`,{replace : false})}>고백 들으러 가기</Circle>
     </div>
     )}
     </>
@@ -47,11 +47,11 @@ display:flex;
 align-items:center;
 justify-content:center;
 position:absolute;
-width:27%;
-aspect-ratio: 1 / 1;
+width:518px;
+height:518px;
 background-color:white;
 border: 2px solid #000;
-top:40%;
+top:370px;
 border-radius:50%;
 font-size: 42.505px;
 font-style: normal;
