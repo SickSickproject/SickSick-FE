@@ -77,7 +77,7 @@ flex-direction:row;
 `
 const Sidebar = styled.div`
 width:316px;
-height:850px;
+height:1105px;
 display:flex;
 flex-direction:column;
 position:relative;
