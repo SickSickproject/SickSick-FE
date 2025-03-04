@@ -1,31 +1,45 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { useState } from "react";
-
 import leesunminhoverimg from "../../assets/Hoverimg/leesunminhoverimg.png";
-import leejinsolhoverimg from "../../assets/Hoverimg/leejinsolhoverimg.png";
-import babarahoverimg from "../../assets/Hoverimg/babarahoverimg.png";
 
-const Leesunminpage = () => {
+const Leesunminpage = ({ setpagestate, setbtnclick }) => {
+    console.log(setbtnclick)
     const [isClicked, setIsClicked] = useState(false);
 
+    const [move, setmove] = useState(0)
+    const [move2, setmove2] = useState(0)
+
+    const [mouseenter1, setmouseenter1] = useState(false)
+    const [mouseenter2, setmouseenter2] = useState(false)
+    const [mouseenter3, setmouseenter3] = useState(false)
+
     const img1 = leesunminhoverimg;
-    const img2 = leejinsolhoverimg;
-    const img3 = babarahoverimg;
+
+    const moving = (i) => {
+        if (i) {
+            setmove(-100)
+            setmove2(200)
+        }
+        else {
+            setmove(0)
+            setmove2(0)
+        }
+    }
 
     return (
         <>
             <AnimatePresence>
                 <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 0.8 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
                 >
                     <Container clicked={isClicked}>
                         <Namebar>이선민</Namebar>
-                        <Titlebar>
+                        <Titlebar move2={move2}>
                             "그럴 수 밖에 없었음을 받아들이고, 앞으로 무엇을 할 것인가에 대해 생각하면 돼요."
                         </Titlebar>
                         <Discriptbar>
@@ -39,25 +53,81 @@ const Leesunminpage = () => {
                         {/* 클릭하면 강조되는 이미지 */}
 
                         {/* 배경 클릭하면 원래 상태로 복귀 */}
-                        {isClicked && <Overlay onClick={() => setIsClicked(false)} />}
+                        {isClicked && <Overlay onClick={() => { setIsClicked(!isClicked); moving(!isClicked) }} />}
                     </Container>
-                    <motion.div
-                        className="absolute w-full h-full bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg"
-                        initial={{ scale: 1, opacity: 1, zIndex: 1 }}
-                        animate={
-                            isClicked
-                                ? { scale: 1.3, opacity: 1, zIndex: 20 }
-                                : { scale: 1, opacity: 0.7, zIndex: 1 }
-                        }
-                        transition={{ duration: 0.5, ease: "easeOut" }}
-                    >
-                        <Personimg
-                            src={img1}
-                            isClicked={isClicked}
-                            onClick={() => setIsClicked(!isClicked)}
-                        />
-                    </motion.div>
-                    <Navigatebar>고백들으러가기</Navigatebar>
+                    <Personimg
+                        src={img1}
+                        isClicked={isClicked}
+                        onClick={() => { setIsClicked(!isClicked); moving(!isClicked) }}
+                        move={move}
+                    />
+                    <AnimatePresence>
+                        {isClicked && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            >
+                                <Commentbox
+                                    style={{ left: "1330px", top: "460px" }}
+                                    isClicked={isClicked}
+                                    onMouseEnter={() => setmouseenter2(true)}
+                                    onMouseLeave={() => setmouseenter2(false)}
+                                >{mouseenter2 && <div style={{width:"20px",height:"20px",backgroundColor:"black",borderRadius:"50%"}}></div>}</Commentbox>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    {mouseenter2 && <Infobox2>
+                        <Infobox2_sub>최근에 아이를 출산해 한 아이의
+                            엄마가 되었다.</Infobox2_sub>
+                    </Infobox2>}
+                    <AnimatePresence>
+                        {isClicked && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            >
+                                <Commentbox
+                                    style={{ left: "890px", top: "720px" }}
+                                    isClicked={isClicked}
+                                    onMouseEnter={() => setmouseenter3(true)}
+                                    onMouseLeave={() => setmouseenter3(false)}
+                                >{mouseenter3 && <div style={{width:"20px",height:"20px",backgroundColor:"black",borderRadius:"50%"}}></div>}</Commentbox>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {mouseenter3 && <Infobox3>
+                        <Infobox3_sub>예술로서 섭식장애를
+                            이야기 하는 방법을
+                            찾아가고 있다.</Infobox3_sub>
+                    </Infobox3>}
+                    <AnimatePresence>
+                        {isClicked && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            >
+                                <Commentbox
+                                    style={{ left: "1270px", top: "190px" }}
+                                    isClicked={isClicked}
+                                    onMouseEnter={() => setmouseenter1(true)}
+                                    onMouseLeave={() => setmouseenter1(false)}
+                                >{mouseenter1 && <div style={{width:"20px",height:"20px",backgroundColor:"black",borderRadius:"50%"}}></div>}</Commentbox>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    {mouseenter1 && <Infobox1>
+                        <Infobox1_sub>예술기획자로 일하고 있다.</Infobox1_sub>
+                    </Infobox1>}
+                    <Navigatebar onClick={() => {
+                        setpagestate("main"); setbtnclick([0, 1, 0, 0]); window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}>고백, 들으러가기{`>`}</Navigatebar>
                 </motion.div>
             </AnimatePresence>
         </>
@@ -92,9 +162,22 @@ const Overlay = styled.div`
 
 // 내비게이션 바 (기본 유지)
 const Navigatebar = styled.div`
-    width: 1605px;
-    height: 82px;
-    background-color: yellow;
+display: flex;
+width: 1605px;
+height: 82px;
+align-items: center;
+justify-content:right;
+flex-shrink: 0;
+background-color: yellow;
+font-size: 42px;
+font-style: normal;
+font-weight: 600;
+cursor: pointer;
+border: 1.5px solid #000;
+&:hover {
+    background-color: #FFFFA3;
+    transition: background-color 0.3s ease-in-out
+    }
 `;
 
 // 이름 표시
@@ -133,7 +216,8 @@ const Titlebar = styled.div`
     height: 306px;
     color: yellow;
     z-index: 10;
-    div
+    transform: ${({ move2 }) => `translateY(${move2}px)`};
+    transition: transform 0.3s ease-in-out ;
 `;
 
 // 설명 부분
@@ -156,21 +240,104 @@ const Personimg = styled.img`
     width:565px;
     height:764px;
     left: 780px;
+    transform-origin: top left;
+    transform: ${({ move }) => `translateY(${move}px)`};
+    opacity: ${({ isClicked }) => (isClicked ? 0.8 : 0.5)};
     top: 260px;
     position: absolute;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
-    transform-origin: top left;
     &:hover {
-        transform: ${({ isClicked }) => (isClicked ? "scale(1)" : "scale(1.2)")};
+        transform: ${({ move }) => `translateY(${move}px) scale(1.1)`};
         opacity: 0.8;
     }
 `;
 
-const Personimg2 = styled.img`
-position: absolute;
-left: 800px;
-top: 180px;
-z-index:100;
+const Commentbox = styled.div`
+width:27px;
+height:27px;
+border:3px solid black;
+position:absolute;
+z-index;100;
+background-color:yellow;
+transition: opacity 0.3s ease-in-out;
+display:flex;
+justify-content:center;
+align-items:center;
+`
 
+const Infobox1 = styled.div`
+left: 1337px;
+position:absolute;
+top:190px;
+background-color:yellow;
+width:163px;
+height:79px;
+display: flex;
+padding: 18px 22px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border: 3px solid #000;
+`
+
+const Infobox1_sub = styled.div`
+color: #010101;
+leading-trim: both;
+text-edge: cap;
+font-family: "Gothic A1";
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 140%;
+`
+
+const Infobox2 = styled.div`
+left: 1397px;
+position:absolute;
+top:460px;
+background-color:yellow;
+width:320px;
+height:79px;
+display: flex;
+padding: 18px 22px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border: 3px solid #000;
+`
+const Infobox2_sub = styled.div`
+color: #010101;
+leading-trim: both;
+text-edge: cap;
+font-family: "Gothic A1";
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 140%;
+`
+
+const Infobox3 = styled.div`
+left: 957px;
+position:absolute;
+top:720px;
+width:227px;
+height:107px;
+display: flex;
+padding: 18px 22px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+background-color:yellow;
+border: 3px solid #000;
+`
+const Infobox3_sub = styled.div`
+color: #010101;
+leading-trim: both;
+text-edge: cap;
+font-family: "Gothic A1";
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 140%;
 `
