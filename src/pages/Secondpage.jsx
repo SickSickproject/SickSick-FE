@@ -56,13 +56,13 @@ const Secondpage = ()=>{
         </Mainbar>
         }
         {pagestate === "leesunmin" && 
-            <Leesunminpage></Leesunminpage>
+            <Leesunminpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leesunminpage>
         }
         {pagestate === "leejinsol" && 
-            <Leejinsolpage></Leejinsolpage>
+            <Leejinsolpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leejinsolpage>
         }
         {pagestate === "babara" && 
-            <Babarapage></Babarapage>
+            <Babarapage setpagestate={setpagestate} setbtnclick={setbtnclick}></Babarapage>
         }
     </Container>
 }
