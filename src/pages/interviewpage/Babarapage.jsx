@@ -39,19 +39,17 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                 >
                     <Container clicked={isClicked}>
                         <Namebar>바바라</Namebar>
-                        <div style={{display:"flex",width:"1350px",height:"202px", padding : "0px, 131px",justifyContent:"center",alignItems:"center",flexShrink:"0",position:"absolute",left:"117px",top:"105px"}}>
-                        <Titlebar move2={move2}>
-                            “그 사회가 나를 키워서<br></br>
-                            아프게 만들었다는 걸<br></br>
-                            우리가 인정하기는 어려워요.”
-                        </Titlebar>
+                        <div style={{ display: "flex", width: "1350px", height: "202px", padding: "0px, 131px", justifyContent: "center", alignItems: "center", flexShrink: "0", position: "absolute", left: "117px", top: "105px" }}>
+                            <Titlebar move2={move2}>
+                                “그 사회가 나를 키워서<br></br>
+                                아프게 만들었다는 걸<br></br>
+                                우리가 인정하기는 어려워요.”
+                            </Titlebar>
                         </div>
                         <Discriptbar>
-                            예술가이자 아트디렉터로 활동하고 있는 이선민님은
-                            ‘섭식장애건강권연대’를 만들어 다양한 활동과 프로그램을
-                            기획하는데 앞장서고 있습니다. 무용수를 준비하던 학창시절부터 긴 시간동안 함께해온 섭식장애와의 이야기를 가진 선민님은
-                            '안전한 식탁'과 같은 여러 프로그램을 기획하며 섭식장애는 남녀노소를 불문하고 누구에게나 일어날 수 있음을 이야기합니다.
-                            섭식장애를 겪는 모든 사람들이 건강한 식습관과 관련된 경험을 꼭 해보고, 그를 통해 식사와 자기 스스로에게 긍정적인 태도를 가질 수 있도록 기획자로서의 정진을 멈추지 않고 계속해서 나아가고 있습니다.
+                            바바라는 2011년도에 가수로 데뷔를 했고 현재는 보컬 트레이너로 활동을 하고 있습니다. 과거 연예계를 경험
+                            하며 겪은 섭식장애 그리고 보컬트레이너로서 보는 섭식장애를 겪는 학생들. 이에 대해 그는 미디어가 시대에
+                            미치는 영향에 대해 힘있는 목소리로 이야기합니다. 바바라 라는 이름이 가수 혹은 보컬트레이너 라는 키워드에 멈추지 않고 누군가에게 용기가 될 수 있는 활동가로 불릴 수 있을 때까지, 그의 목소리는 계속해서 울려 퍼지고 있습니다.
                         </Discriptbar>
 
                         {/* 클릭하면 강조되는 이미지 */}
@@ -84,7 +82,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     </AnimatePresence>
                     {mouseenter2 && <Infobox2>
                         <Infobox2_sub>다이어트 약을<br></br>
-                        처방받은 적이 있다.</Infobox2_sub>
+                            처방받은 적이 있다.</Infobox2_sub>
                     </Infobox2>}
                     <AnimatePresence>
                         {isClicked && (
@@ -106,7 +104,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
 
                     {mouseenter3 && <Infobox3>
                         <Infobox3_sub>2011년 가수로<br></br>
-                        데뷔했다.</Infobox3_sub>
+                            데뷔했다.</Infobox3_sub>
                     </Infobox3>}
                     <AnimatePresence>
                         {isClicked && (
@@ -127,7 +125,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     </AnimatePresence>
                     {mouseenter1 && <Infobox1>
                         <Infobox1_sub>현재 보컬 트레이너로서
-                        학생들을 가르치고 있다.</Infobox1_sub>
+                            학생들을 가르치고 있다.</Infobox1_sub>
                     </Infobox1>}
                     <Navigatebar onClick={() => {
                         setpagestate("main"); setbtnclick([0, 0, 0, 1]); window.scrollTo({ top: 0, behavior: "smooth" });
@@ -231,11 +229,15 @@ const Discriptbar = styled.div`
     position: absolute;
     left: 22px;
     color: white;
-    top: 776px;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 125%;
+    top: 796px;
+    color: #FFF;
+leading-trim: both;
+text-edge: cap;
+font-family: "Gothic A1";
+font-size: 32px;
+font-style: normal;
+font-weight: 600;
+line-height: 125%; /* 40px */
     z-index: 10;
 `;
 
