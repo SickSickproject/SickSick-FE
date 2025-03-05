@@ -23,7 +23,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
     const moving = (i) => {
         if (i) {
-            setmove(-100)
+            setmove(-70)
             setmove2(200)
         }
         else {
@@ -74,7 +74,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1490px", top: "440px" }}
+                                    style={{ left: "1490px", top: "470px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter2(true)}
                                     onMouseLeave={() => setmouseenter2(false)}
@@ -95,7 +95,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "980px", top: "550px" }}
+                                    style={{ left: "980px", top: "580px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter3(true)}
                                     onMouseLeave={() => setmouseenter3(false)}
@@ -117,7 +117,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1240px", top: "120px" }}
+                                    style={{ left: "1240px", top: "150px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter1(true)}
                                     onMouseLeave={() => setmouseenter1(false)}
@@ -138,7 +138,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1350px", top: "760px" }}
+                                    style={{ left: "1350px", top: "790px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter4(true)}
                                     onMouseLeave={() => setmouseenter4(false)}
@@ -295,7 +295,7 @@ align-items:center;
 const Infobox1 = styled.div`
 left: 1307px;
 position:absolute;
-top:120px;
+top:150px;
 background-color:yellow;
 width:227px;
 height:79px;
@@ -321,7 +321,7 @@ line-height: 140%;
 const Infobox2 = styled.div`
 left: 1557px;
 position:absolute;
-top:440px;
+top:470px;
 background-color:yellow;
 width:244px;
 height:79px;
@@ -346,7 +346,7 @@ line-height: 140%;
 const Infobox3 = styled.div`
 left: 1047px;
 position:absolute;
-top:550px;
+top:580px;
 width:294px;
 height:79px;
 display: flex;
@@ -371,7 +371,7 @@ line-height: 140%;
 const Infobox4 = styled.div`
 left: 1417px;
 position:absolute;
-top:760px;
+top:790px;
 background-color:yellow;
 width:260px;
 height:107px;
