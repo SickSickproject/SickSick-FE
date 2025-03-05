@@ -74,7 +74,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1330px", top: "460px" }}
+                                    style={{ left: "980px", top: "540px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter2(true)}
                                     onMouseLeave={() => setmouseenter2(false)}
@@ -83,8 +83,8 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                         )}
                     </AnimatePresence>
                     {mouseenter2 && <Infobox2>
-                        <Infobox2_sub>최근에 아이를 출산해 한 아이의
-                            엄마가 되었다.</Infobox2_sub>
+                        <Infobox2_sub>다이어트 약을<br></br>
+                        처방받은 적이 있다.</Infobox2_sub>
                     </Infobox2>}
                     <AnimatePresence>
                         {isClicked && (
@@ -95,7 +95,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "890px", top: "720px" }}
+                                    style={{ left: "1120px", top: "730px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter3(true)}
                                     onMouseLeave={() => setmouseenter3(false)}
@@ -105,9 +105,8 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     </AnimatePresence>
 
                     {mouseenter3 && <Infobox3>
-                        <Infobox3_sub>예술로서 섭식장애를
-                            이야기 하는 방법을
-                            찾아가고 있다.</Infobox3_sub>
+                        <Infobox3_sub>2011년 가수로<br></br>
+                        데뷔했다.</Infobox3_sub>
                     </Infobox3>}
                     <AnimatePresence>
                         {isClicked && (
@@ -118,7 +117,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1270px", top: "190px" }}
+                                    style={{ left: "1390px", top: "430px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter1(true)}
                                     onMouseLeave={() => setmouseenter1(false)}
@@ -127,7 +126,8 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                         )}
                     </AnimatePresence>
                     {mouseenter1 && <Infobox1>
-                        <Infobox1_sub>예술기획자로 일하고 있다.</Infobox1_sub>
+                        <Infobox1_sub>현재 보컬 트레이너로서
+                        학생들을 가르치고 있다.</Infobox1_sub>
                     </Infobox1>}
                     <Navigatebar onClick={() => {
                         setpagestate("main"); setbtnclick([0, 0, 0, 1]); window.scrollTo({ top: 0, behavior: "smooth" });
@@ -271,11 +271,11 @@ align-items:center;
 `
 
 const Infobox1 = styled.div`
-left: 1337px;
+left: 1457px;
 position:absolute;
-top:190px;
+top:430px;
 background-color:yellow;
-width:163px;
+width:258px;
 height:79px;
 display: flex;
 padding: 18px 22px;
@@ -297,11 +297,11 @@ line-height: 140%;
 `
 
 const Infobox2 = styled.div`
-left: 1397px;
+left: 1047px;
 position:absolute;
-top:460px;
+top:540px;
 background-color:yellow;
-width:320px;
+width:219px;
 height:79px;
 display: flex;
 padding: 18px 22px;
@@ -322,11 +322,11 @@ line-height: 140%;
 `
 
 const Infobox3 = styled.div`
-left: 957px;
+left: 1187px;
 position:absolute;
-top:720px;
-width:227px;
-height:107px;
+top:730px;
+width:174px;
+height:79px;
 display: flex;
 padding: 18px 22px;
 justify-content: center;
