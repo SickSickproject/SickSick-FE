@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import sicksickbtn from "../assets/sicksickbtn.jpg"
@@ -21,9 +21,13 @@ const Mainpage = ()=> {
     const [Left,setLeft] = useState(window.innerWidth*0.8)
     const navigate = useNavigate();
 
+    useEffect(()=>{
+        updateWidth();
+    },[])
+
     const updateWidth = ()=>{
         const screenWidth = window.innerWidth; // 전체 화면 너비
-        setLeft(screenWidth * 0.8);
+        setLeft(screenWidth * 0.75);
     }
 
     window.addEventListener("resize",()=>{
@@ -55,12 +59,15 @@ const Mainpage = ()=> {
 export default Mainpage
 
 const Navbar = styled.div`
-position: relative;
+position:fixed;
 display: flex;
 align-items: center;
 flex-direction: row;
+top:0;
+left:0;
 width:1920px;
 height:95px;
+background-color:white;
 border-bottom: 2px solid black;
 z-index: 9999;
 box-sizing: border-box;
@@ -85,10 +92,9 @@ text-decoration: ${(props)=>(props.clicked ? "underline":"none")};
 `
 
 const Navbarin = styled.div`
-left: ${(props) => props.left}px;
+margin-left: ${(props) => props.left}px;
 width:380px;
 height:95px;
-position:absolute;
 display:flex;
 flex-direction:row;
 align-items:center;
@@ -97,6 +103,8 @@ align-items:center;
 const Imgcontainer = styled.img`
 width:73px;
 height:60px;
-position:absolute;
-left:19px;
+margin-left:19px;
+&:hover {
+    cursor:pointer;
+  }
 `
