@@ -5,6 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Leesunminpage from "./interviewpage/Leesunminpage";
 import Leejinsolpage from "./interviewpage/Leejinsolpage";
 import Babarapage from "./interviewpage/Babarapage";
+import Allvideo from "./videolistpage/Allvideo";
+import Leesunminvideo from "./videolistpage/Leesunminvideo";
+import Leejinsolvideo from "./videolistpage/Leejinsolvideo";
+import Babaravideo from "./videolistpage/Babaravideo";
 
 const Secondpage = ()=>{
 
@@ -53,6 +57,10 @@ const Secondpage = ()=>{
             <SelectBtn style={{left:"300px"}} color={btnclick[2]} onClick={()=>{btnchange(2)}}>이진솔</SelectBtn>
             <SelectBtn style={{left:"440px"}} color={btnclick[3]} onClick={()=>{btnchange(3)}}>바바라</SelectBtn>
         </SelectBar>
+        {btnclick[0] === 1 && <Allvideo></Allvideo>}
+        {btnclick[1] === 1 && <Leesunminvideo></Leesunminvideo>}
+        {btnclick[2] === 1 && <Leejinsolvideo></Leejinsolvideo>}
+        {btnclick[3] === 1 && <Babaravideo></Babaravideo>}
         </Mainbar>
         }
         {pagestate === "leesunmin" && 
@@ -70,17 +78,20 @@ const Secondpage = ()=>{
 export default Secondpage
 
 const Container = styled.div`
+padding-top:95px;
 width:1920px;
-height:850px;
-display:flex;
-flex-direction:row;
+height:1105px;
 `
 const Sidebar = styled.div`
+position:fixed;
+top:95px;
+left:0px;
 width:316px;
 height:1105px;
 display:flex;
 flex-direction:column;
-position:relative;
+z-index:9999;
+background-color:white;
 `;
 
 const SidebarBtn = styled.div`
@@ -128,10 +139,10 @@ cursor:pointer;
 
 
 const Mainbar = styled.div`
+margin-left:316px;
 width:1605px;
-height:850px;
+height:1105px;
 
-overflow:auto;
 `
 
 const SelectBar = styled.div`
@@ -140,8 +151,7 @@ height:81px;
 display:flex;
 align-items:center;
 position:relative;
-border-bottom: 1px solid black;
-box-sizing: border-box;
+
 `
 
 const SelectBtn = styled.div`

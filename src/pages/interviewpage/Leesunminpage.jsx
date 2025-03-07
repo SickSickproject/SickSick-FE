@@ -34,13 +34,13 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                     initial={{ opacity: 0.8 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
                 >
                     <Container clicked={isClicked}>
                         <Namebar>이선민</Namebar>
                         <Titlebar move2={move2}>
-                            "그럴 수 밖에 없었음을 받아들이고, 앞으로 무엇을 할 것인가에 대해 생각하면 돼요."
+                            "그럴 수 밖에 없었음을 받아들이고, 앞으로 무엇을 할 것인가에 대해<br></br> 생각하면 돼요."
                         </Titlebar>
                         <Discriptbar>
                             예술가이자 아트디렉터로 활동하고 있는 이선민님은
@@ -79,7 +79,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                         )}
                     </AnimatePresence>
                     {mouseenter2 && <Infobox2>
-                        <Infobox2_sub>최근에 아이를 출산해 한 아이의
+                        <Infobox2_sub>최근에 아이를 출산해 한 아이의<br></br>
                             엄마가 되었다.</Infobox2_sub>
                     </Infobox2>}
                     <AnimatePresence>
@@ -101,8 +101,8 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                     </AnimatePresence>
 
                     {mouseenter3 && <Infobox3>
-                        <Infobox3_sub>예술로서 섭식장애를
-                            이야기 하는 방법을
+                        <Infobox3_sub>예술로서 섭식장애를<br></br>
+                            이야기 하는 방법을<br></br>
                             찾아가고 있다.</Infobox3_sub>
                     </Infobox3>}
                     <AnimatePresence>
@@ -123,7 +123,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                         )}
                     </AnimatePresence>
                     {mouseenter1 && <Infobox1>
-                        <Infobox1_sub>예술기획자로 일하고 있다.</Infobox1_sub>
+                        <Infobox1_sub>예술기획자로<br></br> 일하고 있다.</Infobox1_sub>
                     </Infobox1>}
                     <Navigatebar onClick={() => {
                         setpagestate("main"); setbtnclick([0, 1, 0, 0]); window.scrollTo({ top: 0, behavior: "smooth" });
@@ -139,11 +139,11 @@ export default Leesunminpage;
 
 // 메인 컨테이너 (클릭 시 흐림 효과 적용)
 const Container = styled.div`
+    margin-left:316px;
     width: 1605px;
     height: 1023px;
     background-color: black;
     position: relative;
-    overflow: hidden;
     transition: filter 0.3s ease-in-out;
     ${({ clicked }) => clicked && `filter: blur(5px) brightness(50%);`}
 `;
@@ -173,7 +173,7 @@ font-size: 42px;
 font-style: normal;
 font-weight: 600;
 cursor: pointer;
-border: 1.5px solid #000;
+margin-left:316px;
 &:hover {
     background-color: #FFFFA3;
     transition: background-color 0.3s ease-in-out
@@ -258,7 +258,7 @@ width:27px;
 height:27px;
 border:3px solid black;
 position:absolute;
-z-index;100;
+z-index:100;
 background-color:yellow;
 transition: opacity 0.3s ease-in-out;
 display:flex;
