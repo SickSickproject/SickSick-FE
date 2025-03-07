@@ -39,13 +39,13 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                     initial={{ opacity: 0.8 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
                 >
                     <Container clicked={isClicked}>
                         <Namebar>이진솔</Namebar>
                         <Titlebar move2={move2}>
-                            "섭식장애가 인생에서 중심이 되지 않도록 하는 것이 진정한 회복의 시작입니다."
+                            "섭식장애가 인생에서 중심이<br></br> 되지 않도록 하는 것이 진정한<br></br> 회복의 시작입니다."
                         </Titlebar>
                         <Discriptbar>
                             섭식장애  상담사이자 경험자 입니다.  유튜브와 블로그에 관련 주제를 다루며,
@@ -165,6 +165,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 export default Leejinsolpage
 
 const Container = styled.div`
+margin-left:316px;
     width: 1605px;
     height: 1023px;
     background-color: black;
@@ -188,6 +189,7 @@ const Overlay = styled.div`
 
 // 내비게이션 바 (기본 유지)
 const Navigatebar = styled.div`
+margin-left:316px;
 display: flex;
 width: 1605px;
 height: 82px;
@@ -199,7 +201,6 @@ font-size: 42px;
 font-style: normal;
 font-weight: 600;
 cursor: pointer;
-border: 1.5px solid #000;
 &:hover {
     background-color: #FFFFA3;
     transition: background-color 0.3s ease-in-out

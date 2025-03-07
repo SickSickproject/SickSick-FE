@@ -34,7 +34,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     initial={{ opacity: 0.8 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
                 >
                     <Container clicked={isClicked}>
@@ -144,7 +144,7 @@ const Container = styled.div`
     height: 1023px;
     background-color: black;
     position: relative;
-    overflow: hidden;
+   margin-left:316px;
     transition: filter 0.3s ease-in-out;
     ${({ clicked }) => clicked && `filter: blur(5px) brightness(50%);`}
 `;
@@ -166,6 +166,7 @@ const Navigatebar = styled.div`
 display: flex;
 width: 1605px;
 height: 82px;
+margin-left:316px;
 align-items: center;
 justify-content:right;
 flex-shrink: 0;
@@ -174,7 +175,6 @@ font-size: 42px;
 font-style: normal;
 font-weight: 600;
 cursor: pointer;
-border: 1.5px solid #000;
 &:hover {
     background-color: #FFFFA3;
     transition: background-color 0.3s ease-in-out
