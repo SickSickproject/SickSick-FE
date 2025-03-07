@@ -32,7 +32,8 @@ const Selectpage = ()=>{
             <img src={img1} style={{width:"100%",height:"100%"}} alt="sicksick1"></img>
         </div>
         <Textbox>식식은 섭식장애 인식 확산을 위한 당사자 고백 프로젝트입니다.</Textbox>
-        <Circle style={{left:"258px"}} onClick={()=>navigate(`/main/one`,{replace : false})}>섭식장애란 무엇일까?</Circle>
+        
+        <Circle style={{left:"258px"}} onClick={()=>navigate(`/main/one`,{replace : false})}>섭식장애란<br></br> 무엇일까?</Circle>
         
         <Circle style={{left:"996px"}} onClick={()=>navigate(`/main/two`,{replace : false})}>고백 들으러 가기</Circle>
     </div>
@@ -63,6 +64,7 @@ line-height: 142%;
     border: 2px solid #FF0;
     color:yellow;
     transition:0.3s ease-in;
+    cursor:pointer;
   }
 `
 
