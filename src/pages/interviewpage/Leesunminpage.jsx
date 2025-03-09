@@ -227,7 +227,7 @@ const Discriptbar = styled.div`
     position: absolute;
     left: 21px;
     color: white;
-    top: 776px;
+    top: 806px;
     font-size: 32px;
     font-style: normal;
     font-weight: 600;

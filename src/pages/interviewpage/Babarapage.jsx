@@ -229,7 +229,7 @@ const Discriptbar = styled.div`
     position: absolute;
     left: 22px;
     color: white;
-    top: 836px;
+    top: 846px;
     color: #FFF;
 leading-trim: both;
 text-edge: cap;
