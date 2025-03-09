@@ -229,11 +229,10 @@ const Discriptbar = styled.div`
     position: absolute;
     left: 22px;
     color: white;
-    top: 796px;
+    top: 836px;
     color: #FFF;
 leading-trim: both;
 text-edge: cap;
-font-family: "Gothic A1";
 font-size: 32px;
 font-style: normal;
 font-weight: 600;
