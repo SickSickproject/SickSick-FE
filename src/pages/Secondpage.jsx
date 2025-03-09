@@ -77,10 +77,12 @@ const Secondpage = ()=>{
 
 export default Secondpage
 
+
 const Container = styled.div`
 padding-top:95px;
 width:1920px;
 height:1105px;
+font-family: Gothic A1;
 `
 const Sidebar = styled.div`
 position:fixed;
@@ -90,7 +92,7 @@ width:316px;
 height:1105px;
 display:flex;
 flex-direction:column;
-z-index:9999;
+z-index:9998;
 background-color:white;
 `;
 

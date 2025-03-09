@@ -81,6 +81,7 @@ align-items: center;
 margin-right:30px;
 justify-content:center;
 font-size: 24px;
+font-family: Gothic A1;
 font-style: normal;
 font-weight: ${(props)=>(props.clicked ? "800":"500")};
 text-decoration: ${(props)=>(props.clicked ? "underline":"none")};
