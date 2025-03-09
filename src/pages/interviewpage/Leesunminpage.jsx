@@ -204,7 +204,7 @@ const Titlebar = styled.div`
     text-shadow: 0px 8px 22.1px rgba(0, 0, 0, 0.2);
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
-    font-family: OnulGoraesil;
+    font-family: Jua;
     font-size: 80px;
     font-style: normal;
     font-weight: 800;
@@ -225,7 +225,7 @@ const Discriptbar = styled.div`
     width: 1547px;
     height: 226px;
     position: absolute;
-    left: 22px;
+    left: 21px;
     color: white;
     top: 776px;
     font-size: 32px;

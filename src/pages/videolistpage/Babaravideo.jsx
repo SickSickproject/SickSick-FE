@@ -1,8 +1,11 @@
 import styled from "styled-components"
 import { useMediaQuery } from "react-responsive";
 import Babara from "../../datas/BabaraVideoimg";
+import { useNavigate } from "react-router-dom";
 
 const Babaravideo = () => {
+
+    const navigate = useNavigate();
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
@@ -13,7 +16,7 @@ const Babaravideo = () => {
                 <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
                 <Videocontainer>
                     {Babara.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => { navigate(`/main/overlay`,{replace : false}) }}>
                             <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
                             <Videoelement_stitle>{v.stitle}</Videoelement_stitle>
                             <Videoelement_title style={{fontSize: i === 5 ? "21px":"22px"}}>{v.title}</Videoelement_title>

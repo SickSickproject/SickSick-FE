@@ -3,6 +3,7 @@ import Secondpage from "../pages/Secondpage.jsx";
 import Thirdpage from "../pages/Thirdpage.jsx";
 import Selectpage from "../pages/Selectpage.jsx";
 import Mainpage from "../pages/Mainpage.jsx";
+import VideoOverlaypage from "../pages/VideoOverlaypage.jsx";
 import { createBrowserRouter } from "react-router-dom";
 
 
@@ -28,6 +29,10 @@ const routes = createBrowserRouter([
       {
         path: "three",
         element: <Thirdpage />,
+      },
+      {
+        path: "overlay",
+        element: <VideoOverlaypage/>,
       },
     ]
   }

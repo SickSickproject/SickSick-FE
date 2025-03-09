@@ -45,6 +45,7 @@ export default Leejinsolvideo
 const Container = styled.div`
 width:1604px;
 height:2326px;
+font-family: Gothic A1;
 `
 
 const Namebar = styled.div`

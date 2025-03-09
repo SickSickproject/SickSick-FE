@@ -58,6 +58,7 @@ border-radius:50%;
 font-size: 65.766px;
 font-style: normal;
 font-weight: 800;
+font-family: Gothic A1;
 line-height: 142%;
  &:hover {
     background-color: black;
@@ -78,6 +79,7 @@ height:33px;
 left:245px;
 top:310px;
 font-size: 42.505px;
+font-family: Gothic A1;
 font-style: normal;
 font-weight: 800;
 `
