@@ -5,7 +5,7 @@ import Leejinsol from "../../datas/LeejinsolVideoimg";
 import Babara from "../../datas/BabaraVideoimg";
 import { useNavigate } from "react-router-dom";
 
-const Allvideo = () => {
+const Allvideo_grid = () => {
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
     const navigate = useNavigate();
@@ -67,7 +67,7 @@ const Allvideo = () => {
     </>;
 }
 
-export default Allvideo
+export default Allvideo_grid
 
 const Container = styled.div`
 width:1604px;
@@ -85,11 +85,10 @@ gap: 10px;
 flex-shrink: 0;
 background-color: #EFEFEF;
 color: #000;
-
+box-sizing: border-box;
 leading-trim: both;
-
 text-edge: cap;
-font-family: OnulDamso;
+font-family: Gothic A1;
 font-size: 28px;
 font-style: normal;
 font-weight: 400;
@@ -112,7 +111,7 @@ width:324px;
 height:100px;
 padding:20px;
 color:white;
-font-family: "Gothic A1";
+font-family: Gothic A1;
 font-size: 18px;
 font-style: normal;
 font-weight: 400;
@@ -124,7 +123,7 @@ width:263.3277px;
 height:50px;
 left:337.42px;
 color: #FFF;
-font-family: "Gothic A1";
+font-family: Gothic A1;
 font-size: 18px;
 font-style: normal;
 font-weight: 400;
@@ -154,7 +153,7 @@ top:373px;
 color: #000;
 leading-trim: both;
 text-edge: cap;
-font-family: OnulDamso;
+font-family: Gothic A1;
 font-size: 22px;
 font-style: normal;
 font-weight: 400;
@@ -168,7 +167,7 @@ width: 21.818px;
 text-align: center;
 leading-trim: both;
 text-edge: cap;
-font-family: OnulDamso;
+font-family: Gothic A1;
 font-size: 26.853px;
 font-style: normal;
 font-weight: 700;
