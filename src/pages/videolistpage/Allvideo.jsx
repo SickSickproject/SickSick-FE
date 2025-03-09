@@ -3,10 +3,12 @@ import { useMediaQuery } from "react-responsive";
 import Leesunmin from "../../datas/LeesuminVideoimg";
 import Leejinsol from "../../datas/LeejinsolVideoimg";
 import Babara from "../../datas/BabaraVideoimg";
+import { useNavigate } from "react-router-dom";
 
 const Allvideo = () => {
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+    const navigate = useNavigate();
 
     return <>
 
@@ -16,7 +18,7 @@ const Allvideo = () => {
                 <Videocontainer>
 
                     {Leesunmin.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => { navigate(`/main/overlay`,{replace : false}) }}>
                             <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
                             <Videoelement_stitle>{v.stitle}</Videoelement_stitle>
                             <Videoelement_title>{v.title}</Videoelement_title>
@@ -39,7 +41,7 @@ const Allvideo = () => {
                 <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
                 <Videocontainer style={{ height: "1565px" }}>
                     {Babara.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => { setisOverlay("open") }}>
                             <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
                             <Videoelement_stitle style={{ color: "white" }}>{v.stitle}</Videoelement_stitle>
                             <Videoelement_title style={{fontSize: i === 5 ? "21px":"22px"}}>{v.title}</Videoelement_title>
