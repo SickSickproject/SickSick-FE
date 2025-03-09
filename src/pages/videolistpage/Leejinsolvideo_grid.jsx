@@ -1,11 +1,8 @@
 import styled from "styled-components"
 import { useMediaQuery } from "react-responsive";
-import Babara from "../../datas/BabaraVideoimg";
-import { useNavigate } from "react-router-dom";
+import Leejinsol from "../../datas/LeejinsolVideoimg";
 
-const Babaravideo = () => {
-
-    const navigate = useNavigate();
+const Leejinsolvideo_grid = () => {
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
@@ -13,18 +10,19 @@ const Babaravideo = () => {
 
         {!isMobile &&
             <Container>
-                <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
+                <Namebar>&nbsp;&nbsp;{">>"} 이진솔</Namebar>
                 <Videocontainer>
-                    {Babara.map((v, i) => {
-                        return <Videoelement onClick={() => { navigate(`/main/overlay`,{replace : false}) }}>
+
+                    {Leejinsol.map((v, i) => {
+                        return <Videoelement onClick={() => { console.log(11) }}>
                             <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
                             <Videoelement_stitle>{v.stitle}</Videoelement_stitle>
-                            <Videoelement_title style={{fontSize: i === 5 ? "21px":"22px"}}>{v.title}</Videoelement_title>
-                            <div style={{ width: "472px", height: "30px", position: "absolute", top: "450px", borderBottom: "2px solid black" }}>인터뷰이 | 바바라</div>
+                            <Videoelement_title>{v.title}</Videoelement_title>
+                            <div style={{ width: "472px", height: "30px", position: "absolute", top: "450px", borderBottom: "2px solid black" }}>인터뷰이 | 이진솔</div>
                         </Videoelement>
                     })}
                 </Videocontainer>
-                <div style={{ width: "1604px", height: "157px", backgroundColor: "black", position: "relative" }}>
+                <div style={{ width: "1604px", height: "157px", backgroundColor: "black",position:"absolute" }}>
                     <Teaminfo>
                         섭식장애 고백 프로젝트 식식<br></br>
                         Eating Disorder Confession<br></br>
@@ -32,8 +30,8 @@ const Babaravideo = () => {
                         ©Siksik, Inc. All Rights Reserved.
                     </Teaminfo>
                     <Teaminfo2>
-                        T. 010 8892 9473<br></br>
-                        Mail. jhss8892@naver.com
+                    T. 010 8892 9473<br></br>
+                    Mail. jhss8892@naver.com
                     </Teaminfo2>
                 </div>
             </Container>
@@ -42,11 +40,12 @@ const Babaravideo = () => {
     </>;
 }
 
-export default Babaravideo
+export default Leejinsolvideo_grid
 
 const Container = styled.div`
 width:1604px;
-height:1807px;
+height:2326px;
+font-family: Gothic A1;
 `
 
 const Namebar = styled.div`
@@ -62,12 +61,13 @@ background-color: #EFEFEF;
 color: #000;
 leading-trim: both;
 text-edge: cap;
-font-family: OnulDamso;
+font-family: Gothic A1;
 font-size: 28px;
 font-style: normal;
 font-weight: 400;
 line-height: 152%; /* 42.56px */
 letter-spacing: -2.24px;
+box-sizing: border-box;
 `
 
 const Videocontainer = styled.div`
@@ -75,7 +75,7 @@ width:1584px;
 margin-left:20px;
 margin-top:20px;
 display:grid;
-height:1565px;
+height:2084px;
 grid-template-columns: repeat(3, 1fr);
 
 `
@@ -85,7 +85,7 @@ width:324px;
 height:100px;
 padding:20px;
 color:white;
-font-family: "Gothic A1";
+font-family: Gothic A1;
 font-size: 18px;
 font-style: normal;
 font-weight: 400;
@@ -97,7 +97,7 @@ width:263.3277px;
 height:50px;
 left:337.42px;
 color: #FFF;
-font-family: "Gothic A1";
+font-family: Gothic A1;
 font-size: 18px;
 font-style: normal;
 font-weight: 400;
@@ -127,7 +127,7 @@ top:373px;
 color: #000;
 leading-trim: both;
 text-edge: cap;
-font-family: OnulDamso;
+font-family: Gothic A1;
 font-size: 22px;
 font-style: normal;
 font-weight: 400;
@@ -136,12 +136,12 @@ letter-spacing: -1.1px;
 `
 
 const Videoelement_stitle = styled.div`
-color: white;
+color: #574215;
 width: 21.818px;
 text-align: center;
 leading-trim: both;
 text-edge: cap;
-font-family: OnulDamso;
+font-family: Gothic A1;
 font-size: 26.853px;
 font-style: normal;
 font-weight: 700;

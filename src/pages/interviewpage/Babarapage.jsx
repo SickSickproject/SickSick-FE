@@ -224,12 +224,14 @@ line-height: 127%; /* 101.6px */
 
 // 설명 부분
 const Discriptbar = styled.div`
+    display:flex;
+    align-items:flex-end;
     width: 1547px;
     height: 226px;
     position: absolute;
     left: 22px;
     color: white;
-    top: 836px;
+    top: 786px;
     color: #FFF;
 leading-trim: both;
 text-edge: cap;

@@ -1,16 +1,27 @@
 import { useState } from "react"
 import styled from "styled-components"
-import { useMediaQuery } from "react-responsive";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence} from "framer-motion";
 import Leesunminpage from "./interviewpage/Leesunminpage";
 import Leejinsolpage from "./interviewpage/Leejinsolpage";
 import Babarapage from "./interviewpage/Babarapage";
-import Allvideo from "./videolistpage/Allvideo";
-import Leesunminvideo from "./videolistpage/Leesunminvideo";
-import Leejinsolvideo from "./videolistpage/Leejinsolvideo";
-import Babaravideo from "./videolistpage/Babaravideo";
+import Allvideo_grid from "./videolistpage/Allvideo_grid";
+import Leesunminvideo_grid from "./videolistpage/Leesunminvideo_grid";
+import Leejinsolvideo_grid from "./videolistpage/Leejinsolvideo_grid";
+import Babaravideo_grid from "./videolistpage/Babaravideo_grid";
+import Leesunminvideo_list from "./videolistpage/Leesunminvideo_list";
+import Leejinsolvideo_list from "./videolistpage/Leejinsolvideo_list";
+import Babaravideo_list from "./videolistpage/Babaravideo_list";
+import Allvideo_list from "./videolistpage/Allvideo_list";
+import gridbtn from "../assets/viewchangebtnimg/gridbtn.png"
+import listbtn from "../assets/viewchangebtnimg/listbtn.svg"
+import changebtn from "../assets/viewchangebtnimg/changebtn.svg"
+
 
 const Secondpage = ()=>{
+
+    const img1 = listbtn
+    const img2 = gridbtn
+    const img3 = changebtn
 
     const [btnclick,setbtnclick] = useState([1,0,0,0])
 
@@ -18,8 +29,7 @@ const Secondpage = ()=>{
     const [pagestate,setpagestate] = useState("main")
 
  
-    const [orderform , setorderform] = useState(0)
-    const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+    const [viewchange , setviewchange] = useState("grid")
 
     const btnchange = (i)=>{
         const newarr = [0,0,0,0]
@@ -56,14 +66,22 @@ const Secondpage = ()=>{
             <SelectBtn style={{left:"160px"}} color={btnclick[1]} onClick={()=>{btnchange(1)}}>이선민</SelectBtn>
             <SelectBtn style={{left:"300px"}} color={btnclick[2]} onClick={()=>{btnchange(2)}}>이진솔</SelectBtn>
             <SelectBtn style={{left:"440px"}} color={btnclick[3]} onClick={()=>{btnchange(3)}}>바바라</SelectBtn>
+            <Changebtn onClick={()=>{setviewchange(viewchange === "grid" ? "list" : "grid")}}>
+                <img src={img3}></img>
+                {viewchange === "grid" ? <img src={img1} style={{width:"31px",height:"24px"}}></img>: <img src={img2} style={{width:"31px",height:"29px"}}></img>}
+            </Changebtn>
         </SelectBar>
-        {btnclick[0] === 1 && <Allvideo></Allvideo>}
-        {btnclick[1] === 1 && <Leesunminvideo></Leesunminvideo>}
-        {btnclick[2] === 1 && <Leejinsolvideo></Leejinsolvideo>}
-        {btnclick[3] === 1 && <Babaravideo></Babaravideo>}
+        {btnclick[0] === 1 && viewchange === "grid" && <Allvideo_grid></Allvideo_grid>}
+        {btnclick[0] === 1 && viewchange === "list" && <Allvideo_list></Allvideo_list>}
+        {btnclick[1] === 1 && viewchange === "grid" &&  <Leesunminvideo_grid></Leesunminvideo_grid>}
+        {btnclick[1] === 1 && viewchange === "list" &&  <Leesunminvideo_list></Leesunminvideo_list>}
+        {btnclick[2] === 1 && viewchange === "grid" && <Leejinsolvideo_grid></Leejinsolvideo_grid>}
+        {btnclick[2] === 1 && viewchange === "list" && <Leejinsolvideo_list></Leejinsolvideo_list>}
+        {btnclick[3] === 1 && viewchange === "grid" && <Babaravideo_grid></Babaravideo_grid>}
+        {btnclick[3] === 1 && viewchange === "list" && <Babaravideo_list></Babaravideo_list>}
         </Mainbar>
         }
-        {pagestate === "leesunmin" && 
+        {pagestate === "leesunmin" &&
             <Leesunminpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leesunminpage>
         }
         {pagestate === "leejinsol" && 
@@ -95,6 +113,16 @@ flex-direction:column;
 z-index:9998;
 background-color:white;
 `;
+
+const Changebtn = styled.div`
+position:absolute;
+width:78px;
+height:24px;
+left:1500px;
+display: flex;
+align-items: center;
+gap: 10px;
+`
 
 const SidebarBtn = styled.div`
 width:296px;
@@ -144,7 +172,6 @@ const Mainbar = styled.div`
 margin-left:316px;
 width:1605px;
 height:1105px;
-
 `
 
 const SelectBar = styled.div`

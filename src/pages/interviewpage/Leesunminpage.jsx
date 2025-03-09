@@ -227,12 +227,14 @@ const Discriptbar = styled.div`
     position: absolute;
     left: 21px;
     color: white;
-    top: 776px;
+    top: 786px;
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
     line-height: 125%;
     z-index: 10;
+    display:flex;
+    align-items:flex-end;
 `;
 
 // 이미지 스타일 (클릭했을 때 강조)
