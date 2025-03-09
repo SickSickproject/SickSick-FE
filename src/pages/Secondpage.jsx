@@ -12,9 +12,9 @@ import Leesunminvideo_list from "./videolistpage/Leesunminvideo_list";
 import Leejinsolvideo_list from "./videolistpage/Leejinsolvideo_list";
 import Babaravideo_list from "./videolistpage/Babaravideo_list";
 import Allvideo_list from "./videolistpage/Allvideo_list";
-import gridbtn from "../assets/gridbtn.png"
-import listbtn from "../assets/listbtn.svg"
-import changebtn from "../assets/changebtn.svg"
+import gridbtn from "../assets/viewchangebtnimg/gridbtn.png"
+import listbtn from "../assets/viewchangebtnimg/listbtn.svg"
+import changebtn from "../assets/viewchangebtnimg/changebtn.svg"
 
 
 const Secondpage = ()=>{
