@@ -93,8 +93,9 @@ text-decoration: ${(props)=>(props.clicked ? "underline":"none")};
 `
 
 const Navbarin = styled.div`
-margin-left: ${(props) => props.left}px;
-width:380px;
+position:fixed;
+right: 1%;
+width:340px;
 height:95px;
 display:flex;
 flex-direction:row;

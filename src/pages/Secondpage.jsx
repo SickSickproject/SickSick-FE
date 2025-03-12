@@ -122,6 +122,9 @@ left:1500px;
 display: flex;
 align-items: center;
 gap: 10px;
+&:hover {
+cursor:pointer;
+}
 `
 
 const SidebarBtn = styled.div`
