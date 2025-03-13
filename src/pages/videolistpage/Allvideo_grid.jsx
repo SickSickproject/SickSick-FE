@@ -14,43 +14,38 @@ const Allvideo_grid = () => {
 
         {!isMobile &&
             <Container>
-                <Namebar>&nbsp;&nbsp;{">"} 이선민</Namebar>
+               <Namebar>&nbsp;&nbsp;{">"} 이선민</Namebar>
                 <Videocontainer>
-
-                    {Leesunmin.map((v, i) => {
-                        return <Videoelement onClick={() => { navigate(`/main/overlay`,{replace : false}) }}>
-                            <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
-                            <Videoelement_stitle>{v.stitle}</Videoelement_stitle>
-                            <Videoelement_title>{v.title}</Videoelement_title>
-                            <div style={{ width: "472px", height: "30px", position: "absolute", top: "450px", borderBottom: "2px solid black" }}>인터뷰이 | 이선민</div>
+                {Leesunmin.map((v, i) => {
+                        return <Videoelement onClick={() => { console.log(11) }}>
+                             <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
+                             <Videoelement_title>{v.title}</Videoelement_title>
+                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 이선민</div>
                         </Videoelement>
                     })}
                 </Videocontainer>
                 <Namebar>&nbsp;&nbsp;{">>"} 이진솔</Namebar>
                 <Videocontainer>
-
-                    {Leejinsol.map((v, i) => {
+                {Leejinsol.map((v, i) => {
                         return <Videoelement onClick={() => { console.log(11) }}>
-                            <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
-                            <Videoelement_stitle>{v.stitle}</Videoelement_stitle>
-                            <Videoelement_title>{v.title}</Videoelement_title>
-                            <div style={{ width: "472px", height: "30px", position: "absolute", top: "450px", borderBottom: "2px solid black" }}>인터뷰이 | 이진솔</div>
+                             <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
+                             <Videoelement_title>{v.title}</Videoelement_title>
+                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 이진솔</div>
                         </Videoelement>
                     })}
                 </Videocontainer>
                 <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
-                <Videocontainer style={{ height: "1565px" }}>
-                    {Babara.map((v, i) => {
-                        return <Videoelement onClick={() => { setisOverlay("open") }}>
-                            <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
-                            <Videoelement_stitle style={{ color: "white" }}>{v.stitle}</Videoelement_stitle>
-                            <Videoelement_title style={{fontSize: i === 5 ? "21px":"22px"}}>{v.title}</Videoelement_title>
-                            <div style={{ width: "472px", height: "30px", position: "absolute", top: "450px", borderBottom: "2px solid black" }}>인터뷰이 | 바바라</div>
+                <Videocontainer2>
+                {Babara.map((v, i) => {
+                        return <Videoelement onClick={() => { console.log(11) }}>
+                             <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
+                             <Videoelement_title>{v.title}</Videoelement_title>
+                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 바바라</div>
                         </Videoelement>
                     })}
-                </Videocontainer>
-                <div style={{ width: "1604px", height: "157px", backgroundColor: "black" ,position:"relative"}}>
-                    <Teaminfo>
+                </Videocontainer2>
+                <div style={{ width: "100%", aspectRatio:"1604/157", backgroundColor: "black",position:"relative" }}>
+                <Teaminfo>
                         섭식장애 고백 프로젝트 식식<br></br>
                         Eating Disorder Confession<br></br>
                         Project Siksik<br></br>
@@ -70,14 +65,17 @@ const Allvideo_grid = () => {
 export default Allvideo_grid
 
 const Container = styled.div`
-width:1604px;
-height:6117px;
+width:100%;
+aspect-ratio:1604/6117;
+position:relative;
+background-color:white;
+z-index:10;
 `
 
 const Namebar = styled.div`
 display: flex;
-width: 1604px;
-height: 65px;
+width: 100%;
+aspect-ratio: 1604 / 65;
 border-top: 1px solid black;
 border-bottom: 1px solid black;
 align-items: center;
@@ -89,7 +87,7 @@ box-sizing: border-box;
 leading-trim: both;
 text-edge: cap;
 font-family: Gothic A1;
-font-size: 28px;
+font-size: 2vw;
 font-style: normal;
 font-weight: 400;
 line-height: 152%; /* 42.56px */
@@ -97,22 +95,33 @@ letter-spacing: -2.24px;
 `
 
 const Videocontainer = styled.div`
-width:1584px;
-margin-left:20px;
-margin-top:20px;
+width:98.753117207%;
+margin-left:1.246882793%;
+margin-top:1.246882793%;
 display:grid;
-height:2084px;
+aspect-ratio:1584/2084;
 grid-template-columns: repeat(3, 1fr);
+background-color:white;
+
+`
+const Videocontainer2 = styled.div`
+width:98.753117207%;
+margin-left:1.246882793%;
+margin-top:1.246882793%;
+display:grid;
+aspect-ratio:1584/1565;
+grid-template-columns: repeat(3, 1fr);
+background-color:white;
 
 `
 
 const Teaminfo = styled.div`
-width:324px;
-height:100px;
+width:20.1995%;
+aspect-ratio:324/100;
 padding:20px;
 color:white;
 font-family: Gothic A1;
-font-size: 18px;
+font-size: 1vw;
 font-style: normal;
 font-weight: 400;
 line-height: 140%; /* 25.2px */
@@ -121,10 +130,10 @@ const Teaminfo2 = styled.div`
 top:20px;
 width:263.3277px;
 height:50px;
-left:337.42px;
+left:23%;
 color: #FFF;
 font-family: Gothic A1;
-font-size: 18px;
+font-size: 1vw;
 font-style: normal;
 font-weight: 400;
 line-height: 140%; /* 25.2px */
@@ -133,9 +142,10 @@ position:absolute;
 
 const Videoelement = styled.div`
 display: flex;
-width: 508px;
-height: 499px;
+width: 94%;
+aspect-ratio:508/499;
 justify-content: center;
+background-color:white;
 align-items: center;
 flex-shrink: 0;
 position:relative;
@@ -146,15 +156,20 @@ transition: opacity 0.5s ease;
 }
 `
 const Videoelement_title = styled.div`
-width:472px;
+ display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 2줄 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+width:90%;
 height:auto;
 position:absolute;
-top:373px;
+top:75%;
 color: #000;
 leading-trim: both;
 text-edge: cap;
 font-family: Gothic A1;
-font-size: 22px;
+font-size: 1.4vw;
 font-style: normal;
 font-weight: 400;
 line-height: 135%; /* 29.7px */

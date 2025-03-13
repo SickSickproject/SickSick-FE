@@ -43,6 +43,9 @@ export default Allvideo_list
 const Container = styled.div`
 width:1604px;
 height:2225px;
+position:relative;
+background-color:white;
+z-index:10;
 `
 
 const Namebar = styled.div`
