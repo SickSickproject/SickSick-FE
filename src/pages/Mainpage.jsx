@@ -65,7 +65,7 @@ align-items: center;
 flex-direction: row;
 top:0;
 left:0;
-width:1920px;
+width:100%;
 height:95px;
 background-color:white;
 border-bottom: 2px solid black;
