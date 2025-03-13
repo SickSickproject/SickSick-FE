@@ -144,7 +144,6 @@ const Container = styled.div`
     height: 1023px;
     background-color: black;
     position: relative;
-   margin-left:316px;
     transition: filter 0.3s ease-in-out;
     ${({ clicked }) => clicked && `filter: blur(5px) brightness(50%);`}
 `;
@@ -166,7 +165,6 @@ const Navigatebar = styled.div`
 display: flex;
 width: 1605px;
 height: 82px;
-margin-left:316px;
 align-items: center;
 justify-content:right;
 flex-shrink: 0;
