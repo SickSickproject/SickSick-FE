@@ -139,7 +139,7 @@ export default Leesunminpage;
 
 // 메인 컨테이너 (클릭 시 흐림 효과 적용)
 const Container = styled.div`
-    margin-left:316px;
+  
     width: 1605px;
     height: 1023px;
     background-color: black;
@@ -173,7 +173,6 @@ font-size: 42px;
 font-style: normal;
 font-weight: 600;
 cursor: pointer;
-margin-left:316px;
 &:hover {
     background-color: #FFFFA3;
     transition: background-color 0.3s ease-in-out

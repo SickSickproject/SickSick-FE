@@ -165,7 +165,6 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 export default Leejinsolpage
 
 const Container = styled.div`
-margin-left:316px;
     width: 1605px;
     height: 1023px;
     background-color: black;
@@ -189,7 +188,6 @@ const Overlay = styled.div`
 
 // 내비게이션 바 (기본 유지)
 const Navigatebar = styled.div`
-margin-left:316px;
 display: flex;
 width: 1605px;
 height: 82px;

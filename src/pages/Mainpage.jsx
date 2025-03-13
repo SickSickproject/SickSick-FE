@@ -65,7 +65,7 @@ align-items: center;
 flex-direction: row;
 top:0;
 left:0;
-width:1920px;
+width:100%;
 height:95px;
 background-color:white;
 border-bottom: 2px solid black;
@@ -93,8 +93,9 @@ text-decoration: ${(props)=>(props.clicked ? "underline":"none")};
 `
 
 const Navbarin = styled.div`
-margin-left: ${(props) => props.left}px;
-width:380px;
+position:fixed;
+right: 1%;
+width:340px;
 height:95px;
 display:flex;
 flex-direction:row;

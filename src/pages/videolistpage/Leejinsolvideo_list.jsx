@@ -29,6 +29,9 @@ export default Leejinsolvideo_list
 const Container = styled.div`
 width:1604px;
 height:1023px;
+position:relative;
+background-color:white;
+z-index:10;
 `
 
 const Namebar = styled.div`
