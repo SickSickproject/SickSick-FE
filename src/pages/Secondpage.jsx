@@ -1,6 +1,6 @@
 import { useState } from "react"
 import styled from "styled-components"
-import { motion, AnimatePresence} from "framer-motion";
+import { motion, AnimatePresence, isMotionValue} from "framer-motion";
 import Leesunminpage from "./interviewpage/Leesunminpage";
 import Leejinsolpage from "./interviewpage/Leejinsolpage";
 import Babarapage from "./interviewpage/Babarapage";
@@ -15,10 +15,12 @@ import Allvideo_list from "./videolistpage/Allvideo_list";
 import gridbtn from "../assets/viewchangebtnimg/gridbtn.png"
 import listbtn from "../assets/viewchangebtnimg/listbtn.svg"
 import changebtn from "../assets/viewchangebtnimg/changebtn.svg"
+import { useMediaQuery } from "react-responsive";
 
 
 const Secondpage = ()=>{
 
+    const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
     const img1 = listbtn
     const img2 = gridbtn
     const img3 = changebtn
@@ -38,8 +40,8 @@ const Secondpage = ()=>{
         setbtnclick(newarr)
     }
 
-    return <Container>
-        <Sidebar>
+    return <>
+    <Sidebar>
             <SidebarBtn onClick={()=>{
                 setpagestate("main");
                 navigate(`/main/two`,{replace : true})}}  style={{borderTop:"none"}}>고백한 것들</SidebarBtn>
@@ -58,29 +60,26 @@ const Secondpage = ()=>{
                     <SideBarBtn2 onClick={()=>{setpagestate("babara")}}>바바라</SideBarBtn2>
                 </motion.div>}
             </AnimatePresence>
-        </Sidebar>
-        {pagestate === "main" && 
-        <Mainbar>
-        <SelectBar>
+        </Sidebar>    
+    <Container>
+    {pagestate === "main" && <SelectBar>
             <SelectBtn style={{left:"20px"}} color={btnclick[0]} onClick={()=>{btnchange(0)}}>모두들</SelectBtn>
             <SelectBtn style={{left:"160px"}} color={btnclick[1]} onClick={()=>{btnchange(1)}}>이선민</SelectBtn>
             <SelectBtn style={{left:"300px"}} color={btnclick[2]} onClick={()=>{btnchange(2)}}>이진솔</SelectBtn>
             <SelectBtn style={{left:"440px"}} color={btnclick[3]} onClick={()=>{btnchange(3)}}>바바라</SelectBtn>
-            <Changebtn onClick={()=>{setviewchange(viewchange === "grid" ? "list" : "grid")}}>
+            <Changebtn isMobile={isMobile} onClick={()=>{setviewchange(viewchange === "grid" ? "list" : "grid")}}>
                 <img src={img3}></img>
                 {viewchange === "grid" ? <img src={img1} style={{width:"31px",height:"24px"}}></img>: <img src={img2} style={{width:"31px",height:"29px"}}></img>}
             </Changebtn>
-        </SelectBar>
-        {btnclick[0] === 1 && viewchange === "grid" && <Allvideo_grid></Allvideo_grid>}
-        {btnclick[0] === 1 && viewchange === "list" && <Allvideo_list></Allvideo_list>}
-        {btnclick[1] === 1 && viewchange === "grid" &&  <Leesunminvideo_grid></Leesunminvideo_grid>}
-        {btnclick[1] === 1 && viewchange === "list" &&  <Leesunminvideo_list></Leesunminvideo_list>}
-        {btnclick[2] === 1 && viewchange === "grid" && <Leejinsolvideo_grid></Leejinsolvideo_grid>}
-        {btnclick[2] === 1 && viewchange === "list" && <Leejinsolvideo_list></Leejinsolvideo_list>}
-        {btnclick[3] === 1 && viewchange === "grid" && <Babaravideo_grid></Babaravideo_grid>}
-        {btnclick[3] === 1 && viewchange === "list" && <Babaravideo_list></Babaravideo_list>}
-        </Mainbar>
-        }
+    </SelectBar>}
+        {btnclick[0] === 1 && viewchange === "grid" && pagestate === "main" && <Allvideo_grid></Allvideo_grid>}
+        {btnclick[0] === 1 && viewchange === "list" && pagestate === "main" && <Allvideo_list></Allvideo_list>}
+        {btnclick[1] === 1 && viewchange === "grid" && pagestate === "main" && <Leesunminvideo_grid></Leesunminvideo_grid>}
+        {btnclick[1] === 1 && viewchange === "list" && pagestate === "main" && <Leesunminvideo_list></Leesunminvideo_list>}
+        {btnclick[2] === 1 && viewchange === "grid" && pagestate === "main" && <Leejinsolvideo_grid></Leejinsolvideo_grid>}
+        {btnclick[2] === 1 && viewchange === "list" && pagestate === "main" && <Leejinsolvideo_list></Leejinsolvideo_list>}
+        {btnclick[3] === 1 && viewchange === "grid" && pagestate === "main" && <Babaravideo_grid></Babaravideo_grid>}
+        {btnclick[3] === 1 && viewchange === "list" && pagestate === "main" && <Babaravideo_list></Babaravideo_list>}
         {pagestate === "leesunmin" &&
             <Leesunminpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leesunminpage>
         }
@@ -90,17 +89,19 @@ const Secondpage = ()=>{
         {pagestate === "babara" && 
             <Babarapage setpagestate={setpagestate} setbtnclick={setbtnclick}></Babarapage>
         }
-    </Container>
+    </Container></>
 }
 
 export default Secondpage
 
 
 const Container = styled.div`
+margin-left: 316px;
 padding-top:95px;
-width:1920px;
 height:1105px;
+background-color:white;
 font-family: Gothic A1;
+width: calc(100vw - 316px);
 `
 const Sidebar = styled.div`
 position:fixed;
@@ -115,13 +116,14 @@ background-color:white;
 `;
 
 const Changebtn = styled.div`
-position:absolute;
+position:${(props)=>{return (props.isMobile ? "absolute":"fixed")}};
 width:78px;
 height:24px;
-left:1500px;
+right:${(props)=>{return (props.isMobile ? "58%":"2%")}};
 display: flex;
 align-items: center;
 gap: 10px;
+z-index:1;
 &:hover {
 cursor:pointer;
 }
@@ -172,13 +174,16 @@ cursor:pointer;
 
 
 const Mainbar = styled.div`
-margin-left:316px;
-width:1605px;
+left:316px;
 height:1105px;
+diplay:flex;
+justify-content:flex-end;
+background-color:yellow;
+position:absolute;
 `
 
 const SelectBar = styled.div`
-width:1604px;
+width:100%px;
 height:81px;
 display:flex;
 align-items:center;
