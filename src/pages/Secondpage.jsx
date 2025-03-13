@@ -115,11 +115,20 @@ z-index:9998;
 background-color:white;
 `;
 
+const SelectBar = styled.div`
+width:100%px;
+height:81px;
+display:flex;
+align-items:center;
+position:relative;
+`
+
 const Changebtn = styled.div`
-position:${(props)=>{return (props.isMobile ? "absolute":"fixed")}};
+position:fixed;
 width:78px;
 height:24px;
-right:${(props)=>{return (props.isMobile ? "58%":"2%")}};
+right:${(props)=>{return (props.isMobile ? "none":"2%")}};
+left:${(props)=>{return (props.isMobile ? "910px":"none")}};
 display: flex;
 align-items: center;
 gap: 10px;
@@ -180,15 +189,6 @@ diplay:flex;
 justify-content:flex-end;
 background-color:yellow;
 position:absolute;
-`
-
-const SelectBar = styled.div`
-width:100%px;
-height:81px;
-display:flex;
-align-items:center;
-position:relative;
-
 `
 
 const SelectBtn = styled.div`
