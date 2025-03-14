@@ -12,24 +12,24 @@ const Babaravideo_grid = () => {
             <Container>
                 <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
                 <Videocontainer>
-                {Babara.map((v, i) => {
+                    {Babara.map((v, i) => {
                         return <Videoelement onClick={() => { console.log(11) }}>
-                             <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
-                             <Videoelement_title>{v.title}</Videoelement_title>
-                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 바바라</div>
+                            <img src={v.image} style={{ top: "5%", width: "100%", position: "absolute" }}></img>
+                            <Videoelement_title>{v.title}</Videoelement_title>
+                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "0.9vw" }}>인터뷰이 | 바바라</div>
                         </Videoelement>
                     })}
                 </Videocontainer>
-                <div style={{ width: "100%", aspectRatio:"1604/157", backgroundColor: "black",position:"relative" }}>
-                <Teaminfo>
+                <div style={{ width: "100%", aspectRatio: "1604/157", backgroundColor: "black", position: "relative" }}>
+                    <Teaminfo>
                         섭식장애 고백 프로젝트 식식<br></br>
                         Eating Disorder Confession<br></br>
                         Project Siksik<br></br>
                         ©Siksik, Inc. All Rights Reserved.
                     </Teaminfo>
                     <Teaminfo2>
-                    T. 010 8892 9473<br></br>
-                    Mail. jhss8892@naver.com
+                        T. 010 8892 9473<br></br>
+                        Mail. jhss8892@naver.com
                     </Teaminfo2>
                 </div>
             </Container>

@@ -122,6 +122,11 @@ transition: opacity 0.5s ease;
 }
 `
 const Videoelement_title = styled.div`
+display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 2줄 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 width:90%;
 height:auto;
 position:absolute;
