@@ -42,11 +42,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                 >
                     <Container clicked={isClicked}>
                         <Namebar>바바라</Namebar>
-                        <div style={{ display: "flex", width: "1350px", height: "202px", padding: "0px, 131px", justifyContent: "center", alignItems: "center", flexShrink: "0", position: "absolute", left: "117px", top: "105px" }}>
-                            <Titlebar move2={move2}>
-                                <img src ={titleimg}></img>
-                            </Titlebar>
-                        </div>
+                        <Titleimg move2={move2} src={titleimg}></Titleimg>
                         <Discriptbar>
                             바바라는 2011년도에 가수로 데뷔를 했고 현재는 보컬 트레이너로 활동을 하고 있습니다. 과거 연예계를 경험
                             하며 겪은 섭식장애 그리고 보컬트레이너로서 보는 섭식장애를 겪는 학생들. 이에 대해 그는 미디어가 시대에
@@ -198,22 +194,17 @@ const Namebar = styled.div`
     z-index: 10;
 `;
 
-// 제목
-const Titlebar = styled.div`
-   text-align: center;
-leading-trim: both;
-text-edge: cap;
-text-shadow: 0px 8px 22.1px rgba(0, 0, 0, 0.20);
--webkit-text-stroke-width: 1px;
--webkit-text-stroke-color: #000;
-font-size: 80px;
-font-style: normal;
-font-weight: 800;
-line-height: 127%; /* 101.6px */
+const Titleimg = styled.img`
+position: absolute;
+left: 117px; 
+top: 50px; 
 z-index: 10;
+flex-shrink:0;
 transform: ${({ move2 }) => `translateY(${move2}px)`};
 transition: transform 0.3s ease-in-out ;
-`;
+ width: 1350px;
+ height: 402px;
+`
 
 
 // 설명 부분
