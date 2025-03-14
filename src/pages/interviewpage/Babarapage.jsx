@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { useState } from "react";
 import babarahoverimg from "../../assets/Hoverimg/babarahoverimg.png";
+import babaratitleimg from "../../assets/interview_title_img/title_babara.svg"
 
 const Babarapage = ({ setpagestate, setbtnclick }) => {
     console.log(setbtnclick)
@@ -13,6 +14,8 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
     const [mouseenter1, setmouseenter1] = useState(false)
     const [mouseenter2, setmouseenter2] = useState(false)
     const [mouseenter3, setmouseenter3] = useState(false)
+
+    const titleimg = babaratitleimg
 
     const img3 = babarahoverimg;
 
@@ -41,9 +44,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                         <Namebar>바바라</Namebar>
                         <div style={{ display: "flex", width: "1350px", height: "202px", padding: "0px, 131px", justifyContent: "center", alignItems: "center", flexShrink: "0", position: "absolute", left: "117px", top: "105px" }}>
                             <Titlebar move2={move2}>
-                                “그 사회가 나를 키워서<br></br>
-                                아프게 만들었다는 걸<br></br>
-                                우리가 인정하기는 어려워요.”
+                                <img src ={titleimg}></img>
                             </Titlebar>
                         </div>
                         <Discriptbar>
@@ -201,22 +202,17 @@ const Namebar = styled.div`
 const Titlebar = styled.div`
    text-align: center;
 leading-trim: both;
-
 text-edge: cap;
 text-shadow: 0px 8px 22.1px rgba(0, 0, 0, 0.20);
 -webkit-text-stroke-width: 1px;
 -webkit-text-stroke-color: #000;
-font-family: OnulGoraesil;
 font-size: 80px;
 font-style: normal;
 font-weight: 800;
 line-height: 127%; /* 101.6px */
-    width: 1088px;
-    height: 260px;
-    color: yellow;
-    z-index: 10;
-    transform: ${({ move2 }) => `translateY(${move2}px)`};
-    transition: transform 0.3s ease-in-out ;
+z-index: 10;
+transform: ${({ move2 }) => `translateY(${move2}px)`};
+transition: transform 0.3s ease-in-out ;
 `;
 
 

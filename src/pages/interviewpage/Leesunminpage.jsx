@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { useState } from "react";
 import leesunminhoverimg from "../../assets/Hoverimg/leesunminhoverimg.png";
+import leesunmintitle from "../../assets/interview_title_img/title_Leesunmin.svg"
 
 const Leesunminpage = ({ setpagestate, setbtnclick }) => {
     console.log(setbtnclick)
@@ -13,6 +14,8 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
     const [mouseenter1, setmouseenter1] = useState(false)
     const [mouseenter2, setmouseenter2] = useState(false)
     const [mouseenter3, setmouseenter3] = useState(false)
+
+    const titleimg = leesunmintitle
 
     const img1 = leesunminhoverimg;
 
@@ -40,7 +43,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                     <Container clicked={isClicked}>
                         <Namebar>이선민</Namebar>
                         <Titlebar move2={move2}>
-                            "그럴 수 밖에 없었음을 받아들이고, 앞으로 무엇을 할 것인가에 대해<br></br> 생각하면 돼요."
+                            <img src={titleimg} alt="" />
                         </Titlebar>
                         <Discriptbar>
                             예술가이자 아트디렉터로 활동하고 있는 이선민님은
@@ -203,7 +206,6 @@ const Titlebar = styled.div`
     text-shadow: 0px 8px 22.1px rgba(0, 0, 0, 0.2);
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
-    font-family: Jua;
     font-size: 80px;
     font-style: normal;
     font-weight: 800;
@@ -211,9 +213,6 @@ const Titlebar = styled.div`
     position: absolute;
     top: 81px;
     left: 132px;
-    width: 1320px;
-    height: 306px;
-    color: yellow;
     z-index: 10;
     transform: ${({ move2 }) => `translateY(${move2}px)`};
     transition: transform 0.3s ease-in-out ;

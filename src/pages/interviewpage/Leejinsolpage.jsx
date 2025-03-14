@@ -1,9 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { useState } from "react";
-import leesunminhoverimg from "../../assets/Hoverimg/leesunminhoverimg.png";
+import leejinsoltitle from "../../assets/interview_title_img/title_Leejinsol.svg"
 import leejinsolhoverimg from "../../assets/Hoverimg/leejinsolhoverimg.png";
-import babarahoverimg from "../../assets/Hoverimg/babarahoverimg.png";
+
 
 
 
@@ -18,6 +18,8 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
     const [mouseenter2, setmouseenter2] = useState(false)
     const [mouseenter3, setmouseenter3] = useState(false)
     const [mouseenter4, setmouseenter4] = useState(false)
+
+    const titleimg = leejinsoltitle
 
     const img2 = leejinsolhoverimg;
 
@@ -45,7 +47,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                     <Container clicked={isClicked}>
                         <Namebar>이진솔</Namebar>
                         <Titlebar move2={move2}>
-                            "섭식장애가 인생에서 중심이<br></br> 되지 않도록 하는 것이 진정한<br></br> 회복의 시작입니다."
+                            <img src={leejinsoltitle}></img>
                         </Titlebar>
                         <Discriptbar>
                             섭식장애  상담사이자 경험자 입니다.  유튜브와 블로그에 관련 주제를 다루며,
@@ -229,7 +231,6 @@ const Titlebar = styled.div`
     text-shadow: 0px 8px 22.1px rgba(0, 0, 0, 0.2);
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
-    font-family: OnulGoraesil;
     font-size: 80px;
     font-style: normal;
     font-weight: 800;
@@ -237,9 +238,6 @@ const Titlebar = styled.div`
     position: absolute;
     top: 81px;
     left: 132px;
-    width: 1320px;
-    height: 306px;
-    color: yellow;
     z-index: 10;
     transform: ${({ move2 }) => `translateY(${move2}px)`};
     transition: transform 0.3s ease-in-out ;
