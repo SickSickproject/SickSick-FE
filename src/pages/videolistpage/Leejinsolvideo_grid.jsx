@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useMediaQuery } from "react-responsive";
 import Leejinsol from "../../datas/LeejinsolVideoimg";
 
-const Leejinsolvideo_grid = () => {
+const Leejinsolvideo_grid = ({setisoverlay,setoverlayinfo}) => {
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
@@ -13,7 +13,9 @@ const Leejinsolvideo_grid = () => {
                 <Namebar>&nbsp;&nbsp;{">>"} 이진솔</Namebar>
                 <Videocontainer>
                 {Leejinsol.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => {
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                        }}>
                              <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
                              <Videoelement_title>{v.title}</Videoelement_title>
                              <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 이진솔</div>

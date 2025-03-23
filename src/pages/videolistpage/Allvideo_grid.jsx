@@ -5,7 +5,7 @@ import Leejinsol from "../../datas/LeejinsolVideoimg";
 import Babara from "../../datas/BabaraVideoimg";
 import { useNavigate } from "react-router-dom";
 
-const Allvideo_grid = () => {
+const Allvideo_grid = ({setisoverlay,setoverlayinfo}) => {
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
     const navigate = useNavigate();
@@ -17,7 +17,9 @@ const Allvideo_grid = () => {
                <Namebar>&nbsp;&nbsp;{">"} 이선민</Namebar>
                 <Videocontainer>
                 {Leesunmin.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => {
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                        }}>
                              <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
                              <Videoelement_title>{v.title}</Videoelement_title>
                              <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 이선민</div>
@@ -27,7 +29,9 @@ const Allvideo_grid = () => {
                 <Namebar>&nbsp;&nbsp;{">>"} 이진솔</Namebar>
                 <Videocontainer>
                 {Leejinsol.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => {
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                        }}>
                              <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
                              <Videoelement_title>{v.title}</Videoelement_title>
                              <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 이진솔</div>
@@ -37,7 +41,9 @@ const Allvideo_grid = () => {
                 <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
                 <Videocontainer2>
                 {Babara.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => {
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                            }}>
                              <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
                              <Videoelement_title>{v.title}</Videoelement_title>
                              <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | 바바라</div>

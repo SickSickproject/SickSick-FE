@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useMediaQuery } from "react-responsive";
 import Babara from "../../datas/BabaraVideoimg";
 
-const Babaravideo_grid = () => {
+const Babaravideo_grid = ({setisoverlay,setoverlayinfo}) => {
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
@@ -13,7 +13,8 @@ const Babaravideo_grid = () => {
                 <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
                 <Videocontainer>
                     {Babara.map((v, i) => {
-                        return <Videoelement onClick={() => { console.log(11) }}>
+                        return <Videoelement onClick={() => {
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); }}>
                             <img src={v.image} style={{ top: "5%", width: "100%", position: "absolute" }}></img>
                             <Videoelement_title>{v.title}</Videoelement_title>
                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "0.9vw" }}>인터뷰이 | 바바라</div>

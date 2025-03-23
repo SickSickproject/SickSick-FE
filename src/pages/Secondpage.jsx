@@ -16,14 +16,32 @@ import gridbtn from "../assets/viewchangebtnimg/gridbtn.png"
 import listbtn from "../assets/viewchangebtnimg/listbtn.svg"
 import changebtn from "../assets/viewchangebtnimg/changebtn.svg"
 import { useMediaQuery } from "react-responsive";
+import YouTube from "react-youtube";
 
 
 const Secondpage = ()=>{
+
+    const opts = {
+        height:"900px",
+        width:"100%",
+        playerVars: {
+            autoplay: 0,  // 자동 재생
+          },
+    }
+
+    const [overlayinfo,setoverlayinfo] = useState({
+        title:"",
+        name:"",
+        youtubeid:"",
+        title_s:"",
+        time:"",
+    })
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
     const img1 = listbtn
     const img2 = gridbtn
     const img3 = changebtn
+
 
     const [btnclick,setbtnclick] = useState([1,0,0,0])
 
@@ -32,6 +50,8 @@ const Secondpage = ()=>{
 
  
     const [viewchange , setviewchange] = useState("grid")
+
+    const [isoverlay,setisoverlay]=useState(false)
 
     const btnchange = (i)=>{
         const newarr = [0,0,0,0]
@@ -55,44 +75,80 @@ const Secondpage = ()=>{
                  transition={{ duration: 0.3, ease: "easeInOut" }}
                  className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
                 >
-                    <SideBarBtn2 onClick={()=>{setpagestate("leesunmin")}}>이선민</SideBarBtn2>
-                    <SideBarBtn2 onClick={()=>{setpagestate("leejinsol")}}>이진솔</SideBarBtn2>
-                    <SideBarBtn2 onClick={()=>{setpagestate("babara")}}>바바라</SideBarBtn2>
+                    <SideBarBtn2 onClick={()=>{setpagestate(isoverlay ? "main" : "leesunmin")}}>이선민</SideBarBtn2>
+                    <SideBarBtn2 onClick={()=>{setpagestate(isoverlay ? "main" : "leejinsol")}}>이진솔</SideBarBtn2>
+                    <SideBarBtn2 onClick={()=>{setpagestate(isoverlay ? "main" : "babara")}}>바바라</SideBarBtn2>
                 </motion.div>}
             </AnimatePresence>
         </Sidebar>    
-    <Container>
-    {pagestate === "main" && <SelectBar>
-            <SelectBtn style={{left:"20px"}} color={btnclick[0]} onClick={()=>{btnchange(0)}}>모두들</SelectBtn>
-            <SelectBtn style={{left:"160px"}} color={btnclick[1]} onClick={()=>{btnchange(1)}}>이선민</SelectBtn>
-            <SelectBtn style={{left:"300px"}} color={btnclick[2]} onClick={()=>{btnchange(2)}}>이진솔</SelectBtn>
-            <SelectBtn style={{left:"440px"}} color={btnclick[3]} onClick={()=>{btnchange(3)}}>바바라</SelectBtn>
-            <Changebtn isMobile={isMobile} onClick={()=>{setviewchange(viewchange === "grid" ? "list" : "grid")}}>
-                <img src={img3}></img>
-                {viewchange === "grid" ? <img src={img1} style={{width:"31px",height:"24px"}}></img>: <img src={img2} style={{width:"31px",height:"29px"}}></img>}
-            </Changebtn>
-    </SelectBar>}
-        {btnclick[0] === 1 && viewchange === "grid" && pagestate === "main" && <Allvideo_grid></Allvideo_grid>}
-        {btnclick[0] === 1 && viewchange === "list" && pagestate === "main" && <Allvideo_list></Allvideo_list>}
-        {btnclick[1] === 1 && viewchange === "grid" && pagestate === "main" && <Leesunminvideo_grid></Leesunminvideo_grid>}
-        {btnclick[1] === 1 && viewchange === "list" && pagestate === "main" && <Leesunminvideo_list></Leesunminvideo_list>}
-        {btnclick[2] === 1 && viewchange === "grid" && pagestate === "main" && <Leejinsolvideo_grid></Leejinsolvideo_grid>}
-        {btnclick[2] === 1 && viewchange === "list" && pagestate === "main" && <Leejinsolvideo_list></Leejinsolvideo_list>}
-        {btnclick[3] === 1 && viewchange === "grid" && pagestate === "main" && <Babaravideo_grid></Babaravideo_grid>}
-        {btnclick[3] === 1 && viewchange === "list" && pagestate === "main" && <Babaravideo_list></Babaravideo_list>}
-        {pagestate === "leesunmin" &&
-            <Leesunminpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leesunminpage>
-        }
-        {pagestate === "leejinsol" && 
-            <Leejinsolpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leejinsolpage>
-        }
-        {pagestate === "babara" && 
-            <Babarapage setpagestate={setpagestate} setbtnclick={setbtnclick}></Babarapage>
-        }
-    </Container></>
+    {!isoverlay &&
+        <Container>
+        {pagestate === "main" && <SelectBar>
+                <SelectBtn style={{left:"20px"}} color={btnclick[0]} onClick={()=>{btnchange(0)}}>모두들</SelectBtn>
+                <SelectBtn style={{left:"160px"}} color={btnclick[1]} onClick={()=>{btnchange(1)}}>이선민</SelectBtn>
+                <SelectBtn style={{left:"300px"}} color={btnclick[2]} onClick={()=>{btnchange(2)}}>이진솔</SelectBtn>
+                <SelectBtn style={{left:"440px"}} color={btnclick[3]} onClick={()=>{btnchange(3)}}>바바라</SelectBtn>
+                <Changebtn isMobile={isMobile} onClick={()=>{setviewchange(viewchange === "grid" ? "list" : "grid")}}>
+                    <img src={img3}></img>
+                    {viewchange === "grid" ? <img src={img1} style={{width:"31px",height:"24px"}}></img>: <img src={img2} style={{width:"31px",height:"29px"}}></img>}
+                </Changebtn>
+        </SelectBar>}
+            {btnclick[0] === 1 && viewchange === "grid" && pagestate === "main" && <Allvideo_grid setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Allvideo_grid>}
+            {btnclick[0] === 1 && viewchange === "list" && pagestate === "main" && <Allvideo_list setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Allvideo_list>}
+            {btnclick[1] === 1 && viewchange === "grid" && pagestate === "main" && <Leesunminvideo_grid setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Leesunminvideo_grid>}
+            {btnclick[1] === 1 && viewchange === "list" && pagestate === "main" && <Leesunminvideo_list setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Leesunminvideo_list>}
+            {btnclick[2] === 1 && viewchange === "grid" && pagestate === "main" && <Leejinsolvideo_grid setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Leejinsolvideo_grid>}
+            {btnclick[2] === 1 && viewchange === "list" && pagestate === "main" && <Leejinsolvideo_list setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Leejinsolvideo_list>}
+            {btnclick[3] === 1 && viewchange === "grid" && pagestate === "main" && <Babaravideo_grid setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Babaravideo_grid>}
+            {btnclick[3] === 1 && viewchange === "list" && pagestate === "main" && <Babaravideo_list setisoverlay={setisoverlay} setoverlayinfo={setoverlayinfo}></Babaravideo_list>}
+            {pagestate === "leesunmin" &&
+                <Leesunminpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leesunminpage>
+            }
+            {pagestate === "leejinsol" &&
+                <Leejinsolpage setpagestate={setpagestate} setbtnclick={setbtnclick}></Leejinsolpage>
+            }
+            {pagestate === "babara" &&
+                <Babarapage setpagestate={setpagestate} setbtnclick={setbtnclick}></Babarapage>
+            }
+        </Container>
+    }
+    {isoverlay && <Overlay>
+            <button onClick={()=>{setisoverlay(false)}} style={{left:"95%",top:"10%",width:"60px",height:"60px",position:"absolute",zIndex:"999",background:"none"}}>X</button>
+            <div style={{width:"95%",left:"1%",height:"10%",position:"absolute",top:"9.9%",display:"flex",flexDirection:"column"}}>
+                <div style={{width:"90%",height:"50%",fontSize:"40px",fontWeight:"600",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+                    {overlayinfo.title}
+                </div>
+                <div style={{width:"90%",height:"50%",alignItems:"center",display:"flex",fontSize:"25px"}}>
+                    인터뷰이 | {overlayinfo.name}&nbsp;&nbsp;&nbsp;&nbsp;{overlayinfo.time}
+                </div>
+            </div>
+            <Youtubecontainer>
+                <YouTube opts={opts} videoId={overlayinfo.youtubeid} ></YouTube>
+            </Youtubecontainer>
+            
+        </Overlay>}
+    </>
+    
 }
 
 export default Secondpage
+
+const Youtubecontainer = styled.div`
+position:absolute;
+width:100%;
+height:75%;
+top:20%;
+`
+
+const Overlay = styled.div`
+height:1105px;
+width: 1604px;
+padding-top:95px;
+margin-left: 316px;
+position:relative;
+font-family: Gothic A1;
+padding-top:95px;
+`
 
 
 const Container = styled.div`
