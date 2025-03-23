@@ -3,23 +3,29 @@ import Babara from "../../datas/BabaraVideoimg"
 import Leejinsol from "../../datas/LeejinsolVideoimg"
 import Leesunmin from "../../datas/LeesuminVideoimg"
 
-const Allvideo_list = ()=>{
+const Allvideo_list = ({setisoverlay,setoverlayinfo})=>{
     return <Container>
         <Namebar style={{borderTop:"1px solid black"}}>&nbsp;&nbsp;{">"} 이선민</Namebar>
             {
-            Leesunmin.map((v,i)=>{return <Listelement>
+            Leesunmin.map((v,i)=>{return <Listelement onClick={()=>{
+                setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+            }}>
                 <Listelement_title>{v.title}</Listelement_title>
             </Listelement>})
             }
         <Namebar>&nbsp;&nbsp;{">>"} 이진솔</Namebar>
             {
-            Leejinsol.map((v,i)=>{return <Listelement>
+            Leejinsol.map((v,i)=>{return <Listelement onClick={()=>{
+                setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+            }}>
                 <Listelement_title>{v.title}</Listelement_title>
             </Listelement>})
             }
         <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
             {
-            Babara.map((v,i)=>{return <Listelement>
+            Babara.map((v,i)=>{return <Listelement onClick={()=>{
+                setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+            }}>
                 <Listelement_title>{v.title}</Listelement_title>
             </Listelement>})
             }

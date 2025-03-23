@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import Babara from "../../datas/BabaraVideoimg"
 
-const Babaravideo_list = ()=>{
+const Babaravideo_list = ({setisoverlay,setoverlayinfo})=>{
     return <Container>
         <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
         <Listcontainer>{
-            Babara.map((v,i)=>{return <Listelement>
+            Babara.map((v,i)=>{return <Listelement onClick={()=>{
+                setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+            }}>
                 <Listelement_title>{v.title}</Listelement_title>
             </Listelement>})
             }</Listcontainer>

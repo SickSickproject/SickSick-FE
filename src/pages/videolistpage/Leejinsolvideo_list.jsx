@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import Leejinsol from "../../datas/LeejinsolVideoimg"
 
-const Leejinsolvideo_list = ()=>{
+const Leejinsolvideo_list = ({setisoverlay,setoverlayinfo})=>{
     return <Container>
         <Namebar>&nbsp;&nbsp;{">>"} 이진솔</Namebar>
         <Listcontainer>{
-            Leejinsol.map((v,i)=>{return <Listelement>
+            Leejinsol.map((v,i)=>{return <Listelement onClick={()=>{
+                setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+            }}>
                 <Listelement_title>{v.title}</Listelement_title>
             </Listelement>})
             }</Listcontainer>
