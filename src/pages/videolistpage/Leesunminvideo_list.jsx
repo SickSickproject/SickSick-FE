@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import Leesunmin from "../../datas/LeesuminVideoimg";
 
-const Leesunminvideo_list = ()=>{
+const Leesunminvideo_list = ({setisoverlay,setoverlayinfo})=>{
     return <Container>
         <Namebar>&nbsp;&nbsp;{">"} 이선민</Namebar>
         <Listcontainer>{
-            Leesunmin.map((v,i)=>{return <Listelement>
+            Leesunmin.map((v,i)=>{return <Listelement onClick={()=>{
+                setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+            }}>
                 <Listelement_title>{v.title}</Listelement_title>
             </Listelement>})
             }</Listcontainer>
