@@ -17,6 +17,11 @@ import listbtn from "../assets/viewchangebtnimg/listbtn.svg"
 import changebtn from "../assets/viewchangebtnimg/changebtn.svg"
 import { useMediaQuery } from "react-responsive";
 import YouTube from "react-youtube";
+import Leesunmin from "../datas/LeesuminVideoimg";
+import Babara from "../datas/BabaraVideoimg";
+import Leejinsol from "../datas/LeejinsolVideoimg";
+import { TfiArrowCircleRight } from "react-icons/tfi";
+import { TfiArrowCircleLeft } from "react-icons/tfi";
 
 
 const Secondpage = ()=>{
@@ -35,6 +40,7 @@ const Secondpage = ()=>{
         youtubeid:"",
         title_s:"",
         time:"",
+        id:""
     })
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
@@ -58,6 +64,88 @@ const Secondpage = ()=>{
         newarr[i] = 1;
         console.log(newarr)
         setbtnclick(newarr)
+    }
+
+    const prevbtnclick = ()=>{
+        if(btnclick[0]){
+            if(overlayinfo.name === "바바라"){
+                if(overlayinfo.id === 0){
+                    setoverlayinfo(Leejinsol[10])
+                }
+                else{
+                    setoverlayinfo(Babara[overlayinfo.id-1])
+                }
+            }
+            else if(overlayinfo.name === "이진솔"){
+                if(overlayinfo.id === 0){
+                    setoverlayinfo(Leesunmin[10])
+                }
+                else{
+                    setoverlayinfo(Leejinsol[overlayinfo.id-1])
+                }
+            }
+            else{
+                if(overlayinfo.id != 0){
+                    setoverlayinfo(Leesunmin[overlayinfo.id-1])
+                }
+            }
+        }
+        else if(btnclick[1]){
+            if(overlayinfo.id != 0){
+                setoverlayinfo(Leesunmin[overlayinfo.id-1])
+            }
+        }
+        else if(btnclick[2]){
+            if(overlayinfo.id != 0){
+                setoverlayinfo(Leejinsol[overlayinfo.id-1])
+            }
+        }
+        else{
+            if(overlayinfo.id != 0){
+                setoverlayinfo(Babara[overlayinfo.id-1])
+            }
+        }
+    }
+
+    const nextbtnclick = ()=>{
+        if(btnclick[0]){
+            if(overlayinfo.name === "이선민"){
+                if(overlayinfo.id === 10){
+                    setoverlayinfo(Leejinsol[0])
+                }
+                else{
+                    setoverlayinfo(Leesunmin[overlayinfo.id+1])
+                }
+            }
+            else if(overlayinfo.name === "이진솔"){
+                if(overlayinfo.id === 10){
+                    setoverlayinfo(Babara[0])
+                }
+                else{
+                    setoverlayinfo(Leejinsol[overlayinfo.id+1])
+                }
+            }
+            else{
+                if(overlayinfo.id != 7){
+                    setoverlayinfo(Babara[overlayinfo.id+1])
+                }
+            }
+        }
+        else if(btnclick[1]){
+            if(overlayinfo.id != 10){
+                setoverlayinfo(Leesunmin[overlayinfo.id+1])
+            }
+        }
+        else if(btnclick[2]){
+            if(overlayinfo.id != 10){
+                setoverlayinfo(Leejinsol[overlayinfo.id+1])
+            }
+        }
+        else{
+            if(overlayinfo.id != 7){
+                setoverlayinfo(Babara[overlayinfo.id+1])
+            }
+        }
     }
 
     return <>
@@ -125,6 +213,12 @@ const Secondpage = ()=>{
             <Youtubecontainer>
                 <YouTube opts={opts} videoId={overlayinfo.youtubeid} ></YouTube>
             </Youtubecontainer>
+            <Pagebtn onClick={()=>{nextbtnclick()}} style={{left:"1850px"}}>
+                <TfiArrowCircleRight style={{width:"100%",height:"100%"}}/>
+            </Pagebtn>
+            <Pagebtn onClick={()=>{prevbtnclick()}} style={{left:"1800px"}}>
+                <TfiArrowCircleLeft style={{width:"100%",height:"100%"}}/>
+            </Pagebtn>
             
         </Overlay>}
     </>
@@ -132,6 +226,13 @@ const Secondpage = ()=>{
 }
 
 export default Secondpage
+
+const Pagebtn = styled.div`
+position:absolute;
+width:40px;
+height:40px;
+top:1150px;
+`
 
 const Youtubecontainer = styled.div`
 position:absolute;
@@ -142,12 +243,13 @@ top:20%;
 
 const Overlay = styled.div`
 height:1105px;
-width: 1604px;
+width: 1920px;
 padding-top:95px;
-margin-left: 316px;
+z-index:9998;
 position:relative;
 font-family: Gothic A1;
 padding-top:95px;
+background-color:white;
 `
 
 
@@ -167,7 +269,7 @@ width:316px;
 height:1105px;
 display:flex;
 flex-direction:column;
-z-index:9998;
+z-index:9997;
 background-color:white;
 `;
 
