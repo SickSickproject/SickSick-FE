@@ -18,7 +18,7 @@ const Allvideo_grid = ({setisoverlay,setoverlayinfo}) => {
                 <Videocontainer>
                 {Leesunmin.map((v, i) => {
                         return <Videoelement onClick={() => {
-                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); 
                         }}>
                              <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
                              <Videoelement_title>{v.title}</Videoelement_title>
@@ -30,7 +30,7 @@ const Allvideo_grid = ({setisoverlay,setoverlayinfo}) => {
                 <Videocontainer>
                 {Leejinsol.map((v, i) => {
                         return <Videoelement onClick={() => {
-                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); 
                         }}>
                              <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
                              <Videoelement_title>{v.title}</Videoelement_title>
@@ -42,7 +42,7 @@ const Allvideo_grid = ({setisoverlay,setoverlayinfo}) => {
                 <Videocontainer2>
                 {Babara.map((v, i) => {
                         return <Videoelement onClick={() => {
-                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); 
                             }}>
                              <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
                              <Videoelement_title>{v.title}</Videoelement_title>

@@ -14,7 +14,7 @@ const Babaravideo_grid = ({setisoverlay,setoverlayinfo}) => {
                 <Videocontainer>
                     {Babara.map((v, i) => {
                         return <Videoelement onClick={() => {
-                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid}); setisoverlay(true); window.scrollTo({ top: 0 }); }}>
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); }}>
                             <img src={v.image} style={{ top: "5%", width: "100%", position: "absolute" }}></img>
                             <Videoelement_title>{v.title}</Videoelement_title>
                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "0.9vw" }}>인터뷰이 | 바바라</div>
