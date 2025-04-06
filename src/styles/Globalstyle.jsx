@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const Globalstyle = createGlobalStyle`
 html, body, #root {
   width: 100%;
-  height:1200px;
+  height:100%;
   margin: 0;
   padding: 0;
 //   overflow:auto;
