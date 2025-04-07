@@ -185,7 +185,7 @@ const Secondpage = () => {
             </AnimatePresence>
         </Sidebar>
         {!isoverlay &&
-            <Container>
+            <Container isMobile={isMobile}>
                 {pagestate === "main" && <SelectBar>
                     <SelectBtn style={{ left: "20px" }} color={btnclick[0]} onClick={() => { btnchange(0) }}>모두들</SelectBtn>
                     <SelectBtn style={{ left: "160px" }} color={btnclick[1]} onClick={() => { btnchange(1) }}>이선민</SelectBtn>
@@ -290,7 +290,7 @@ export default Secondpage
 const Desktoppage = styled.div`
 font-family: Gothic A1;
 width:1920px;
-height:975px;
+height:880px;
 position:relative;
 padding-top:95px;
 background-color:white;
@@ -376,14 +376,14 @@ padding-top:95px;
 height:1105px;
 background-color:white;
 font-family: Gothic A1;
-width: calc(100vw - 316px);
+width: ${(props)=>(props.isMobile ? "708px" : "calc(100vw - 316px)")};
 `
 const Sidebar = styled.div`
 position:fixed;
 top:95px;
 left:0px;
 width:316px;
-height:auto;
+height:100%;
 display:flex;
 flex-direction:column;
 z-index:9997;
@@ -391,7 +391,7 @@ background-color:white;
 `;
 
 const SelectBar = styled.div`
-width:100%px;
+width:100%;
 height:81px;
 display:flex;
 align-items:center;
