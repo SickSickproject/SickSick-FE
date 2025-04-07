@@ -217,7 +217,7 @@ const Secondpage = () => {
         }
         {isoverlay && isMobile &&
             <Mobilepage>
-                <img src={img4} style={{ position: "absolute", left: "860px", top: "119px", }} onClick={() => { setisoverlay(false) }}></img>
+                <img src={img4} style={{ position: "absolute", left: "860px", top: "119px", zIndex: "999" }} onClick={() => { setisoverlay(false) }}></img>
                 <Mobilepage_title>
                     <div style={{ width: "740px", height: "65px", textAlign: "left", fontSize: "40px", fontWeight: "600", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {overlayinfo.title}
@@ -239,7 +239,7 @@ const Secondpage = () => {
         }
         {isoverlay && isTablet &&
             <Tabletpage>
-                <img src={img4} style={{ position: "absolute", left: "1284px", top: "119px", }} onClick={() => { setisoverlay(false) }}></img>
+                <img src={img4} style={{ position: "absolute", left: "1284px", top: "119px", zIndex: "999" }} onClick={() => { setisoverlay(false) }}></img>
                 <Tabletpage_title>
                     <div style={{ width: "1160px", height: "65px", textAlign: "left", fontSize: "40px", fontWeight: "600", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {overlayinfo.title}
@@ -261,7 +261,7 @@ const Secondpage = () => {
         }
         {isoverlay && isDesktop &&
             <Desktoppage>
-                <img src={img4} style={{ position: "absolute", left: "1522px", top: "119px", }} onClick={() => { setisoverlay(false) }}></img>
+                <img src={img4} style={{ position: "absolute", left: "1522px", top: "119px", zIndex: "999" }} onClick={() => { setisoverlay(false) }}></img>
                 <Desktoppage_title>
                     <div style={{ width: "1150px", height: "65px", textAlign: "left", fontSize: "40px", fontWeight: "600", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {overlayinfo.title}
@@ -270,7 +270,7 @@ const Secondpage = () => {
                         인터뷰이 | {overlayinfo.name}&nbsp;&nbsp;&nbsp;&nbsp;{overlayinfo.time}
                     </div>
                 </Desktoppage_title>
-                <Desktoppage_youtube style={{left:"360.34"}}>
+                <Desktoppage_youtube style={{ left: "360.34" }}>
                     <YouTube opts={opts2} videoId={overlayinfo.youtubeid}></YouTube>
                 </Desktoppage_youtube>
                 <Pagebtn onClick={() => { prevbtnclick() }} style={{ left: "1482px", top: "920px", position: "absolute" }}>

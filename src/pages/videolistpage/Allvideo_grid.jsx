@@ -11,6 +11,7 @@ const Allvideo_grid = ({setisoverlay,setoverlayinfo}) => {
     const navigate = useNavigate();
 
     return <>
+        {isMobile && <div style={{width:"100%",position:"relative",backgroundColor:"red",zIndex:"10",aspectRatio:"1604/6117"}}></div>}
 
         {!isMobile &&
             <Container>
@@ -69,6 +70,14 @@ const Allvideo_grid = ({setisoverlay,setoverlayinfo}) => {
 }
 
 export default Allvideo_grid
+
+const Smallcontainer = styled.div`
+width:100%;
+position:relative;
+background-color:red;
+z-index:10;
+
+`
 
 const Container = styled.div`
 width:100%;
