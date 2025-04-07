@@ -3,8 +3,42 @@ import styled from "styled-components";
 import { useState } from "react";
 import leesunminhoverimg from "../../assets/Hoverimg/leesunminhoverimg.png";
 import leesunmintitle from "../../assets/interview_title_img/title_Leesunmin.svg"
-
+import { useRef } from "react";
 const Leesunminpage = ({ setpagestate, setbtnclick }) => {
+    const scrollRef = useRef(null);
+    const isDragging = useRef(false);
+    const startX = useRef(0);
+    const startY = useRef(0);
+    const scrollLeftPos = useRef(0);
+    const scrollTopPos = useRef(0);
+
+    const handleMouseDown = (e) => {
+        isDragging.current = true;
+        startX.current = e.pageX;
+        startY.current = e.pageY;
+        scrollLeftPos.current = scrollRef.current.scrollLeft;
+        scrollTopPos.current = scrollRef.current.scrollTop;
+    };
+
+    const handleMouseUp = () => {
+        isDragging.current = false;
+    };
+
+    const handleMouseLeave = () => {
+        isDragging.current = false;
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging.current) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const y = e.pageY;
+        const walkX = x - startX.current;
+        const walkY = y - startY.current;
+        scrollRef.current.scrollLeft = scrollLeftPos.current - walkX;
+        scrollRef.current.scrollTop = scrollTopPos.current - walkY;
+    };
+
     console.log(setbtnclick)
     const [isClicked, setIsClicked] = useState(false);
 
@@ -32,6 +66,12 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
 
     return (
         <>
+        <ScrollContainer
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}>
             <AnimatePresence>
                 <motion.div
                     initial={{ opacity: 0.8 }}
@@ -39,6 +79,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
+                    style={{userSelect:"none"}}
                 >
                     <Container clicked={isClicked}>
                         <Namebar>이선민</Namebar>
@@ -73,7 +114,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1330px", top: "460px" }}
+                                    style={{ left: "1090px", top: "360px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter2(true)}
                                     onMouseLeave={() => setmouseenter2(false)}
@@ -94,7 +135,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "890px", top: "720px" }}
+                                    style={{ left: "660px", top: "620px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter3(true)}
                                     onMouseLeave={() => setmouseenter3(false)}
@@ -117,7 +158,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1270px", top: "190px" }}
+                                    style={{ left: "1030px", top: "90px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter1(true)}
                                     onMouseLeave={() => setmouseenter1(false)}
@@ -133,6 +174,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                     }}>고백, 들으러가기{`>`}</Navigatebar>
                 </motion.div>
             </AnimatePresence>
+            </ScrollContainer>
         </>
     );
 };
@@ -140,9 +182,25 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
 
 export default Leesunminpage;
 
+const ScrollContainer = styled.div`
+    width: calc(100vw - 316px);
+    height: calc(100vh - 95px);
+    overflow: scroll;
+    user-select: none;
+    cursor: grab;
+    position: relative;
+
+    /* 스크롤바 숨기기 (Chrome, Safari, Opera) */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* IE, Edge, Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+`;
+
 // 메인 컨테이너 (클릭 시 흐림 효과 적용)
 const Container = styled.div`
-  
     width: 1605px;
     height: 1023px;
     background-color: black;
@@ -239,11 +297,11 @@ const Discriptbar = styled.div`
 const Personimg = styled.img`
     width:565px;
     height:764px;
-    left: 780px;
+    left: 540px;
     transform-origin: top left;
     transform: ${({ move }) => `translateY(${move}px)`};
     opacity: ${({ isClicked }) => (isClicked ? 0.8 : 0.5)};
-    top: 260px;
+    top: 160px;
     position: absolute;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
@@ -267,9 +325,9 @@ align-items:center;
 `
 
 const Infobox1 = styled.div`
-left: 1337px;
+left: 1097px;
 position:absolute;
-top:190px;
+top:90px;
 background-color:yellow;
 width:163px;
 height:79px;
@@ -293,9 +351,9 @@ line-height: 140%;
 `
 
 const Infobox2 = styled.div`
-left: 1397px;
+left: 1157px;
 position:absolute;
-top:460px;
+top:360px;
 background-color:yellow;
 width:320px;
 height:79px;
@@ -318,9 +376,9 @@ line-height: 140%;
 `
 
 const Infobox3 = styled.div`
-left: 957px;
+left: 727px;
 position:absolute;
-top:720px;
+top:620px;
 width:227px;
 height:107px;
 display: flex;

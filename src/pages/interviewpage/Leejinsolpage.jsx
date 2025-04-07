@@ -3,11 +3,46 @@ import styled from "styled-components";
 import { useState } from "react";
 import leejinsoltitle from "../../assets/interview_title_img/title_Leejinsol.svg"
 import leejinsolhoverimg from "../../assets/Hoverimg/leejinsolhoverimg.png";
-
+import { useRef } from "react";
 
 
 
 const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
+
+    const scrollRef = useRef(null);
+    const isDragging = useRef(false);
+    const startX = useRef(0);
+    const startY = useRef(0);
+    const scrollLeftPos = useRef(0);
+    const scrollTopPos = useRef(0);
+
+    const handleMouseDown = (e) => {
+        isDragging.current = true;
+        startX.current = e.pageX;
+        startY.current = e.pageY;
+        scrollLeftPos.current = scrollRef.current.scrollLeft;
+        scrollTopPos.current = scrollRef.current.scrollTop;
+    };
+
+    const handleMouseUp = () => {
+        isDragging.current = false;
+    };
+
+    const handleMouseLeave = () => {
+        isDragging.current = false;
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging.current) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const y = e.pageY;
+        const walkX = x - startX.current;
+        const walkY = y - startY.current;
+        scrollRef.current.scrollLeft = scrollLeftPos.current - walkX;
+        scrollRef.current.scrollTop = scrollTopPos.current - walkY;
+    };
+
     console.log(setbtnclick)
     const [isClicked, setIsClicked] = useState(false);
 
@@ -36,6 +71,12 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
     return (
         <>
+        <ScrollContainer
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}>
             <AnimatePresence>
                 <motion.div
                     initial={{ opacity: 0.8 }}
@@ -43,6 +84,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
+                    style={{ userSelect: "none" }}
                 >
                     <Container clicked={isClicked}>
                         <Namebar>이진솔</Namebar>
@@ -76,7 +118,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1490px", top: "470px" }}
+                                    style={{ left: "1180px", top: "380px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter2(true)}
                                     onMouseLeave={() => setmouseenter2(false)}
@@ -97,7 +139,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "980px", top: "580px" }}
+                                    style={{ left: "670px", top: "490px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter3(true)}
                                     onMouseLeave={() => setmouseenter3(false)}
@@ -119,7 +161,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1240px", top: "150px" }}
+                                    style={{ left: "930px", top: "60px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter1(true)}
                                     onMouseLeave={() => setmouseenter1(false)}
@@ -140,7 +182,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1350px", top: "790px" }}
+                                    style={{ left: "1040px", top: "700px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter4(true)}
                                     onMouseLeave={() => setmouseenter4(false)}
@@ -158,6 +200,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                     }}>고백, 들으러가기{`>`}</Navigatebar>
                 </motion.div>
             </AnimatePresence>
+            </ScrollContainer>
         </>
     );
 
@@ -165,6 +208,23 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 }
 
 export default Leejinsolpage
+
+const ScrollContainer = styled.div`
+    width: calc(100vw - 316px);
+    height: calc(100vh - 95px);
+    overflow: scroll;
+    user-select: none;
+    cursor: grab;
+    position: relative;
+
+    /* 스크롤바 숨기기 (Chrome, Safari, Opera) */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* IE, Edge, Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+`;
 
 const Container = styled.div`
     width: 1605px;
@@ -262,11 +322,11 @@ const Discriptbar = styled.div`
 const Personimg = styled.img`
     width:735px;
     height:786px;
-    left: 780px;
+    left: 470px;
     transform-origin: top left;
     transform: ${({ move }) => `translateY(${move}px)`};
     opacity: ${({ isClicked }) => (isClicked ? 0.8 : 0.5)};
-    top: 230px;
+    top: 140px;
     position: absolute;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
@@ -290,9 +350,9 @@ align-items:center;
 `
 
 const Infobox1 = styled.div`
-left: 1307px;
+left: 997px;
 position:absolute;
-top:150px;
+top:60px;
 background-color:yellow;
 width:227px;
 height:79px;
@@ -316,9 +376,9 @@ line-height: 140%;
 `
 
 const Infobox2 = styled.div`
-left: 1557px;
+left: 1247px;
 position:absolute;
-top:470px;
+top:380px;
 background-color:yellow;
 width:244px;
 height:79px;
@@ -341,9 +401,9 @@ line-height: 140%;
 `
 
 const Infobox3 = styled.div`
-left: 1047px;
+left: 737px;
 position:absolute;
-top:580px;
+top:490px;
 width:294px;
 height:79px;
 display: flex;
@@ -366,9 +426,9 @@ line-height: 140%;
 `
 
 const Infobox4 = styled.div`
-left: 1417px;
+left: 1107px;
 position:absolute;
-top:790px;
+top:700px;
 background-color:yellow;
 width:260px;
 height:107px;

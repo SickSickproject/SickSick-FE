@@ -185,7 +185,7 @@ const Secondpage = () => {
             </AnimatePresence>
         </Sidebar>
         {!isoverlay &&
-            <Container>
+            <Container isMobile={isMobile}>
                 {pagestate === "main" && <SelectBar>
                     <SelectBtn style={{ left: "20px" }} color={btnclick[0]} onClick={() => { btnchange(0) }}>모두들</SelectBtn>
                     <SelectBtn style={{ left: "160px" }} color={btnclick[1]} onClick={() => { btnchange(1) }}>이선민</SelectBtn>
@@ -217,7 +217,7 @@ const Secondpage = () => {
         }
         {isoverlay && isMobile &&
             <Mobilepage>
-                <img src={img4} style={{ position: "absolute", left: "860px", top: "119px", }} onClick={() => { setisoverlay(false) }}></img>
+                <img src={img4} style={{ position: "absolute", left: "860px", top: "119px", zIndex: "999" }} onClick={() => { setisoverlay(false) }}></img>
                 <Mobilepage_title>
                     <div style={{ width: "740px", height: "65px", textAlign: "left", fontSize: "40px", fontWeight: "600", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {overlayinfo.title}
@@ -239,7 +239,7 @@ const Secondpage = () => {
         }
         {isoverlay && isTablet &&
             <Tabletpage>
-                <img src={img4} style={{ position: "absolute", left: "1284px", top: "119px", }} onClick={() => { setisoverlay(false) }}></img>
+                <img src={img4} style={{ position: "absolute", left: "1284px", top: "119px", zIndex: "999" }} onClick={() => { setisoverlay(false) }}></img>
                 <Tabletpage_title>
                     <div style={{ width: "1160px", height: "65px", textAlign: "left", fontSize: "40px", fontWeight: "600", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {overlayinfo.title}
@@ -261,7 +261,7 @@ const Secondpage = () => {
         }
         {isoverlay && isDesktop &&
             <Desktoppage>
-                <img src={img4} style={{ position: "absolute", left: "1522px", top: "119px", }} onClick={() => { setisoverlay(false) }}></img>
+                <img src={img4} style={{ position: "absolute", left: "1522px", top: "119px", zIndex: "999" }} onClick={() => { setisoverlay(false) }}></img>
                 <Desktoppage_title>
                     <div style={{ width: "1150px", height: "65px", textAlign: "left", fontSize: "40px", fontWeight: "600", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {overlayinfo.title}
@@ -270,7 +270,7 @@ const Secondpage = () => {
                         인터뷰이 | {overlayinfo.name}&nbsp;&nbsp;&nbsp;&nbsp;{overlayinfo.time}
                     </div>
                 </Desktoppage_title>
-                <Desktoppage_youtube style={{left:"360.34"}}>
+                <Desktoppage_youtube style={{ left: "360.34" }}>
                     <YouTube opts={opts2} videoId={overlayinfo.youtubeid}></YouTube>
                 </Desktoppage_youtube>
                 <Pagebtn onClick={() => { prevbtnclick() }} style={{ left: "1482px", top: "920px", position: "absolute" }}>
@@ -290,7 +290,7 @@ export default Secondpage
 const Desktoppage = styled.div`
 font-family: Gothic A1;
 width:1920px;
-height:975px;
+height:880px;
 position:relative;
 padding-top:95px;
 background-color:white;
@@ -373,25 +373,25 @@ top:1150px;
 const Container = styled.div`
 margin-left: 316px;
 padding-top:95px;
-height:1105px;
+height:auto;
 background-color:white;
 font-family: Gothic A1;
-width: calc(100vw - 316px);
+width: ${(props)=>(props.isMobile ? "708px" : "calc(100vw - 316px)")};
 `
 const Sidebar = styled.div`
 position:fixed;
 top:95px;
 left:0px;
 width:316px;
-height:auto;
+height:100%;
 display:flex;
 flex-direction:column;
 z-index:9997;
-background-color:white;
+background-color:none;
 `;
 
 const SelectBar = styled.div`
-width:100%px;
+width:100%;
 height:81px;
 display:flex;
 align-items:center;
