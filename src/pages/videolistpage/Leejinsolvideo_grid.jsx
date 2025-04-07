@@ -8,6 +8,35 @@ const Leejinsolvideo_grid = ({setisoverlay,setoverlayinfo}) => {
 
     return <>
 
+{isMobile &&
+            <Smallcontainer>
+            <Smallnamebar>&nbsp;&nbsp;{">>"} 이진솔</Smallnamebar>
+            <Smallvideocontainer>
+            {Leejinsol.map((v, i) => {
+                        return <Videoelement onClick={() => {
+                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                        }}>
+                             <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
+                             <Videoelement_title style={{fontSize:"20px"}}>{v.title}</Videoelement_title>
+                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"15px"}}>인터뷰이 | 이선민</div>
+                        </Videoelement>
+                    })}
+            </Smallvideocontainer>
+            <div style={{ width: "708px",height:"100px", backgroundColor: "black",position:"relative" }}>
+                <Teaminfo style={{fontSize:"10px"}} >
+                        섭식장애 고백 프로젝트 식식<br></br>
+                        Eating Disorder Confession<br></br>
+                        Project Siksik<br></br>
+                        ©Siksik, Inc. All Rights Reserved.
+                    </Teaminfo>
+                    <Teaminfo2 style={{fontSize:"10px"}}>
+                    T. 010 8892 9473<br></br>
+                    Mail. jhss8892@naver.com
+                    </Teaminfo2>
+                </div>
+        </Smallcontainer>
+        }
+
         {!isMobile &&
             <Container>
                 <Namebar>&nbsp;&nbsp;{">>"} 이진솔</Namebar>
@@ -41,6 +70,46 @@ const Leejinsolvideo_grid = ({setisoverlay,setoverlayinfo}) => {
 }
 
 export default Leejinsolvideo_grid
+
+const Smallcontainer = styled.div`
+width:708px;
+height:auto;
+position:relative;
+background-color:white;
+z-index:10;
+
+`
+
+const Smallnamebar = styled.div`
+display: flex;
+width: 708px;
+height:50px;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+background-color: #EFEFEF;
+color: #000;
+box-sizing: border-box;
+leading-trim: both;
+text-edge: cap;
+font-family: Gothic A1;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: 152%; /* 42.56px */
+letter-spacing: -2.24px;
+`
+
+const Smallvideocontainer = styled.div`
+margin-bottom:20px;
+width:708px;
+height:auto;
+display:grid;
+grid-template-columns: repeat(2, 1fr);
+background-color:white;
+`
 
 const Container = styled.div`
 width:100%;
