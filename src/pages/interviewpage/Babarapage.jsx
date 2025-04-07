@@ -3,8 +3,43 @@ import styled from "styled-components";
 import { useState } from "react";
 import babarahoverimg from "../../assets/Hoverimg/babarahoverimg.png";
 import babaratitleimg from "../../assets/interview_title_img/title_babara.svg"
+import { useRef } from "react";
 
 const Babarapage = ({ setpagestate, setbtnclick }) => {
+
+    const scrollRef = useRef(null);
+    const isDragging = useRef(false);
+    const startX = useRef(0);
+    const startY = useRef(0);
+    const scrollLeftPos = useRef(0);
+    const scrollTopPos = useRef(0);
+
+    const handleMouseDown = (e) => {
+        isDragging.current = true;
+        startX.current = e.pageX;
+        startY.current = e.pageY;
+        scrollLeftPos.current = scrollRef.current.scrollLeft;
+        scrollTopPos.current = scrollRef.current.scrollTop;
+    };
+
+    const handleMouseUp = () => {
+        isDragging.current = false;
+    };
+
+    const handleMouseLeave = () => {
+        isDragging.current = false;
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging.current) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const y = e.pageY;
+        const walkX = x - startX.current;
+        const walkY = y - startY.current;
+        scrollRef.current.scrollLeft = scrollLeftPos.current - walkX;
+        scrollRef.current.scrollTop = scrollTopPos.current - walkY;
+    };
     console.log(setbtnclick)
     const [isClicked, setIsClicked] = useState(false);
 
@@ -32,6 +67,12 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
 
     return (
         <>
+        <ScrollContainer
+            ref={scrollRef}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}>
             <AnimatePresence>
                 <motion.div
                     initial={{ opacity: 0.8 }}
@@ -49,9 +90,9 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                             미치는 영향에 대해 힘있는 목소리로 이야기합니다. 바바라 라는 이름이 가수 혹은 보컬트레이너 라는 키워드에 멈추지 않고 누군가에게 용기가 될 수 있는 활동가로 불릴 수 있을 때까지, 그의 목소리는 계속해서 울려 퍼지고 있습니다.
                         </Discriptbar>
 
-                        {/* 클릭하면 강조되는 이미지 */}
+                    
 
-                        {/* 배경 클릭하면 원래 상태로 복귀 */}
+                        
                         {isClicked && <Overlay onClick={() => { setIsClicked(!isClicked); moving(!isClicked) }} />}
                     </Container>
                     <Personimg
@@ -69,7 +110,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "980px", top: "540px" }}
+                                    style={{ left: "680px", top: "470px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter2(true)}
                                     onMouseLeave={() => setmouseenter2(false)}
@@ -90,7 +131,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1120px", top: "730px" }}
+                                    style={{ left: "830px", top: "660px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter3(true)}
                                     onMouseLeave={() => setmouseenter3(false)}
@@ -112,7 +153,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                             >
                                 <Commentbox
-                                    style={{ left: "1390px", top: "430px" }}
+                                    style={{ left: "1090px", top: "350px" }}
                                     isClicked={isClicked}
                                     onMouseEnter={() => setmouseenter1(true)}
                                     onMouseLeave={() => setmouseenter1(false)}
@@ -129,11 +170,29 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     }}>고백, 들으러가기{`>`}</Navigatebar>
                 </motion.div>
             </AnimatePresence>
+            </ScrollContainer>
         </>
     );
 }
 
 export default Babarapage
+
+const ScrollContainer = styled.div`
+    width: calc(100vw - 316px);
+    height: calc(100vh - 95px);
+    overflow: scroll;
+    user-select: none;
+    cursor: grab;
+    position: relative;
+
+    /* 스크롤바 숨기기 (Chrome, Safari, Opera) */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* IE, Edge, Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+`;
 
 // 메인 컨테이너 (클릭 시 흐림 효과 적용)
 const Container = styled.div`
@@ -231,11 +290,11 @@ line-height: 125%; /* 40px */
 const Personimg = styled.img`
     width:639px;
     height:655px;
-    left: 780px;
+    left: 480px;
     transform-origin: top left;
     transform: ${({ move }) => `translateY(${move}px)`};
     opacity: ${({ isClicked }) => (isClicked ? 0.8 : 0.5)};
-    top: 330px;
+    top: 260px;
     position: absolute;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
@@ -259,9 +318,9 @@ align-items:center;
 `
 
 const Infobox1 = styled.div`
-left: 1457px;
+left: 1157px;
 position:absolute;
-top:430px;
+top:260px;
 background-color:yellow;
 width:258px;
 height:79px;
@@ -285,9 +344,9 @@ line-height: 140%;
 `
 
 const Infobox2 = styled.div`
-left: 1047px;
+left: 747px;
 position:absolute;
-top:540px;
+top:470px;
 background-color:yellow;
 width:219px;
 height:79px;
@@ -310,9 +369,9 @@ line-height: 140%;
 `
 
 const Infobox3 = styled.div`
-left: 1187px;
+left: 897px;
 position:absolute;
-top:730px;
+top:660px;
 width:174px;
 height:79px;
 display: flex;
