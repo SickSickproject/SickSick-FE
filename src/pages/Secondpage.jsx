@@ -373,7 +373,7 @@ top:1150px;
 const Container = styled.div`
 margin-left: 316px;
 padding-top:95px;
-height:1105px;
+height:auto;
 background-color:white;
 font-family: Gothic A1;
 width: ${(props)=>(props.isMobile ? "708px" : "calc(100vw - 316px)")};
@@ -387,7 +387,7 @@ height:100%;
 display:flex;
 flex-direction:column;
 z-index:9997;
-background-color:white;
+background-color:none;
 `;
 
 const SelectBar = styled.div`
