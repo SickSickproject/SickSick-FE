@@ -9,7 +9,7 @@ const Leejinsol = [
         name:"이진솔",
         image:LeejinsolVideoimg,
         title:"안녕하세요. 이진솔입니다.",
-        stitle:`①소개`,
+        stitle:`① 소개`,
         time:"41초",
         youtubeid:"IacTiqQMOj8",
         id:0
@@ -36,7 +36,7 @@ const Leejinsol = [
         name:"이진솔",
         image:LeejinsolVideoimg,
         title:"섭식장애를 바라보는 세상의 시선, 무엇이 잘못되었나요?",
-        stitle:"④ 오해와진실",
+        stitle:"④ 오해와 진실",
         time:"1분",
         youtubeid:"nLd7BLAdgPk",
         id:3

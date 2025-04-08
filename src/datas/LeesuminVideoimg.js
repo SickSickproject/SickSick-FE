@@ -6,7 +6,7 @@ const Leesunmin = [
         name:"이선민",
         image:LeesunminVideoimg,
         title:"안녕하세요. 이선민입니다.",
-        stitle:`①소개`,
+        stitle:`① 소개`,
         time:"1분 39초",
         youtubeid:"RkwPC1qc_LY",
         id:0
