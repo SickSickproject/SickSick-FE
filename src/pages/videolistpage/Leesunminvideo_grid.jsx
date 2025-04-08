@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import Leesunmin from "../../datas/LeesuminVideoimg";
 import { useNavigate } from "react-router-dom";
 
-const Leesunminvideo_grid = ({setisoverlay,setoverlayinfo}) => {
+const Leesunminvideo_grid = ({ setisoverlay, setoverlayinfo }) => {
 
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
@@ -11,46 +11,56 @@ const Leesunminvideo_grid = ({setisoverlay,setoverlayinfo}) => {
 
     return <>
 
-{isMobile &&
+        {isMobile &&
             <Smallcontainer>
-            <Smallnamebar>&nbsp;&nbsp;{">"} 이선민</Smallnamebar>
-            <Smallvideocontainer>
-            {Leesunmin.map((v, i) => {
+                <Smallnamebar>&nbsp;&nbsp;{">"} 이선민</Smallnamebar>
+                <Smallvideocontainer>
+                    {Leesunmin.map((v, i) => {
                         return <Videoelement onClick={() => {
-                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); 
+                            setoverlayinfo({ title: v.title, name: v.name, time: v.time, youtubeid: v.youtubeid, id: v.id }); setisoverlay(true); window.scrollTo({ top: 0 });
                         }}>
-                             <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
-                             <Videoelement_title style={{fontSize:"20px"}}>{v.title}</Videoelement_title>
-                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"15px"}}>인터뷰이 | 이선민</div>
+                            <img src={v.image} style={{ top: "5%", width: "100%", position: "absolute" }}></img>
+                            <Videoelement_stitle2>
+                                {v.stitle.split('').map((char, i) => (
+                                    <div key={i} style={char === ' ' ? { fontSize: "10px", height: "5px", display: 'inline-block' } : {}}>{char === ' ' ? '\u00A0' : char}</div>
+                                ))}
+                                <VerticalLine /></Videoelement_stitle2>
+                            <Videoelement_title style={{ fontSize: "20px" }}>{v.title}</Videoelement_title>
+                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "15px" }}>인터뷰이 | 이선민</div>
                         </Videoelement>
                     })}
-            </Smallvideocontainer>
-            <div style={{ width: "708px",height:"100px", backgroundColor: "black",position:"relative" }}>
-                <Teaminfo style={{fontSize:"10px"}} >
+                </Smallvideocontainer>
+                <div style={{ width: "708px", height: "100px", backgroundColor: "black", position: "relative" }}>
+                    <Teaminfo style={{ fontSize: "10px" }} >
                         섭식장애 고백 프로젝트 식식<br></br>
                         Eating Disorder Confession<br></br>
                         Project Siksik<br></br>
                         ©Siksik, Inc. All Rights Reserved.
                     </Teaminfo>
-                    <Teaminfo2 style={{fontSize:"10px"}}>
-                    T. 010 8892 9473<br></br>
-                    Mail. jhss8892@naver.com
+                    <Teaminfo2 style={{ fontSize: "10px" }}>
+                        T. 010 8892 9473<br></br>
+                        Mail. jhss8892@naver.com
                     </Teaminfo2>
                 </div>
-        </Smallcontainer>
+            </Smallcontainer>
         }
 
         {!isMobile &&
             <Container>
                 <Namebar>&nbsp;&nbsp;{">"} 이선민</Namebar>
                 <Videocontainer>
-                {Leesunmin.map((v, i) => {
+                    {Leesunmin.map((v, i) => {
                         return <Videoelement onClick={() => {
-                            setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); 
-                         }}>
-                             <img src={v.image} style={{ top: "5%",width:"100%", position: "absolute" }}></img>
-                             <Videoelement_title>{v.title}</Videoelement_title>
-                             <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%",fontSize:"0.9vw"}}>인터뷰이 | {v.name}</div>
+                            setoverlayinfo({ title: v.title, name: v.name, time: v.time, youtubeid: v.youtubeid, id: v.id }); setisoverlay(true); window.scrollTo({ top: 0 });
+                        }}>
+                            <img src={v.image} style={{ top: "5%", width: "100%", position: "absolute" }}></img>
+                            <Videoelement_stitle>
+                                {v.stitle.split('').map((char, i) => (
+                                    <div key={i} style={char === ' ' ? { fontSize: "0.1vw", height: "0.5vh", display: 'inline-block' } : {}}>{char === ' ' ? '\u00A0' : char}</div>
+                                ))}
+                                <VerticalLine /></Videoelement_stitle>
+                            <Videoelement_title>{v.title}</Videoelement_title>
+                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "0.9vw" }}>인터뷰이 | {v.name}</div>
                             {/* <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
                             <Videoelement_stitle>{v.stitle}</Videoelement_stitle>
                             <Videoelement_title>{v.title}</Videoelement_title>
@@ -58,16 +68,16 @@ const Leesunminvideo_grid = ({setisoverlay,setoverlayinfo}) => {
                         </Videoelement>
                     })}
                 </Videocontainer>
-                <div style={{ width: "100%", aspectRatio:"1604/157", backgroundColor: "black",position:"relative" }}>
-                <Teaminfo>
+                <div style={{ width: "100%", aspectRatio: "1604/157", backgroundColor: "black", position: "relative" }}>
+                    <Teaminfo>
                         섭식장애 고백 프로젝트 식식<br></br>
                         Eating Disorder Confession<br></br>
                         Project Siksik<br></br>
                         ©Siksik, Inc. All Rights Reserved.
                     </Teaminfo>
                     <Teaminfo2>
-                    T. 010 8892 9473<br></br>
-                    Mail. jhss8892@naver.com
+                        T. 010 8892 9473<br></br>
+                        Mail. jhss8892@naver.com
                     </Teaminfo2>
                 </div>
             </Container>
@@ -222,17 +232,52 @@ letter-spacing: -1.1px;
 
 const Videoelement_stitle = styled.div`
 color: #574215;
-width: 21.818px;
+width: 1.5vw;
 text-align: center;
 leading-trim: both;
 text-edge: cap;
 font-family: Gothic A1;
-font-size: 26.853px;
+font-size: 1.4vw;
 font-style: normal;
 font-weight: 700;
 line-height: 108%; /* 29.001px */
-letter-spacing: -3.491px;
 position:absolute;
-left:455.28px;
-top:30px;
+padding-top:1%;
+right:5%;
+top:8%;
+aspect-ratio:21.82/188;
+overflow:hidden;
+display: flex;
+  flex-direction: column;
+  align-items: center;     // 가로 가운데 정렬
+`
+
+const VerticalLine = styled.div`
+width: 2px;
+height: 100%;
+background-color: #574215;
+opacity:0.8;
+margin-top:50%;
+`;
+
+const Videoelement_stitle2 = styled.div`
+color: #574215;
+width: 30px;
+height:180px;
+text-align: center;
+leading-trim: both;
+text-edge: cap;
+font-family: Gothic A1;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 108%; /* 29.001px */
+position:absolute;
+padding-top:1%;
+right:5%;
+top:8%;
+overflow:hidden;
+display: flex;
+  flex-direction: column;
+  align-items: center;     // 가로 가운데 정렬
 `
