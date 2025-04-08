@@ -9,7 +9,7 @@ const Babara = [
         name:"바바라",
         image:BabaraVideoimg,
         title:"안녕하세요. 바바라입니다.",
-        stitle:`①소개`,
+        stitle:`① 소개`,
         time:"1분 3초",
         youtubeid:"jgtSnNZ6-vY",
         id:0
