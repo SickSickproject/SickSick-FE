@@ -8,7 +8,6 @@ const Firstpage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const [activeSection, setActiveSection] = useState("식식에대하여");
   
-  // YouTube 옵션
   const youtubeOpts = {
     height: '390',
     width: '100%',
@@ -17,13 +16,11 @@ const Firstpage = () => {
     },
   };
   
-  // 각 섹션의 ref 생성
   const section1Ref = useRef(null);
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
   const section4Ref = useRef(null);
   
-  // 스크롤 핸들러
   const scrollToSection = (sectionId) => {
     let targetRef;
     
@@ -45,10 +42,9 @@ const Firstpage = () => {
       targetRef.current.scrollIntoView({ behavior: 'smooth' });
     }
     
-    setActiveSection(sectionId);
+    // setActiveSection(sectionId);
   };
   
-  // 스크롤 위치에 따라 활성화된 섹션 변경
   useEffect(() => {
     const handleScroll = () => {
       if (!section1Ref.current || !section2Ref.current || !section3Ref.current) return;
@@ -72,29 +68,38 @@ const Firstpage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 각 LeftColumnItem의 높이를 해당하는 ContentSection과 동일하게 맞추기
   useEffect(() => {
     const adjustLeftColumnHeight = () => {
-      // 각 ContentSection의 높이를 가져옵니다
       if (section1Ref.current && section2Ref.current && section3Ref.current && section4Ref.current) {
-        const section1Height = section1Ref.current.offsetHeight;
-        const section2Height = section2Ref.current.offsetHeight;
-        const section3Height = section3Ref.current.offsetHeight;
-        const section4Height = section4Ref.current.offsetHeight;
+        const section1Rect = section1Ref.current.getBoundingClientRect();
+        const section2Rect = section2Ref.current.getBoundingClientRect();
+        const section3Rect = section3Ref.current.getBoundingClientRect();
+        const section4Rect = section4Ref.current.getBoundingClientRect();
         
-        // 각 LeftColumnItem 선택
+        const section1Height = section1Rect.height;
+        const section2Height = section2Rect.height;
+        const section3Height = section3Rect.height;
+        const section4Height = section4Rect.height;
+        
         const leftItem1 = document.querySelector('.left-item-1');
         const leftItem2 = document.querySelector('.left-item-2');
         const leftItem3 = document.querySelector('.left-item-3');
         const leftItem4 = document.querySelector('.left-item-4');
         
-        // 높이 설정
         if (leftItem1) leftItem1.style.height = `${section1Height}px`;
         if (leftItem2) leftItem2.style.height = `${section2Height}px`;
         if (leftItem3) leftItem3.style.height = `${section3Height}px`;
         if (leftItem4) leftItem4.style.height = `${section4Height}px`;
         
-        // LeftColumn의 높이를 콘텐츠에 맞게 조정하여 하단 공백 제거
+        [leftItem1, leftItem2, leftItem3, leftItem4].forEach(item => {
+          if (item) {
+            item.style.paddingTop = '0px';
+            item.style.paddingBottom = '0px';
+            item.style.display = 'flex';
+            item.style.alignItems = 'center';
+          }
+        });
+        
         const leftColumn = document.querySelector('.left-column');
         if (leftColumn) {
           const totalHeight = section1Height + section2Height + section3Height + section4Height;
@@ -103,20 +108,27 @@ const Firstpage = () => {
       }
     };
     
-    // 초기 실행 및 창 크기 변경 시 실행
     adjustLeftColumnHeight();
-    window.addEventListener('resize', adjustLeftColumnHeight);
     
-    // 이미지나 폰트 로딩 후에도 실행
+    window.addEventListener('scroll', adjustLeftColumnHeight);
+    window.addEventListener('resize', adjustLeftColumnHeight);
     window.addEventListener('load', adjustLeftColumnHeight);
     
+    setTimeout(adjustLeftColumnHeight, 500);
+    
     return () => {
+      window.removeEventListener('scroll', adjustLeftColumnHeight);
       window.removeEventListener('resize', adjustLeftColumnHeight);
       window.removeEventListener('load', adjustLeftColumnHeight);
     };
   }, []);
 
   const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    console.log("Navigating to:", path);
+    navigate(path);
+  };
 
   return (
     <Container>
@@ -157,12 +169,10 @@ const Firstpage = () => {
               섭식장애란
             </LeftColumnItem3>
             <LeftColumnItem4 className="left-item-4">
-              섭식장애란
             </LeftColumnItem4>
           </LeftColumn>
           
           <RightColumn>
-            {/* 식식에 대하여 섹션 */}
             <ContentSection1 ref={section1Ref}>
               <ContentTitle>식식은 먹는 아픔을 겪는 모든 식구들을 지지합니다.</ContentTitle>
               <Paragraph>
@@ -194,7 +204,6 @@ const Firstpage = () => {
               </Paragraph>
             </ContentSection1>
 
-            {/* 고백으로 연결되다 섹션 */}
             <ContentSection2 ref={section2Ref}>
               <ContentTitle>식식은 씩씩한 고백을 하는 식구들의 목소리에 귀를 기울입니다</ContentTitle>
               <Paragraph>
@@ -208,13 +217,12 @@ const Firstpage = () => {
               
               <YoutubeWrapper>
                 <YouTube 
-                  videoId="dQw4w9WgXcQ" // 유튜브 영상 ID (예: YouTube URL에서 v= 뒤의 값)
+                  videoId="dQw4w9WgXcQ"
                   opts={youtubeOpts} 
                 />
               </YoutubeWrapper>
             </ContentSection2>
             
-            {/* 섭식장애란 섹션 */}
             <ContentSection3 ref={section3Ref}>
               <ContentTitle>섭식장애는 먹는 행동과 관련해 어려움을 겪으며 개인의 신체적 건강과<br/>
               심리.사회적 기능을 손상시키는 정신장애를 의미합니다.</ContentTitle>
@@ -269,27 +277,27 @@ const Firstpage = () => {
         </ContentLayout>
         
         <BottomLinks>
-          <BottomLink onClick={() => navigate('/two')}>
+          <BottomLink onClick={() => handleNavigation('/two')}>
             <LinkText>식식한 고백들</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
-          <BottomLink onClick={() => navigate('/three')}>
+          <BottomLink onClick={() => handleNavigation('/three')}>
             <LinkText>식식한 연결하기</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
-          <BottomLink onClick={() => navigate('/')}>
+          <BottomLink onClick={() => handleNavigation('/')}>
             <LinkText>식식에 대하여</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
         </BottomLinks>
         
         <Footer>
-          <FooterContent>
-            <FooterText>식식재단 고백 프로젝트 식식</FooterText>
-            <FooterText>T.010-8892-9473</FooterText>
-            <FooterText>Mail: jhss8892@naver.com</FooterText>
-            <FooterText>©Siksik, Inc. All Rights Reserved.</FooterText>
-          </FooterContent>
+          <FooterText>섭식장애 고백 프로젝트 식식</FooterText>
+          <FooterText>Eating Disorder Confession</FooterText>
+          <FooterText>Project Siksik</FooterText>
+          <FooterText>T.010 8892 9473</FooterText>
+          <FooterText>Mail:jhss8892@naver.com</FooterText>
+          <FooterText>©Siksik, Inc. All Rights Reserved.</FooterText>
         </Footer>
       </MainContent>
     </Container>
@@ -303,7 +311,7 @@ const Container = styled.div`
   min-height: calc(100vh - 95px);
   display: flex;
   font-family: "Gothic A1", sans-serif;
-  margin-top: 95px; /* 네비게이션 바 높이 */
+  margin-top: 95px;
 `;
 
 const Sidebar = styled.div`
@@ -368,7 +376,7 @@ const LeftColumn = styled.div`
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  height: auto; /* auto로 변경하여 콘텐츠에 맞게 높이 조절 */
+  height: auto;
 `;
 
 const LeftColumnItem1 = styled.div`
@@ -433,7 +441,7 @@ const LeftColumnItem4 = styled.div`
   justify-content: center;
   font-size: 32px;
   font-weight: 500;
-  border-bottom: none; /* 마지막 항목의 아래 테두리 제거 */
+  border-bottom: none;
   cursor: pointer;
   line-height: 1.4;
   transition: background-color 0.3s;
@@ -453,7 +461,7 @@ const ContentSection1 = styled.div`
   padding: 0 0 30px 0;
   margin-bottom: 30px;
   border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px; /* 스크롤 시 상단 여백 설정 */
+  scroll-margin-top: 100px;
   
   &:last-child {
     border-bottom: none;
@@ -465,7 +473,7 @@ const ContentSection2 = styled.div`
   padding: 0 0 30px 0;
   margin-bottom: 30px;
   border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px; /* 스크롤 시 상단 여백 설정 */
+  scroll-margin-top: 100px;
   
   &:last-child {
     border-bottom: none;
@@ -477,7 +485,7 @@ const ContentSection3 = styled.div`
   padding: 0 0 30px 0;
   margin-bottom: 30px;
   border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px; /* 스크롤 시 상단 여백 설정 */
+  scroll-margin-top: 100px;
   
   &:last-child {
     border-bottom: none;
@@ -489,7 +497,7 @@ const ContentSection4 = styled.div`
   padding: 0 0 30px 0;
   margin-bottom: 30px;
   border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px; /* 스크롤 시 상단 여백 설정 */
+  scroll-margin-top: 100px;
   
   &:last-child {
     border-bottom: none;
@@ -510,14 +518,13 @@ const Paragraph = styled.p`
   margin-bottom: 15px;
 `;
 
-// 유튜브 컨테이너 스타일
 const YoutubeWrapper = styled.div`
   width: 100%;
   margin: 20px 0;
   max-width: 800px;
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%; /* 16:9 비율 유지 */
+  padding-top: 56.25%;
   
   iframe {
     position: absolute;
@@ -557,22 +564,27 @@ const LinkText = styled.div`
 const LinkArrow = styled.div`
   font-size: 20px;
   font-weight: bold;
+  transition: transform 0.3s ease;
+  
+  ${BottomLink}:hover & {
+    transform: scaleX(1.5);
+    transform-origin: left;
+  }
 `;
 
 const Footer = styled.div`
   background-color: #000;
   color: #fff;
-  padding: 15px 20px;
-`;
-
-const FooterContent = styled.div`
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: flex-start;
 `;
 
 const FooterText = styled.p`
   margin: 0;
+  margin-bottom: 4px;
   font-size: 11px;
   color: #fff;
+  line-height: 1.2;
 `;
