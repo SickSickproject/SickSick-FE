@@ -86,13 +86,13 @@ const Selectpage = () => {
               식식은 섭식장애 인식 확산을 위한 당사자 고백 프로젝트입니다.
             </Textbox>
 
-            <Circle style={{ left: "258px" }} onClick={() => navigate(`/main/one`, { replace: false })}>
-              섭식장애란<br />
+            <Circle style={{ left: "258px",textAlign:"center" }} onClick={() => navigate(`/main/one`, { replace: false })}>
+              ①<br/>섭식장애란<br />
               무엇일까?
             </Circle>
 
-            <Circle style={{ left: "996px" }} onClick={() => navigate(`/main/two`, { replace: false })}>
-              고백 들으러 가기
+            <Circle style={{ left: "996px",textAlign:"center" }} onClick={() => navigate(`/main/two`, { replace: false })}>
+              ②<br/>고백 들으러<br/> 가기
             </Circle>
           </ContentWrapper>
         </ScrollContainer>
@@ -143,6 +143,7 @@ const Circle = styled.div`
   border-radius: 50%;
   font-size: 65.766px;
   font-style: normal;
+  line-height:136%;
   font-weight: 800;
   font-family: "Gothic A1";
   &:hover {
