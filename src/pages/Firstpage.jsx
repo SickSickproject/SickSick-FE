@@ -277,15 +277,15 @@ const Firstpage = () => {
         </ContentLayout>
         
         <BottomLinks>
-          <BottomLink onClick={() => handleNavigation('/two')}>
+          <BottomLink onClick={() => handleNavigation('/main/two')}>
             <LinkText>식식한 고백들</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
-          <BottomLink onClick={() => handleNavigation('/three')}>
+          <BottomLink onClick={() => handleNavigation('/main/three')}>
             <LinkText>식식한 연결하기</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
-          <BottomLink onClick={() => handleNavigation('/')}>
+          <BottomLink onClick={() => handleNavigation('/main/one')}>
             <LinkText>식식에 대하여</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>

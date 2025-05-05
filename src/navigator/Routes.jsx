@@ -4,12 +4,12 @@ import Thirdpage from "../pages/Thirdpage.jsx";
 import Selectpage from "../pages/Selectpage.jsx";
 import Mainpage from "../pages/Mainpage.jsx";
 import VideoOverlaypage from "../pages/VideoOverlaypage.jsx";
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import AdminPage from "../pages/AdminPage.jsx"; 
 
 
 
-const routes = createBrowserRouter([
+const routes = createHashRouter([
   {
     path: "/admin",
     element: <AdminPage />,
