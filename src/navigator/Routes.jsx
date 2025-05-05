@@ -5,10 +5,15 @@ import Selectpage from "../pages/Selectpage.jsx";
 import Mainpage from "../pages/Mainpage.jsx";
 import VideoOverlaypage from "../pages/VideoOverlaypage.jsx";
 import { createBrowserRouter } from "react-router-dom";
+import AdminPage from "../pages/AdminPage.jsx"; 
 
 
 
 const routes = createBrowserRouter([
+  {
+    path: "/admin",
+    element: <AdminPage />,
+  },
   // 지도(메인)
   {
     path: "/",
@@ -29,7 +34,7 @@ const routes = createBrowserRouter([
       {
         path: "three",
         element: <Thirdpage />,
-      },
+      },  
       {
         path: "overlay",
         element: <VideoOverlaypage/>,

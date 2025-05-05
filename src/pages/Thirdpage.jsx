@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react"; // useEffect 추가!
 import styled from "styled-components";
 
 // 이미지 가져오기 (경로는 실제 위치에 맞게 수정해주세요)
@@ -6,6 +6,10 @@ import plate1 from "../assets/Achiveimg/plate1.png";
 import plate2 from "../assets/Achiveimg/plate2.png";
 import plate3 from "../assets/Achiveimg/plate3.png";
 import downArrow from "../assets/Achiveimg/downArrow.png"; 
+import { supabase } from "../SupabaseClient";
+
+
+
 
 const Thirdpage = () => {
   // 화살표 ref와 폼 ref 생성
@@ -20,6 +24,30 @@ const Thirdpage = () => {
   // 등록된 메시지 관리
   const [registeredMessages, setRegisteredMessages] = useState([]);
   const [writerName, setWriterName] = useState("작성자명");
+
+  // ✅ 여기 useEffect 추가
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from("cheering")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("데이터 불러오기 실패:", error);
+      } else {
+        const dataWithPlate = data.map((msg) => ({
+          id: msg.id,
+          text: msg.text,
+          writer: msg.name,
+          plateType: Math.floor(Math.random() * 3) + 1,
+        }));
+        setRegisteredMessages(dataWithPlate);
+      }
+    };
+
+    fetchMessages();
+  }, []);
   
   // 텍스트 입력 처리
   const handleTextChange = (e) => {
@@ -53,20 +81,37 @@ const Thirdpage = () => {
   };
   
   // 메시지 등록 처리
-  const handleRegisterMessage = () => {
+  const handleRegisterMessage = async () => {
     if (textValue.trim()) {
-      // 사용자 입력 텍스트가 있을 때만 메시지 등록
       const newMessage = {
-        id: Date.now(), // 고유 ID
         text: textValue,
-        writer: writerName !== "작성자명" ? writerName : "익명",
-        plateType: Math.floor(Math.random() * 3) + 1 // 1, 2, 3 중 랜덤 접시 타입
+        name: writerName !== "작성자명" ? writerName : "익명",
       };
-      
-      // 새 메시지를 기존 메시지 배열에 추가
-      setRegisteredMessages([...registeredMessages, newMessage]);
-      
-      // 입력 폼 초기화
+  
+      const { data, error } = await supabase
+        .from("cheering")
+        .insert([newMessage])
+        .select(); // ← 삽입 후 데이터 반환받기
+  
+      if (error) {
+        console.error("등록 실패:", error);
+        alert("등록에 실패했습니다.");
+        return;
+      }
+  
+      // UI에 반영
+      const inserted = data[0];
+      const plateType = Math.floor(Math.random() * 3) + 1;
+      setRegisteredMessages([
+        ...registeredMessages,
+        {
+          id: inserted.id,
+          text: inserted.text,
+          writer: inserted.name,
+          plateType,
+        },
+      ]);
+  
       setTextValue("");
       if (writerName !== "작성자명") {
         setWriterName("작성자명");
@@ -76,7 +121,7 @@ const Thirdpage = () => {
       alert("메시지를 입력해주세요!");
     }
   };
-  
+
   // 화살표 클릭 시 화살표가 화면 상단에 오도록 스크롤하는 함수
   const scrollToArrow = () => {
     if (arrowRef.current) {
