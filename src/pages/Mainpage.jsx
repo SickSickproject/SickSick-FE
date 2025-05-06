@@ -2,61 +2,74 @@ import { useEffect, useState } from "react"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import sicksickbtn from "../assets/sicksickbtn.jpg"
+import NavContext from "./Navcontext.jsx";
 
 
+const Mainpage = () => {
 
-const Mainpage = ()=> {
 
     const img1 = sicksickbtn
 
     const location = useLocation(); // 현재 경로 정보 가져오기
     const path = location.pathname; // 예: "/main/one"
-  
+
     // 경로에서 마지막 부분만 추출 ("/main/one" -> "one")
     const lastSegment = path.split("/").pop();
+    console.log(lastSegment)
 
-
-    const [btnclick,setbtnclick] = useState(lastSegment === "one" ? [1,0,0] : [0,1,0])
+    const [btnclick, setbtnclick] = useState([1, 0, 0])
     console.log(btnclick)
-    const [Left,setLeft] = useState(window.innerWidth*0.8)
+    const [Left, setLeft] = useState(window.innerWidth * 0.8)
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
+        if (lastSegment === "one") {
+            setbtnclick([1, 0, 0])
+        }
+        else if (lastSegment === "two") {
+            setbtnclick([0, 1, 0])
+        }
+        else {
+            setbtnclick([0, 0, 1])
+        }
         updateWidth();
-    },[])
+    }, [])
 
-    const updateWidth = ()=>{
+    const updateWidth = () => {
         const screenWidth = window.innerWidth; // 전체 화면 너비
         setLeft(screenWidth * 0.75);
     }
 
-    window.addEventListener("resize",()=>{
+    window.addEventListener("resize", () => {
         updateWidth();
     })
 
-    const btnchange = (i)=>{
-        const newarr = [0,0,0]
+    const btnchange = (i) => {
+        const newarr = [0, 0, 0]
         newarr[i] = 1;
         setbtnclick(newarr)
-        if(i === 0)navigate(`/main/one`,{replace : true})
-        else if(i === 1)navigate(`/main/two`,{replace : true})
-        else navigate(`/main/three`,{replace : true})
-        
+        if (i === 0) navigate(`/main/one`, { replace: true })
+        else if (i === 1) navigate(`/main/two`, { replace: true })
+        else navigate(`/main/three`, { replace: true })
+
     }
     return <>
-        <Navbar>
-            <Imgcontainer onClick={()=>navigate(`/`,{replace : true})} src={img1}></Imgcontainer>
-            <Navbarin left = {Left}>
-                <Btns clicked={btnclick[0]} onClick={()=>{btnchange(0)}} style={{width:"70px"}}>식식</Btns>
-                <Btns clicked={btnclick[1]} onClick={()=>{btnchange(1)}}>고백들</Btns>
-                <Btns clicked={btnclick[2]} onClick={()=>{btnchange(2)}}>연대하기</Btns>
-            </Navbarin>
-        </Navbar>
-        <Outlet></Outlet>
+        <NavContext.Provider value={{setbtnclick}}>
+            <Navbar>
+                <Imgcontainer onClick={() => navigate(`/`, { replace: true })} src={img1}></Imgcontainer>
+                <Navbarin left={Left}>
+                    <Btns clicked={btnclick[0]} onClick={() => { btnchange(0) }} style={{ width: "70px" }}>식식</Btns>
+                    <Btns clicked={btnclick[1]} onClick={() => { btnchange(1) }}>고백들</Btns>
+                    <Btns clicked={btnclick[2]} onClick={() => { btnchange(2) }}>연대하기</Btns>
+                </Navbarin>
+            </Navbar>
+            <Outlet></Outlet>
+        </NavContext.Provider>
     </>
 }
 
 export default Mainpage
+
 
 const Navbar = styled.div`
 position:fixed;
@@ -83,8 +96,8 @@ justify-content:center;
 font-size: 24px;
 font-family: Gothic A1;
 font-style: normal;
-font-weight: ${(props)=>(props.clicked ? "800":"500")};
-text-decoration: ${(props)=>(props.clicked ? "underline":"none")};
+font-weight: ${(props) => (props.clicked ? "800" : "500")};
+text-decoration: ${(props) => (props.clicked ? "underline" : "none")};
 &:hover {
     text-decoration: underline;
     cursor:pointer;

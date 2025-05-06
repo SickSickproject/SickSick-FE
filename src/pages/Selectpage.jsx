@@ -76,7 +76,6 @@ const Selectpage = () => {
                 width: "882.927px",
                 height: "199px",
                 left: "518.5365px",
-                backgroundColor: "red",
                 top: "47px",
               }}
             >

@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import YouTube from "react-youtube";
 import { useNavigate } from "react-router-dom";
+import NavContext from "./Navcontext";
+import { useContext } from "react";
 
 const Firstpage = () => {
+
+  const { setbtnclick } = useContext(NavContext);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const [activeSection, setActiveSection] = useState("식식에대하여");
   
@@ -127,7 +131,7 @@ const Firstpage = () => {
 
   const handleNavigation = (path) => {
     console.log("Navigating to:", path);
-    navigate(path);
+    navigate(`${path}`,{replace : true});
   };
 
   return (
@@ -277,15 +281,15 @@ const Firstpage = () => {
         </ContentLayout>
         
         <BottomLinks>
-          <BottomLink onClick={() => handleNavigation('/two')}>
+          <BottomLink onClick={() => {setbtnclick([0,1,0]); handleNavigation("/main/two")}}>
             <LinkText>식식한 고백들</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
-          <BottomLink onClick={() => handleNavigation('/three')}>
+          <BottomLink onClick={() => {setbtnclick([0,0,1]);; handleNavigation('/main/three')}}>
             <LinkText>식식한 연결하기</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
-          <BottomLink onClick={() => handleNavigation('/')}>
+          <BottomLink onClick={() => {window.scrollTo({ top: 0, behavior: "smooth" })}}>
             <LinkText>식식에 대하여</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
