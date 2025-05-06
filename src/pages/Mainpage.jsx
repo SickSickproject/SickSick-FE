@@ -58,9 +58,9 @@ const Mainpage = () => {
             <Navbar>
                 <Imgcontainer onClick={() => navigate(`/`, { replace: true })} src={img1}></Imgcontainer>
                 <Navbarin left={Left}>
-                    <Btns clicked={btnclick[0]} onClick={() => { btnchange(0) }} style={{ width: "70px" }}>식식</Btns>
-                    <Btns clicked={btnclick[1]} onClick={() => { btnchange(1) }}>고백들</Btns>
-                    <Btns clicked={btnclick[2]} onClick={() => { btnchange(2) }}>연대하기</Btns>
+                    <Btns clicked={btnclick[0]} onClick={() => { window.scrollTo({ top: 0}); btnchange(0) }} style={{ width: "70px" }}>식식</Btns>
+                    <Btns clicked={btnclick[1]} onClick={() => { window.scrollTo({ top: 0}); btnchange(1) }}>고백들</Btns>
+                    <Btns clicked={btnclick[2]} onClick={() => { window.scrollTo({ top: 0}); btnchange(2) }}>연대하기</Btns>
                 </Navbarin>
             </Navbar>
             <Outlet></Outlet>
