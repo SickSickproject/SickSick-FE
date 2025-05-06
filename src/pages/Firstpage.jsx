@@ -281,11 +281,11 @@ const Firstpage = () => {
         </ContentLayout>
         
         <BottomLinks>
-          <BottomLink onClick={() => {setbtnclick([0,1,0]); handleNavigation("/main/two")}}>
+          <BottomLink onClick={() => {setbtnclick([0,1,0]); window.scrollTo({ top: 0}); handleNavigation("/main/two")}}>
             <LinkText>식식한 고백들</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
-          <BottomLink onClick={() => {setbtnclick([0,0,1]);; handleNavigation('/main/three')}}>
+          <BottomLink onClick={() => {setbtnclick([0,0,1]); window.scrollTo({ top: 0}); handleNavigation('/main/three');}}>
             <LinkText>식식한 연결하기</LinkText>
             <LinkArrow>→</LinkArrow>
           </BottomLink>
