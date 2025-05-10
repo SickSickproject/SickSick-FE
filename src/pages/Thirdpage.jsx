@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"; // useEffect 추가!
+import { useState, useRef } from "react";
 import styled from "styled-components";
 
 // 이미지 가져오기 (경로는 실제 위치에 맞게 수정해주세요)
@@ -6,10 +6,6 @@ import plate1 from "../assets/Achiveimg/plate1.png";
 import plate2 from "../assets/Achiveimg/plate2.png";
 import plate3 from "../assets/Achiveimg/plate3.png";
 import downArrow from "../assets/Achiveimg/downArrow.png"; 
-import { supabase } from "../SupabaseClient";
-
-
-
 
 const Thirdpage = () => {
   // 화살표 ref와 폼 ref 생성
@@ -24,30 +20,8 @@ const Thirdpage = () => {
   // 등록된 메시지 관리
   const [registeredMessages, setRegisteredMessages] = useState([]);
   const [writerName, setWriterName] = useState("작성자명");
-
-  // ✅ 여기 useEffect 추가
-  useEffect(() => {
-    const fetchMessages = async () => {
-      const { data, error } = await supabase
-        .from("cheering")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        console.error("데이터 불러오기 실패:", error);
-      } else {
-        const dataWithPlate = data.map((msg) => ({
-          id: msg.id,
-          text: msg.text,
-          writer: msg.name,
-          plateType: Math.floor(Math.random() * 3) + 1,
-        }));
-        setRegisteredMessages(dataWithPlate);
-      }
-    };
-
-    fetchMessages();
-  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9; // 한 페이지당 9개의 접시
   
   // 텍스트 입력 처리
   const handleTextChange = (e) => {
@@ -81,37 +55,23 @@ const Thirdpage = () => {
   };
   
   // 메시지 등록 처리
-  const handleRegisterMessage = async () => {
+  const handleRegisterMessage = () => {
     if (textValue.trim()) {
+      // 사용자 입력 텍스트가 있을 때만 메시지 등록
       const newMessage = {
+        id: Date.now(), // 고유 ID
         text: textValue,
-        name: writerName !== "작성자명" ? writerName : "익명",
+        writer: writerName !== "작성자명" ? writerName : "익명",
+        plateType: Math.floor(Math.random() * 3) + 1 // 1, 2, 3 중 랜덤 접시 타입
       };
-  
-      const { data, error } = await supabase
-        .from("cheering")
-        .insert([newMessage])
-        .select(); // ← 삽입 후 데이터 반환받기
-  
-      if (error) {
-        console.error("등록 실패:", error);
-        alert("등록에 실패했습니다.");
-        return;
-      }
-  
-      // UI에 반영
-      const inserted = data[0];
-      const plateType = Math.floor(Math.random() * 3) + 1;
-      setRegisteredMessages([
-        ...registeredMessages,
-        {
-          id: inserted.id,
-          text: inserted.text,
-          writer: inserted.name,
-          plateType,
-        },
-      ]);
-  
+      
+      // 새 메시지를 기존 메시지 배열에 추가
+      setRegisteredMessages([...registeredMessages, newMessage]);
+      
+      // 새 메시지 등록 시 첫 페이지로 이동 (최신 메시지가 첫 페이지에 표시됨)
+      setCurrentPage(1);
+      
+      // 입력 폼 초기화
       setTextValue("");
       if (writerName !== "작성자명") {
         setWriterName("작성자명");
@@ -121,7 +81,7 @@ const Thirdpage = () => {
       alert("메시지를 입력해주세요!");
     }
   };
-
+  
   // 화살표 클릭 시 화살표가 화면 상단에 오도록 스크롤하는 함수
   const scrollToArrow = () => {
     if (arrowRef.current) {
@@ -140,6 +100,25 @@ const Thirdpage = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  // 현재 페이지에 표시할 메시지 계산
+  const getCurrentPageItems = () => {
+    // 최신 메시지가 먼저 오도록 배열을 역순으로 정렬
+    const reversedMessages = [...registeredMessages].reverse();
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return reversedMessages.slice(startIndex, endIndex);
+  };
+
+  // 총 페이지 수 계산
+  const getTotalPages = () => {
+    return Math.ceil(registeredMessages.length / itemsPerPage);
+  };
+
+  // 페이지 변경 함수
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -239,7 +218,7 @@ const Thirdpage = () => {
         {registeredMessages.length > 0 && (
           <PlatesGridSection>
             <PlatesGrid>
-              {registeredMessages.map((message) => (
+              {getCurrentPageItems().map((message) => (
                 <PlateGridItem key={message.id}>
                   <PlateCircle 
                     src={message.plateType === 1 ? plate1 : message.plateType === 2 ? plate2 : plate3} 
@@ -257,10 +236,15 @@ const Thirdpage = () => {
         
         {registeredMessages.length > 0 && (
           <Pagination>
-            <PageNumber className="active">1</PageNumber>
-            <PageNumber>2</PageNumber>
-            <PageNumber>3</PageNumber>
-            <PageNumber>4</PageNumber>
+            {Array.from({ length: getTotalPages() }, (_, index) => (
+              <PageNumber 
+                key={index + 1}
+                className={currentPage === index + 1 ? "active" : ""}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </PageNumber>
+            ))}
           </Pagination>
         )}
       </MainContent>
