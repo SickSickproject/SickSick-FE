@@ -7,7 +7,6 @@ import NavContext from "./Navcontext";
 import { useContext } from "react";
 
 const Firstpage = () => {
-
   const { setbtnclick } = useContext(NavContext);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const [activeSection, setActiveSection] = useState("식식에대하여");
@@ -43,25 +42,31 @@ const Firstpage = () => {
     }
     
     if (targetRef && targetRef.current) {
-      targetRef.current.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 95;
+      const elementPosition = targetRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
-    
-    // setActiveSection(sectionId);
   };
   
   useEffect(() => {
     const handleScroll = () => {
       if (!section1Ref.current || !section2Ref.current || !section3Ref.current) return;
       
-      const section1Top = section1Ref.current.getBoundingClientRect().top;
-      const section2Top = section2Ref.current.getBoundingClientRect().top;
-      const section3Top = section3Ref.current.getBoundingClientRect().top;
+      const scrollPosition = window.scrollY;
+      const headerOffset = 95;
       
-      const scrollPosition = window.scrollY + 100;
+      const section1Top = section1Ref.current.offsetTop - headerOffset;
+      const section2Top = section2Ref.current.offsetTop - headerOffset;
+      const section3Top = section3Ref.current.offsetTop - headerOffset;
       
-      if (section3Top <= 100) {
+      if (scrollPosition >= section3Top) {
         setActiveSection("섭식장애란");
-      } else if (section2Top <= 100) {
+      } else if (scrollPosition >= section2Top) {
         setActiveSection("고백으로연결되다");
       } else {
         setActiveSection("식식에대하여");
@@ -69,69 +74,19 @@ const Firstpage = () => {
     };
     
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const adjustLeftColumnHeight = () => {
-      if (section1Ref.current && section2Ref.current && section3Ref.current && section4Ref.current) {
-        const section1Rect = section1Ref.current.getBoundingClientRect();
-        const section2Rect = section2Ref.current.getBoundingClientRect();
-        const section3Rect = section3Ref.current.getBoundingClientRect();
-        const section4Rect = section4Ref.current.getBoundingClientRect();
-        
-        const section1Height = section1Rect.height;
-        const section2Height = section2Rect.height;
-        const section3Height = section3Rect.height;
-        const section4Height = section4Rect.height;
-        
-        const leftItem1 = document.querySelector('.left-item-1');
-        const leftItem2 = document.querySelector('.left-item-2');
-        const leftItem3 = document.querySelector('.left-item-3');
-        const leftItem4 = document.querySelector('.left-item-4');
-        
-        if (leftItem1) leftItem1.style.height = `${section1Height}px`;
-        if (leftItem2) leftItem2.style.height = `${section2Height}px`;
-        if (leftItem3) leftItem3.style.height = `${section3Height}px`;
-        if (leftItem4) leftItem4.style.height = `${section4Height}px`;
-        
-        [leftItem1, leftItem2, leftItem3, leftItem4].forEach(item => {
-          if (item) {
-            item.style.paddingTop = '0px';
-            item.style.paddingBottom = '0px';
-            item.style.display = 'flex';
-            item.style.alignItems = 'center';
-          }
-        });
-        
-        const leftColumn = document.querySelector('.left-column');
-        if (leftColumn) {
-          const totalHeight = section1Height + section2Height + section3Height + section4Height;
-          leftColumn.style.height = `${totalHeight}px`;
-        }
-      }
-    };
     
-    adjustLeftColumnHeight();
-    
-    window.addEventListener('scroll', adjustLeftColumnHeight);
-    window.addEventListener('resize', adjustLeftColumnHeight);
-    window.addEventListener('load', adjustLeftColumnHeight);
-    
-    setTimeout(adjustLeftColumnHeight, 500);
+    // 초기 실행
+    handleScroll();
     
     return () => {
-      window.removeEventListener('scroll', adjustLeftColumnHeight);
-      window.removeEventListener('resize', adjustLeftColumnHeight);
-      window.removeEventListener('load', adjustLeftColumnHeight);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
-    console.log("Navigating to:", path);
-    navigate(`${path}`,{replace : true});
+    navigate(path, {replace: true});
   };
 
   return (
@@ -161,23 +116,13 @@ const Firstpage = () => {
       </Sidebar>
 
       <MainContent>
-        <ContentLayout>
-          <LeftColumn className="left-column">
-            <LeftColumnItem1 className="left-item-1">
-              식식(食食)에<br/>대하여
-            </LeftColumnItem1>
-            <LeftColumnItem2 className="left-item-2">
-              고백으로<br/>연결되다
-            </LeftColumnItem2>
-            <LeftColumnItem3 className="left-item-3">
-              섭식장애란
-            </LeftColumnItem3>
-            <LeftColumnItem4 className="left-item-4">
-            </LeftColumnItem4>
-          </LeftColumn>
-          
-          <RightColumn>
-            <ContentSection1 ref={section1Ref}>
+        <ContentWrapper>
+          {/* 첫 번째 섹션 */}
+          <Section id="section1" ref={section1Ref}>
+            <LeftSide>
+              <LeftTitle>식식(食食)에<br/>대하여</LeftTitle>
+            </LeftSide>
+            <RightSide>
               <ContentTitle>식식은 먹는 아픔을 겪는 모든 식구들을 지지합니다.</ContentTitle>
               <Paragraph>
                 우리는 모두 매일 끼니를 챙깁니다. 식구라는 말은 음식이 우리에게 무엇이나 소중하고<br/>
@@ -206,9 +151,15 @@ const Firstpage = () => {
                 짐작할 수 없겠습니다. 고통을 동반하는 행위를 하기까지는 각양각색의 사연이, 감히 재단할 수 없는 다양한<br/>
                 서사가 있을 것입니다.
               </Paragraph>
-            </ContentSection1>
+            </RightSide>
+          </Section>
 
-            <ContentSection2 ref={section2Ref}>
+          {/* 두 번째 섹션 */}
+          <Section id="section2" ref={section2Ref}>
+            <LeftSide>
+              <LeftTitle>고백으로<br/>연결되다</LeftTitle>
+            </LeftSide>
+            <RightSide>
               <ContentTitle>식식은 씩씩한 고백을 하는 식구들의 목소리에 귀를 기울입니다</ContentTitle>
               <Paragraph>
                 숨기고픈 이야기를 꺼내어 발화함으로서 이어지는 개인적 서사의 연결,<br/>식식은 식구들의 목소리가 실처럼 엮여 단단한 울타리가 되기를 꿈꿉니다.
@@ -225,9 +176,15 @@ const Firstpage = () => {
                   opts={youtubeOpts} 
                 />
               </YoutubeWrapper>
-            </ContentSection2>
-            
-            <ContentSection3 ref={section3Ref}>
+            </RightSide>
+          </Section>
+          
+          {/* 세 번째 섹션 */}
+          <Section id="section3" ref={section3Ref}>
+            <LeftSide>
+              <LeftTitle>섭식장애란</LeftTitle>
+            </LeftSide>
+            <RightSide>
               <ContentTitle>섭식장애는 먹는 행동과 관련해 어려움을 겪으며 개인의 신체적 건강과<br/>
               심리.사회적 기능을 손상시키는 정신장애를 의미합니다.</ContentTitle>
               <Paragraph>
@@ -243,8 +200,15 @@ const Firstpage = () => {
                 섭식장애가 다이어트에 따른 부작용이나 '젋은 여성들'의 의지 부족에서 비롯된 질병으로 이해되는 상황에서<br/>
                 자신의 문제를 드러내기는 쉽지 않습니다. 그래서 섭식 장애를 앍고 있는 환자의 수는 더 많을 수 있다고 합니다.
               </Paragraph>
-            </ContentSection3>
-            <ContentSection4 ref={section4Ref}>
+            </RightSide>
+          </Section>
+          
+          {/* 네 번째 섹션 (추가됨) */}
+          <Section id="section4" ref={section4Ref}>
+            <LeftSide>
+              {/* 네 번째 섹션 왼쪽은 비워둡니다 */}
+            </LeftSide>
+            <RightSide>
               <Paragraph>
               ① 누구나 겪을 수 있습니다<br/>
               먹는 것과 자신의 몸이 불화해 온 경험을 공유하기 위해 모인 이들은 하나의 원인에서 섭식장애가 시작되는<br/>
@@ -276,9 +240,9 @@ const Firstpage = () => {
               소통이 필요합니다. 우리나라에서도 섭식장애 관련 정보 제공, 지지집단 조직, 전문가 상담 등의 인프라가 조금씩<br/>
               구축되고 있으나 아직 충분하지 않습니다. 섭식장애에 대한 사회의 관심과 적극적인 대응이 필요한 시점입니다.
               </Paragraph>
-            </ContentSection4>
-          </RightColumn>
-        </ContentLayout>
+            </RightSide>
+          </Section>
+        </ContentWrapper>
         
         <BottomLinks>
           <BottomLink onClick={() => {setbtnclick([0,1,0]); window.scrollTo({ top: 0}); handleNavigation("/main/two")}}>
@@ -310,9 +274,9 @@ const Firstpage = () => {
 
 export default Firstpage;
 
+// 스타일 컴포넌트
 const Container = styled.div`
   width: 100%;
-  min-height: calc(100vh - 95px);
   display: flex;
   font-family: "Gothic A1", sans-serif;
   margin-top: 95px;
@@ -367,146 +331,40 @@ const MainContent = styled.div`
   box-sizing: border-box;
 `;
 
-const ContentLayout = styled.div`
-  display: flex;
+const ContentWrapper = styled.div`
   width: 100%;
-  border-top: none;
-  height: auto;
 `;
 
-const LeftColumn = styled.div`
+const Section = styled.section`
+  display: flex;
+  border-bottom: 1px solid #eee;
+  scroll-margin-top: 95px;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const LeftSide = styled.div`
   width: 316px;
   border-right: 1px solid #000;
   background-color: #fff;
   display: flex;
-  flex-direction: column;
-  height: auto;
+  align-items: center;
+  justify-content: center;
 `;
 
-const LeftColumnItem1 = styled.div`
-  padding: 10px;
-  min-height: 65px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const LeftTitle = styled.div`
   font-size: 32px;
   font-weight: 500;
-  border-bottom: 1px solid #000;
-  cursor: pointer;
+  padding: 20px 10px;
   line-height: 1.4;
-  transition: background-color 0.3s;
-  
-  &:hover {
-    background-color: #f0f0f0;
-  }
+  text-align: center;
 `;
 
-const LeftColumnItem2 = styled.div`
-  padding: 10px;
-  min-height: 65px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 32px;
-  font-weight: 500;
-  border-bottom: 1px solid #000;
-  cursor: pointer;
-  line-height: 1.4;
-  transition: background-color 0.3s;
-  
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
-
-const LeftColumnItem3 = styled.div`
-  padding: 10px;
-  min-height: 65px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 32px;
-  font-weight: 500;
-  border-bottom: 1px solid #000;
-  cursor: pointer;
-  line-height: 1.4;
-  transition: background-color 0.3s;
-  
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
-
-const LeftColumnItem4 = styled.div`
-  padding: 10px;
-  min-height: 65px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 32px;
-  font-weight: 500;
-  border-bottom: none;
-  cursor: pointer;
-  line-height: 1.4;
-  transition: background-color 0.3s;
-  
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
-
-const RightColumn = styled.div`
+const RightSide = styled.div`
   flex: 1;
-  border-right: 1px solid #000;
-  padding: 20px;
-`;
-
-const ContentSection1 = styled.div`
-  padding: 0 0 30px 0;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px;
-  
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-`;
-
-const ContentSection2 = styled.div`
-  padding: 0 0 30px 0;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px;
-  
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-`;
-
-const ContentSection3 = styled.div`
-  padding: 0 0 30px 0;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px;
-  
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-`;
-
-const ContentSection4 = styled.div`
-  padding: 0 0 30px 0;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  scroll-margin-top: 100px;
-  
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
+  padding: 30px 20px;
 `;
 
 const ContentTitle = styled.h2`
