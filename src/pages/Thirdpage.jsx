@@ -270,12 +270,12 @@ const HeaderSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 120px 0 60px;
+  padding: 80px 0 80px;
 `;
 
 const Title = styled.h1`
   font-size: 80px;
-  font-weight: 800;
+  font-weight: 1000;
   margin-bottom: 40px;
   text-align: center;
   color: #000;
@@ -294,7 +294,7 @@ const Subtitle = styled.p`
   margin: 0;
   text-align: center;
   color: #000;
-  font-weight: 500;
+  font-weight: 1000;
 `;
 
 const PlatesStrip = styled.div`
@@ -348,8 +348,8 @@ const DownArrowWrapper = styled.div`
 `;
 
 const DownArrow = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 30px;
 `;
 
 // 메인 콘텐츠 (입력 폼 포함)
@@ -364,16 +364,16 @@ const MainContent = styled.div`
 
 // 고백접시 돌리기 레이블
 const InputLabelBox = styled.div`
-  width: 50%;
+  width: 40%;
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
 `;
 
 const InputLabel = styled.div`
-  font-size: 24px;
+  font-size: 15px;
   font-weight: 600;
-  padding: 10px 20px;
+  padding: 5px 10px;
   background-color: white;
   border: 2px solid black;
   display: inline-block;

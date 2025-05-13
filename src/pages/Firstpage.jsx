@@ -143,7 +143,7 @@ const Firstpage = () => {
               </Paragraph>
               
               <Paragraph>
-                "살려면 그 방법밖에 없었던 거잖아요"
+                <u>"살려면 그 방법밖에 없었던 거잖아요"</u>
               </Paragraph>
               
               <Paragraph>
@@ -160,7 +160,7 @@ const Firstpage = () => {
               <LeftTitle>고백으로<br/>연결되다</LeftTitle>
             </LeftSide>
             <RightSide>
-              <ContentTitle>식식은 씩씩한 고백을 하는 식구들의 목소리에 귀를 기울입니다</ContentTitle>
+              <ContentTitle>식식은 씩씩한 고백을 하는 식구들의 목소리에 귀를 기울입니다.</ContentTitle>
               <Paragraph>
                 숨기고픈 이야기를 꺼내어 발화함으로서 이어지는 개인적 서사의 연결,<br/>식식은 식구들의 목소리가 실처럼 엮여 단단한 울타리가 되기를 꿈꿉니다.
               </Paragraph>
@@ -172,7 +172,7 @@ const Firstpage = () => {
               
               <YoutubeWrapper>
                 <YouTube 
-                  videoId="dQw4w9WgXcQ"
+                  videoId="bjj3Kp13UVA"
                   opts={youtubeOpts} 
                 />
               </YoutubeWrapper>
@@ -185,7 +185,7 @@ const Firstpage = () => {
               <LeftTitle>섭식장애란</LeftTitle>
             </LeftSide>
             <RightSide>
-              <ContentTitle>섭식장애는 먹는 행동과 관련해 어려움을 겪으며 개인의 신체적 건강과<br/>
+              <ContentTitle>섭식장애는 먹는 행동과 관련해 어려움을 겪으며 개인의 신체적 건강과
               심리.사회적 기능을 손상시키는 정신장애를 의미합니다.</ContentTitle>
               <Paragraph>
                 섭식 장애는 신경성 식욕부진증(거식증), 신경석 폭식증, 폭식장애 및 회피제한적 섭취장애 등을 포함하고<br/>
@@ -210,7 +210,7 @@ const Firstpage = () => {
             </LeftSide>
             <RightSide>
               <Paragraph>
-              ① 누구나 겪을 수 있습니다<br/>
+              ① <u>누구나 겪을 수 있습니다</u><br/>
               먹는 것과 자신의 몸이 불화해 온 경험을 공유하기 위해 모인 이들은 하나의 원인에서 섭식장애가 시작되는<br/>
               것은 아니라고 말합니다. 다이어트와 섭식장애는 분명 다를 테지만, 다이어트로 가려진 섭식장애도 많다는<br/>
               사실을 상기하면 섭식과 체중의 문제는 단순할 수 없습니다. 섭식장애를 둘러싼 이야기는 개인의 문제를 넘어<br/>
@@ -218,7 +218,7 @@ const Firstpage = () => {
               </Paragraph>
 
               <Paragraph>
-              ② 사회의 낙착한 이해<br/>
+              ② <u>사회의 낙착한 이해</u><br/>
               <strong>"다른 사람들처럼 우리(섭식장애 당사자)는 엄마도 됐다가 딸도 됐다가 또 환자도 됩니다.<br/>
               직업이 있을 수도 있고, 없을 수도 있죠. 다양한 역할과 정체성 속에서 자기의 삶을 살고 있어요."</strong><br/>
               이진슬씨는 미디어의 틀에 박힌 이미지가 다양한 삶을 살아가는 이들을 포용하기에 너무나도 납작하다고<br/>
@@ -227,18 +227,18 @@ const Firstpage = () => {
               </Paragraph>
 
               <Paragraph>
-              ③ 당사자의 목소리<br/>
+              ③ <u>당사자의 목소리</u><br/>
               섭식장애에 관한 개인의 서사는 모두 다릅니다. 각자의 회복 여정 또한 다른 것은 마찬가지 입니다. 그래서 우리는<br/>
               개인의 경험을 이야기하기 위해 발걸음을 뗐습니다. 각자의 삶이 더이상 고리타분하고 단순한 서사로 남지 않도록,<br/>
               다양한 이야기가 펴져 나가도록 말이지요.
               </Paragraph>
 
               <Paragraph>
-              ④ 회복의 여정<br/>
+              ④ <u>회복의 여정</u><br/>
               섭식장애는 적절한 치료를 받으면 크게 개선되거나 '회복'될 수 있다고 합니다. 이를 위해서는 섭식장애를 조기에<br/>
-              발견하고 치료하는 것이 매우 중요합니다. 특히 사람마다 섭식장애의 원인이 다르기 때문에 관련 전문가와의 긴밀한<br/>
-              소통이 필요합니다. 우리나라에서도 섭식장애 관련 정보 제공, 지지집단 조직, 전문가 상담 등의 인프라가 조금씩<br/>
-              구축되고 있으나 아직 충분하지 않습니다. 섭식장애에 대한 사회의 관심과 적극적인 대응이 필요한 시점입니다.
+              발견하고 치료하는 것이 매우 중요합니다. 특히 사람마다 섭식장애의 원인이 다르기 때문에 관련 전문가와의<br/>
+              긴밀한 소통이 필요합니다. 우리나라에서도 섭식장애 관련 정보 제공, 지지집단 조직, 전문가 상담 등의 인프라가<br/>
+              조금씩 구축되고 있으나 아직 충분하지 않습니다. 섭식장애에 대한 사회의 관심과 적극적인 대응이 필요한 시점입니다.
               </Paragraph>
             </RightSide>
           </Section>
@@ -346,7 +346,7 @@ const Section = styled.section`
 `;
 
 const LeftSide = styled.div`
-  width: 316px;
+  width: 280px;
   border-right: 1px solid #000;
   background-color: #fff;
   display: flex;
@@ -356,10 +356,10 @@ const LeftSide = styled.div`
 
 const LeftTitle = styled.div`
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 1000;
   padding: 20px 10px;
   line-height: 1.4;
-  text-align: center;
+  text-align: left;
 `;
 
 const RightSide = styled.div`
@@ -369,13 +369,13 @@ const RightSide = styled.div`
 
 const ContentTitle = styled.h2`
   font-size: 27px;
-  font-weight: 900;
+  font-weight: 1000;
   margin: 0 0 20px 0;
   line-height: 2.5;
 `;
 
 const Paragraph = styled.p`
-  font-size: 21px;
+  font-size: 18px;
   line-height: 1.6;
   margin-bottom: 15px;
 `;
