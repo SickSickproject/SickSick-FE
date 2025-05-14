@@ -1,11 +1,21 @@
-import { useState, useRef } from "react";
-import styled from "styled-components";
+import { useState, useRef, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 
 // 이미지 가져오기 (경로는 실제 위치에 맞게 수정해주세요)
 import plate1 from "../assets/Achiveimg/plate1.png";
 import plate2 from "../assets/Achiveimg/plate2.png";
 import plate3 from "../assets/Achiveimg/plate3.png";
 import downArrow from "../assets/Achiveimg/downArrow.png"; 
+
+// 애니메이션 정의
+const slideAnimation = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 10px)); /* 경계를 자연스럽게 하기 위해 약간 더 이동 */
+  }
+`;
 
 const Thirdpage = () => {
   // 화살표 ref와 폼 ref 생성
@@ -21,7 +31,20 @@ const Thirdpage = () => {
   const [registeredMessages, setRegisteredMessages] = useState([]);
   const [writerName, setWriterName] = useState("작성자명");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9; // 한 페이지당 9개의 접시
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const itemsPerPage = windowWidth <= 768 ? 3 : windowWidth <= 1024 ? 6 : 9; // 화면 크기에 따라 페이지당 아이템 수 조정
+  
+  // 윈도우 크기 변경 감지
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   
   // 텍스트 입력 처리
   const handleTextChange = (e) => {
@@ -133,26 +156,57 @@ const Thirdpage = () => {
       </HeaderSection>
       
       <PlatesStrip>
-        <PlatesRow>
-          <PlateItem>
-            <PlateImage src={plate1} alt="Plate 1" />
-          </PlateItem>
-          <PlateItem>
-            <PlateImage src={plate2} alt="Plate 2" />
-          </PlateItem>
-          <PlateItem>
-            <PlateImage src={plate3} alt="Plate 3" />
-          </PlateItem>
-          <PlateItem>
-            <PlateImage src={plate1} alt="Plate 1" />
-          </PlateItem>
-          <PlateItem>
-            <PlateImage src={plate2} alt="Plate 2" />
-          </PlateItem>
-          <PlateItem>
-            <PlateImage src={plate3} alt="Plate 3" />
-          </PlateItem>
-        </PlatesRow>
+        <PlatesContainer>
+          <PlatesRow>
+            {/* 첫 번째 세트 */}
+            <PlateItem>
+              <PlateImage src={plate1} alt="Plate 1" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate2} alt="Plate 2" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate3} alt="Plate 3" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate1} alt="Plate 1" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate2} alt="Plate 2" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate3} alt="Plate 3" />
+            </PlateItem>
+            
+            {/* 두 번째 세트 (첫 번째 세트를 복제) */}
+            <PlateItem>
+              <PlateImage src={plate1} alt="Plate 1" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate2} alt="Plate 2" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate3} alt="Plate 3" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate1} alt="Plate 1" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate2} alt="Plate 2" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate3} alt="Plate 3" />
+            </PlateItem>
+            
+            {/* 자연스러운 반복을 위한 추가 요소 */}
+            <PlateItem>
+              <PlateImage src={plate1} alt="Plate 1" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate2} alt="Plate 2" />
+            </PlateItem>
+          </PlatesRow>
+        </PlatesContainer>
       </PlatesStrip>
       
       <DownArrowSection ref={arrowRef}>
@@ -217,7 +271,7 @@ const Thirdpage = () => {
         
         {registeredMessages.length > 0 && (
           <PlatesGridSection>
-            <PlatesGrid>
+            <PlatesGrid windowWidth={windowWidth}>
               {getCurrentPageItems().map((message) => (
                 <PlateGridItem key={message.id}>
                   <PlateCircle 
@@ -270,51 +324,94 @@ const HeaderSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 0 80px;
+  padding: 8vh 0 5vh; /* 여백 증가 */
+  
+  @media (max-width: 768px) {
+    padding: 5vh 0 3vh;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 80px;
+  font-size: 5.5vw; /* 크기 증가 */
+  max-font-size: 80px;
   font-weight: 1000;
-  margin-bottom: 40px;
+  margin-bottom: 4vh; /* 여백 증가 */
   text-align: center;
   color: #000;
+  
+  @media (max-width: 768px) {
+    font-size: 8vw;
+    margin-bottom: 2.5vh;
+  }
 `;
 
 const SubtitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 5vh; /* 여백 유지 */
+  
+  @media (max-width: 768px) {
+    margin-bottom: 3vh;
+  }
 `;
 
 const Subtitle = styled.p`
-  font-size: 28px;
-  line-height: 1.5;
-  margin: 0;
+  font-size: 2vw; /* 크기 유지 */
+  line-height: 1.2; /* 줄 간격 축소 */
+  margin: 0; /* 줄 간격 제거 */
   text-align: center;
   color: #000;
   font-weight: 1000;
+  
+  @media (max-width: 768px) {
+    font-size: 3.5vw;
+    line-height: 1.2; /* 모바일에서도 줄 간격 축소 */
+  }
 `;
 
 const PlatesStrip = styled.div`
   width: 100%;
   background-color: #232323;
-  padding: 30px 0;
+  padding: 6vh 0; /* 패딩 증가 */
   overflow: hidden;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    padding: 5vh 0;
+  }
+`;
+
+const PlatesContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 `;
 
 const PlatesRow = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  width: 100%;
+  width: 300%;
+  animation: ${slideAnimation} 25s linear infinite;
 `;
 
 const PlateItem = styled.div`
-  width: 180px;
-  height: 180px;
-  margin: 0 10px;
+  width: calc((100vw - 200px) / 6); /* 간격 증가 */
+  height: calc((100vw - 200px) / 6);
+  margin: 0 20px; /* 간격 증가 */
+  flex-shrink: 0;
+  max-width: 170px; /* 최대 크기 증가 */
+  max-height: 170px;
+  min-width: 90px;
+  min-height: 90px;
+  
+  @media (max-width: 768px) {
+    width: calc((100vw - 120px) / 3); /* 모바일에서 간격 증가 */
+    height: calc((100vw - 120px) / 3);
+    margin: 0 15px; /* 모바일에서 여백 증가 */
+    max-width: 130px;
+    max-height: 130px;
+  }
 `;
 
 const PlateImage = styled.img`
@@ -324,15 +421,19 @@ const PlateImage = styled.img`
   object-fit: cover;
   background-color: white;
   border: 2px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
-// 화살표 섹션 - 이 섹션이 스크롤 시 화면 상단에 위치하게 됨
 const DownArrowSection = styled.div`
   width: 100%;
-  padding: 40px 0;
+  padding: 5vh 0; /* 패딩 증가 */
   display: flex;
   justify-content: center;
   background-color: #ffff00;
+  
+  @media (max-width: 768px) {
+    padding: 3vh 0;
+  }
 `;
 
 const DownArrowWrapper = styled.div`
@@ -340,106 +441,144 @@ const DownArrowWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: scale(1.2); /* 크기 증가 */
   
   &:hover {
-    transform: translateY(5px);
+    transform: translateY(5px) scale(1.2);
     transition: transform 0.3s ease;
   }
 `;
 
 const DownArrow = styled.img`
-  width: 50px;
-  height: 30px;
+  width: 2vw; /* 크기 증가 */
+  height: auto;
+  max-width: 60px;
+  min-width: 35px;
 `;
 
-// 메인 콘텐츠 (입력 폼 포함)
 const MainContent = styled.div`
   width: 80%;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0 30px;
+  padding: 2vh 0 5vh; /* 패딩 증가 */
+  
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 1vh 0 4vh;
+  }
 `;
 
-// 고백접시 돌리기 레이블
 const InputLabelBox = styled.div`
   width: 40%;
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 5vh; /* 여백 증가 */
+  
+  @media (max-width: 768px) {
+    width: 60%;
+    margin-bottom: 3vh;
+  }
 `;
 
 const InputLabel = styled.div`
-  font-size: 15px;
+  font-size: 1.2vw; /* 크기 증가 */
   font-weight: 600;
-  padding: 5px 10px;
+  padding: 0.8vh 1.5vw; /* 패딩 증가 */
   background-color: white;
   border: 2px solid black;
   display: inline-block;
   text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 3vw;
+    padding: 0.5vh 3vw;
+  }
 `;
 
-// 지시사항
 const FormInstructions = styled.div`
-  margin-bottom: 60px;
+  margin-bottom: 6vh; /* 여백 증가 */
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 4vh;
+  }
 `;
 
 const InstructionWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 1.5vh; /* 여백 증가 */
 `;
 
 const Instruction = styled.div`
-  font-size: 18px;
+  font-size: 1.4vw; /* 크기 증가 */
   text-align: center;
   font-weight: 500;
+  
+  @media (max-width: 768px) {
+    font-size: 3vw;
+  }
 `;
 
-// 폼 섹션
 const FormSection = styled.div`
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 6vh; /* 여백 증가 */
+  
+  @media (max-width: 768px) {
+    margin-bottom: 4vh;
+  }
 `;
 
-// 폼 컨테이너를 수정하여 작성자명까지 포함
 const FormContainer = styled.div`
   width: 100%;
   background-color: white;
   border: 1px solid #000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* 그림자 강화 */
   overflow: hidden;
   position: relative;
+  border-radius: 4px; /* 모서리 약간 둥글게 */
 `;
 
-// 작성자 헤더 - 이제 컨테이너 안쪽으로 이동
 const FormHeader = styled.div`
   display: flex;
   align-items: center;
-  padding: 15px;
-  font-size: 20px;
+  padding: 2vh 2vw; /* 패딩 증가 */
+  font-size: 1.4vw; /* 크기 증가 */
   font-weight: 600;
   border-bottom: 1px solid #eee;
+  
+  @media (max-width: 768px) {
+    padding: 1.5vh 3vw;
+    font-size: 3.5vw;
+  }
 `;
 
 const WriterLabel = styled.div`
-  margin-right: 10px;
+  margin-right: 1vw;
+  
+  @media (max-width: 768px) {
+    margin-right: 2vw;
+  }
 `;
 
 const Divider = styled.span`
-  margin: 0 10px;
+  margin: 0 1.2vw; /* 간격 증가 */
   color: #777;
+  
+  @media (max-width: 768px) {
+    margin: 0 2vw;
+  }
 `;
 
 const WriterNameInput = styled.input`
   color: #777;
-  font-size: 20px;
+  font-size: 1.4vw; /* 크기 증가 */
   font-weight: 600;
   border: none;
   outline: none;
@@ -447,25 +586,34 @@ const WriterNameInput = styled.input`
   padding: 0;
   margin: 0;
   
+  @media (max-width: 768px) {
+    font-size: 3.5vw;
+  }
+  
   &:focus {
     color: #000;
   }
 `;
 
-// 텍스트 영역 - 포커스 상태에 따른 색상 변경 추가
 const FormTextarea = styled.textarea`
   width: 100%;
-  min-height: 180px;
-  padding: 15px;
+  min-height: 18vh; /* 높이 증가 */
+  padding: 2vh 2vw; /* 패딩 증가 */
   border: none;
   resize: vertical;
   font-family: "Gothic A1", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 1.2vw; /* 크기 증가 */
+  line-height: 1.6;
   margin: 0;
   box-sizing: border-box;
   display: block;
   color: ${props => props.isfocused === "true" ? "#000" : "#777"};
+  
+  @media (max-width: 768px) {
+    min-height: 22vh;
+    padding: 1.5vh 3vw;
+    font-size: 3vw;
+  }
   
   &:focus {
     outline: none;
@@ -473,16 +621,20 @@ const FormTextarea = styled.textarea`
   }
 `;
 
-// 남은 글자 수 표시
 const CharacterCount = styled.div`
   position: absolute;
-  bottom: 55px;
-  right: 15px;
-  font-size: 14px;
+  bottom: 6.5vh; /* 위치 조정 */
+  right: 2vw; /* 위치 조정 */
+  font-size: 1vw;
   color: #777;
+  
+  @media (max-width: 768px) {
+    bottom: 7vh;
+    right: 3vw;
+    font-size: 2.5vw;
+  }
 `;
 
-// 구분선
 const FormDivider = styled.div`
   width: 100%;
   height: 1px;
@@ -490,26 +642,34 @@ const FormDivider = styled.div`
   margin: 0;
 `;
 
-// 버튼 영역
 const SubmitButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 15px;
+  padding: 2vh 2vw; /* 패딩 증가 */
   margin: 0;
+  
+  @media (max-width: 768px) {
+    padding: 1.8vh 3vw;
+  }
 `;
 
 const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 20px;
+  padding: 1.2vh 2vw; /* 패딩 증가 */
   background-color: #000;
   color: #fff;
   border: none;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 1.2vw; /* 크기 증가 */
   font-weight: 600;
   cursor: pointer;
+  
+  @media (max-width: 768px) {
+    padding: 1.2vh 5vw;
+    font-size: 3vw;
+  }
   
   &:hover {
     opacity: 0.9;
@@ -517,25 +677,46 @@ const SubmitButton = styled.button`
 `;
 
 const ButtonDot = styled.span`
-  width: 8px;
-  height: 8px;
+  width: 0.6vw; /* 크기 증가 */
+  height: 0.6vw;
+  min-width: 5px;
+  min-height: 5px;
   background-color: white;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 0.8vw; /* 여백 증가 */
+  
+  @media (max-width: 768px) {
+    width: 1.5vw;
+    height: 1.5vw;
+    margin-right: 1.5vw;
+  }
 `;
 
-// 플레이트 그리드
 const PlatesGridSection = styled.div`
   width: 100%;
-  margin: 60px 0 30px;
+  margin: 7vh 0 3vh; /* 여백 증가 */
+  
+  @media (max-width: 768px) {
+    margin: 5vh 0 3vh;
+  }
 `;
 
 const PlatesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 3vw; /* 간격 증가 */
   width: 100%;
   justify-items: center;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4vw; /* 간격 증가 */
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5vw; /* 간격 증가 */
+  }
 `;
 
 const PlateGridItem = styled.div`
@@ -545,9 +726,12 @@ const PlateGridItem = styled.div`
   position: relative;
   cursor: pointer;
   transition: transform 0.3s ease;
+  width: 100%;
+  aspect-ratio: 1/1; /* 정사각형 비율 유지 */
+  max-width: 220px; /* 크기 증가 */
   
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px); /* 효과 강화 */
     
     > div {
       opacity: 1;
@@ -556,12 +740,13 @@ const PlateGridItem = styled.div`
 `;
 
 const PlateCircle = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
   background-color: white;
-  border: 2px solid #fff;
+  border: 3px solid #fff; /* 테두리 두께 증가 */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 그림자 강화 */
 `;
 
 const PlateMessageOverlay = styled.div`
@@ -578,50 +763,78 @@ const PlateMessageOverlay = styled.div`
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s ease;
-  padding: 15px;
+  padding: 2vw; /* 패딩 증가 */
   box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    padding: 6vw;
+  }
 `;
 
 const PlateMessage = styled.div`
   color: white;
-  font-size: 16px;
+  font-size: 1.2vw; /* 크기 증가 */
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 1.5vh; /* 여백 증가 */
   word-break: break-word;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  
+  @media (max-width: 768px) {
+    font-size: 4vw;
+    margin-bottom: 2vh;
+  }
 `;
 
 const PlateWriter = styled.div`
   color: white;
-  font-size: 14px;
+  font-size: 1vw; /* 크기 증가 */
   font-style: italic;
   text-align: right;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    font-size: 3.2vw;
+  }
 `;
 
-// 페이지네이션
 const Pagination = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 4vh; /* 여백 증가 */
+  flex-wrap: wrap;
+  
+  @media (max-width: 768px) {
+    margin-top: 3vh;
+  }
 `;
 
 const PageNumber = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 3vw; /* 크기 증가 */
+  height: 3vw;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 45px;
+  max-height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  margin: 0 5px;
+  margin: 0.8vh 0.8vw; /* 여백 증가 */
   background-color: white;
   border: 1px solid #000;
-  font-size: 16px;
+  font-size: 1.2vw; /* 크기 증가 */
   cursor: pointer;
+  
+  @media (max-width: 768px) {
+    width: 9vw;
+    height: 9vw;
+    font-size: 3.5vw;
+    margin: 1.2vw;
+  }
   
   &.active {
     background-color: #000;
