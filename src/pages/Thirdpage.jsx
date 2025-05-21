@@ -56,9 +56,14 @@ const Thirdpage = () => {
     }
   };
   
-  // 작성자명 입력 처리
+  // 작성자명 입력 처리 - 8자 제한 추가
   const handleWriterNameChange = (e) => {
-    setWriterName(e.target.value);
+    const inputName = e.target.value;
+    // 8자 제한 적용 (공백 제외)
+    const nameWithoutSpaces = inputName.replace(/\s/g, "");
+    if (nameWithoutSpaces.length <= 8) {
+      setWriterName(inputName);
+    }
   };
   
   // 텍스트 영역 포커스 처리
@@ -80,12 +85,17 @@ const Thirdpage = () => {
   // 메시지 등록 처리
   const handleRegisterMessage = () => {
     if (textValue.trim()) {
+      // 현재 날짜 포맷팅 (YYYY-MM-DD)
+      const today = new Date();
+      const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      
       // 사용자 입력 텍스트가 있을 때만 메시지 등록
       const newMessage = {
         id: Date.now(), // 고유 ID
         text: textValue,
         writer: writerName !== "작성자명" ? writerName : "익명",
-        plateType: Math.floor(Math.random() * 3) + 1 // 1, 2, 3 중 랜덤 접시 타입
+        plateType: Math.floor(Math.random() * 3) + 1, // 1, 2, 3 중 랜덤 접시 타입
+        date: formattedDate // 등록 날짜 추가
       };
       
       // 새 메시지를 기존 메시지 배열에 추가
@@ -142,6 +152,26 @@ const Thirdpage = () => {
   // 페이지 변경 함수
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  // 작성자 입력 필드에 대한 포커스 처리
+  const handleNameFocus = () => {
+    if (writerName === "작성자명") {
+      setWriterName("");
+    }
+  };
+
+  // 작성자 입력 필드에 대한 블러 처리
+  const handleNameBlur = () => {
+    if (!writerName.trim()) {
+      setWriterName("작성자명");
+    }
+  };
+
+  // 작성자명 남은 글자 수 계산
+  const getRemainingNameChars = () => {
+    if (writerName === "작성자명") return 8;
+    return 8 - writerName.replace(/\s/g, "").length;
   };
 
   return (
@@ -240,9 +270,13 @@ const Thirdpage = () => {
               <WriterNameInput 
                 value={writerName} 
                 onChange={handleWriterNameChange} 
-                onFocus={() => writerName === "작성자명" && setWriterName("")}
-                onBlur={() => !writerName.trim() && setWriterName("작성자명")}
+                onFocus={handleNameFocus}
+                onBlur={handleNameBlur}
+                isfocused={writerName !== "작성자명" ? "true" : "false"}
               />
+              {writerName !== "작성자명" && (
+                <WriterNameCount>{getRemainingNameChars()}자 남음</WriterNameCount>
+              )}
             </FormHeader>
             
             <FormTextarea
@@ -254,7 +288,7 @@ const Thirdpage = () => {
               isfocused={isFocused || textValue.length > 0 ? "true" : "false"}
             />
             
-            {!isFocused && textValue && (
+            {(isFocused || textValue) && (
               <CharacterCount>{180 - textValue.replace(/\s/g, "").length}자 남음</CharacterCount>
             )}
             
@@ -279,8 +313,9 @@ const Thirdpage = () => {
                     alt={`Plate ${message.plateType}`} 
                   />
                   <PlateMessageOverlay>
-                    <PlateMessage>{message.text.length > 30 ? message.text.substring(0, 30) + "..." : message.text}</PlateMessage>
-                    <PlateWriter>- {message.writer}</PlateWriter>
+                    <PlateWriter>{message.writer}</PlateWriter>
+                    <PlateMessage>{message.text}</PlateMessage>
+                    <PlateDate>{message.date}</PlateDate>
                   </PlateMessageOverlay>
                 </PlateGridItem>
               ))}
@@ -552,6 +587,7 @@ const FormHeader = styled.div`
   font-size: 1.4vw; /* 크기 증가 */
   font-weight: 600;
   border-bottom: 1px solid #eee;
+  position: relative;
   
   @media (max-width: 768px) {
     padding: 1.5vh 3vw;
@@ -577,7 +613,7 @@ const Divider = styled.span`
 `;
 
 const WriterNameInput = styled.input`
-  color: #777;
+  color: ${props => props.isfocused === "true" ? "#000" : "#777"};
   font-size: 1.4vw; /* 크기 증가 */
   font-weight: 600;
   border: none;
@@ -592,6 +628,18 @@ const WriterNameInput = styled.input`
   
   &:focus {
     color: #000;
+  }
+`;
+
+const WriterNameCount = styled.div`
+  position: absolute;
+  right: 2vw;
+  font-size: 1vw;
+  color: #777;
+  
+  @media (max-width: 768px) {
+    right: 3vw;
+    font-size: 2.5vw;
   }
 `;
 
@@ -644,8 +692,8 @@ const FormDivider = styled.div`
 
 const SubmitButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
-  padding: 2vh 2vw; /* 패딩 증가 */
+  justify-content: flex-end; /* 오른쪽 정렬로 변경 */
+  padding: 2vh 2vw;
   margin: 0;
   
   @media (max-width: 768px) {
@@ -657,33 +705,32 @@ const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2vh 2vw; /* 패딩 증가 */
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.2vw; /* 크기 증가 */
+  padding: 1.2vh 0;
+  background-color: transparent; /* 배경 투명 */
+  color: black;
+  border: none; /* 테두리 제거 */
+  font-size: 1.2vw;
   font-weight: 600;
   cursor: pointer;
   
   @media (max-width: 768px) {
-    padding: 1.2vh 5vw;
     font-size: 3vw;
   }
   
   &:hover {
-    opacity: 0.9;
+    opacity: 0.7; /* 호버 시 살짝 투명하게 */
   }
 `;
 
 const ButtonDot = styled.span`
-  width: 0.6vw; /* 크기 증가 */
-  height: 0.6vw;
-  min-width: 5px;
-  min-height: 5px;
-  background-color: white;
+  width: 0.8vw;
+  height: 0.8vw;
+  min-width: 6px;
+  min-height: 6px;
+  background-color: black;
   border-radius: 50%;
-  margin-right: 0.8vw; /* 여백 증가 */
+  margin-right: 1vw;
+  display: inline-block;
   
   @media (max-width: 768px) {
     width: 1.5vw;
@@ -745,7 +792,7 @@ const PlateCircle = styled.img`
   border-radius: 50%;
   object-fit: cover;
   background-color: white;
-  border: 3px solid #fff; /* 테두리 두께 증가 */
+  border: 2px solid #fff; /* 테두리 두께 증가 */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 그림자 강화 */
 `;
 
@@ -756,47 +803,77 @@ const PlateMessageOverlay = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: white; /* 배경색을 하얀색으로 변경 */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s ease;
-  padding: 2vw; /* 패딩 증가 */
+  padding: 10% 8%;
   box-sizing: border-box;
   
-  @media (max-width: 768px) {
-    padding: 6vw;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 7%;
+    left: 7%;
+    right: 7%;
+    bottom: 7%;
+    border: 1px solid #444; /* 내부 원 테두리 색상을 어두운 회색으로 변경 */
+    border-radius: 50%;
+    pointer-events: none; /* 클릭 이벤트를 방해하지 않도록 */
   }
-`;
-
-const PlateMessage = styled.div`
-  color: white;
-  font-size: 1.2vw; /* 크기 증가 */
-  text-align: center;
-  margin-bottom: 1.5vh; /* 여백 증가 */
-  word-break: break-word;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   
   @media (max-width: 768px) {
-    font-size: 4vw;
-    margin-bottom: 2vh;
+    padding: 15% 10%;
   }
 `;
 
 const PlateWriter = styled.div`
-  color: white;
-  font-size: 1vw; /* 크기 증가 */
-  font-style: italic;
-  text-align: right;
+  color: black; /* 글자색을 검정색으로 변경 */
+  font-size: 1.1vw;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  margin-bottom: auto;
+  margin-top: 10%;
+  
+  @media (max-width: 768px) {
+    font-size: 3.5vw;
+    margin-top: 8%;
+  }
+`;
+
+const PlateMessage = styled.div`
+  color: black; /* 글자색을 검정색으로 변경 */
+  font-size: 1vw;
+  text-align: center;
+  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  max-height: 50%;
   width: 100%;
   
   @media (max-width: 768px) {
-    font-size: 3.2vw;
+    font-size: 3vw;
+    -webkit-line-clamp: 4;
+  }
+`;
+
+const PlateDate = styled.div`
+  color: black; /* 글자색을 검정색으로 변경 */
+  font-size: 0.8vw;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 10%;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5vw;
+    margin-bottom: 8%;
   }
 `;
 
