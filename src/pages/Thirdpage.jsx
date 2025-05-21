@@ -7,13 +7,13 @@ import plate2 from "../assets/Achiveimg/plate2.png";
 import plate3 from "../assets/Achiveimg/plate3.png";
 import downArrow from "../assets/Achiveimg/downArrow.png"; 
 
-// 애니메이션 정의
+// 애니메이션 정의 - 세 개의 세트를 위한 애니메이션
 const slideAnimation = keyframes`
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-50% - 10px)); /* 경계를 자연스럽게 하기 위해 약간 더 이동 */
+    transform: translateX(calc(-33.333% - 10px)); /* 3개 세트 중 1개 세트만큼 이동 */
   }
 `;
 
@@ -208,7 +208,7 @@ const Thirdpage = () => {
               <PlateImage src={plate3} alt="Plate 3" />
             </PlateItem>
             
-            {/* 두 번째 세트 (첫 번째 세트를 복제) */}
+            {/* 두 번째 세트 */}
             <PlateItem>
               <PlateImage src={plate1} alt="Plate 1" />
             </PlateItem>
@@ -228,12 +228,24 @@ const Thirdpage = () => {
               <PlateImage src={plate3} alt="Plate 3" />
             </PlateItem>
             
-            {/* 자연스러운 반복을 위한 추가 요소 */}
+            {/* 세 번째 세트 */}
             <PlateItem>
               <PlateImage src={plate1} alt="Plate 1" />
             </PlateItem>
             <PlateItem>
               <PlateImage src={plate2} alt="Plate 2" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate3} alt="Plate 3" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate1} alt="Plate 1" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate2} alt="Plate 2" />
+            </PlateItem>
+            <PlateItem>
+              <PlateImage src={plate3} alt="Plate 3" />
             </PlateItem>
           </PlatesRow>
         </PlatesContainer>
@@ -252,13 +264,13 @@ const Thirdpage = () => {
         
         <FormInstructions>
           <InstructionWrapper>
-            <Instruction>① 고백접시 돌리기 버튼을 누르면 응원의 메세지를 담긴다.</Instruction>
+            <Instruction>❶ 고백접시 돌리기 버튼을 누르면 응원의 메세지를 담긴다.</Instruction>
           </InstructionWrapper>
           <InstructionWrapper>
-            <Instruction>② 고백접시를 돌려 글을 읽어본다.</Instruction>
+            <Instruction>❷ 고백접시를 돌려 글을 읽어본다.</Instruction>
           </InstructionWrapper>
           <InstructionWrapper>
-            <Instruction>③ 든든한 마음과 함께 식식의 식구가 된다.</Instruction>
+            <Instruction>❸ 든든한 마음과 함께 식식의 식구가 된다.</Instruction>
           </InstructionWrapper>
         </FormInstructions>
         
@@ -405,53 +417,69 @@ const Subtitle = styled.p`
   }
 `;
 
+// PlatesStrip은 원래 크기로 유지
 const PlatesStrip = styled.div`
   width: 100%;
   background-color: #232323;
-  padding: 6vh 0; /* 패딩 증가 */
+  padding: 6vh 0; /* 원래 패딩 유지 */
   overflow: hidden;
   position: relative;
+  min-height: 180px; /* 명시적인 최소 높이 설정 */
   
   @media (max-width: 768px) {
     padding: 5vh 0;
+    min-height: 150px;
   }
 `;
 
+// PlatesContainer만 수정하여 내용물이 짤리지 않도록 함
 const PlatesContainer = styled.div`
   width: 100%;
-  overflow: hidden;
+  overflow: visible; /* overflow를 visible로 변경 */
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0; /* 상하 패딩 추가 */
+  height: auto; /* 자동 높이 지정 */
 `;
 
+// PlatesRow도 수정
 const PlatesRow = styled.div`
   display: flex;
   align-items: center;
-  width: 300%;
-  animation: ${slideAnimation} 25s linear infinite;
+  width: 450%; /* 3개 세트 유지 */
+  animation: ${slideAnimation} 35s linear infinite;
+  height: auto; /* 내용물에 맞게 높이 조절 */
 `;
 
+// 접시 아이템 간격 조정
 const PlateItem = styled.div`
-  width: calc((100vw - 200px) / 6); /* 간격 증가 */
+  width: calc((100vw - 200px) / 6);
   height: calc((100vw - 200px) / 6);
-  margin: 0 20px; /* 간격 증가 */
+  margin: 0 35px; /* 좌우 간격 증가 */
   flex-shrink: 0;
-  max-width: 170px; /* 최대 크기 증가 */
+  max-width: 170px;
   max-height: 170px;
   min-width: 90px;
   min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   @media (max-width: 768px) {
-    width: calc((100vw - 120px) / 3); /* 모바일에서 간격 증가 */
+    width: calc((100vw - 120px) / 3);
     height: calc((100vw - 120px) / 3);
-    margin: 0 15px; /* 모바일에서 여백 증가 */
+    margin: 0 25px; /* 모바일에서도 간격 증가 */
     max-width: 130px;
     max-height: 130px;
   }
 `;
 
+// 접시 이미지 크기를 1.2배로 키움
 const PlateImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 120%; /* 1.2배로 크기 증가 */
+  height: 120%; /* 1.2배로 크기 증가 */
   border-radius: 50%;
   object-fit: cover;
   background-color: white;
