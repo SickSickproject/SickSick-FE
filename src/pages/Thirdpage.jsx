@@ -483,7 +483,7 @@ const PlateImage = styled.img`
   border-radius: 50%;
   object-fit: cover;
   background-color: white;
-  border: 2px solid white;
+  border: 2px #232323;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
@@ -820,7 +820,7 @@ const PlateCircle = styled.img`
   border-radius: 50%;
   object-fit: cover;
   background-color: white;
-  border: 2px solid #fff; /* 테두리 두께 증가 */
+  border: 3px  #ffff00; /* 테두리 두께 증가 */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 그림자 강화 */
 `;
 
@@ -840,6 +840,7 @@ const PlateMessageOverlay = styled.div`
   transition: opacity 0.3s ease;
   padding: 10% 8%;
   box-sizing: border-box;
+  border: 1px  solid grey;
   
   &::after {
     content: '';
