@@ -2,9 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
 // 이미지 가져오기 (경로는 실제 위치에 맞게 수정해주세요)
-import plate1 from "../assets/Achiveimg/plate1.png";
-import plate2 from "../assets/Achiveimg/plate2.png";
-import plate3 from "../assets/Achiveimg/plate3.png";
+import plate1 from "../assets/Achiveimg/plate4.svg";
+import plate2 from "../assets/Achiveimg/plate5.svg";
+import plate3 from "../assets/Achiveimg/plate6.svg";
 import downArrow from "../assets/Achiveimg/downArrow.png"; 
 
 // 애니메이션 정의 - 세 개의 세트를 위한 애니메이션
