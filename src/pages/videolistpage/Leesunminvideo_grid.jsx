@@ -47,7 +47,7 @@ const Leesunminvideo_grid = ({ setisoverlay, setoverlayinfo }) => {
 
         {!isMobile &&
             <Container>
-                <Namebar>&nbsp;&nbsp;{">"} 이선민</Namebar>
+                <Namebar><text style={{position:"absolute", left:"1%"}}>&nbsp;&nbsp;{">"} 이선민</text></Namebar>
                 <Videocontainer>
                     {Leesunmin.map((v, i) => {
                         return <Videoelement onClick={() => {
@@ -112,11 +112,10 @@ box-sizing: border-box;
 leading-trim: both;
 text-edge: cap;
 font-family: Gothic A1;
-font-size: 30px;
+font-size: 28px;
 font-style: normal;
 font-weight: 400;
 line-height: 152%; /* 42.56px */
-letter-spacing: -2.24px;
 `
 
 const Smallvideocontainer = styled.div`
@@ -151,11 +150,10 @@ box-sizing: border-box;
 leading-trim: both;
 text-edge: cap;
 font-family: Gothic A1;
-font-size: 2vw;
+font-size: 1.5vw;
 font-style: normal;
 font-weight: 400;
 line-height: 152%; /* 42.56px */
-letter-spacing: -2.24px;
 `
 
 const Videocontainer = styled.div`

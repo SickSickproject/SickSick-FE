@@ -471,7 +471,7 @@ width:116px;
 height:36px;
 position:absolute;
 display:flex;
-color:${(props) => (props.color ? "black" : "grey")};
+color:${(props) => (props.color ? "black" : "rgba(0, 0, 0, 0.2)")};
 justify-content:center;
 align-items:center;
 font-size: 35px;

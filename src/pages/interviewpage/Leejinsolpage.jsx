@@ -206,6 +206,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+                        {mouseenter2 && <div style={{position:"absolute",left:"1212px",borderBottom:"3px solid black",width:"35px",height:"50px",top:"330px"}}></div>}
                         {mouseenter2 && <Infobox2>
                             <Infobox2_sub>섭식장애에 대한
                                 논문을 기재한 바 있다.</Infobox2_sub>
@@ -278,7 +279,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-
+                        {mouseenter3 && <div style={{position:"absolute",left:"702px",borderBottom:"3px solid black",width:"35px",height:"50px",top:"440px"}}></div>}
                         {mouseenter3 && <Infobox3>
                             <Infobox3_sub>논문 기재 이후 2024년 현재,
                                 박사과정을 지내고 있다.</Infobox3_sub>
@@ -351,6 +352,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+                        {mouseenter1 && <div style={{position:"absolute",left:"962px",borderBottom:"3px solid black",width:"35px",height:"50px",top:"10px"}}></div>}
                         {mouseenter1 && <Infobox1>
                             <Infobox1_sub>섭식장애 상담자이자
                                 경험자이다.</Infobox1_sub>
@@ -423,6 +425,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+                         {mouseenter4 && <div style={{position:"absolute",left:"1072px",borderBottom:"3px solid black",width:"35px",height:"50px",top:"650px"}}></div>}
                         {mouseenter4 && <Infobox4>
                             <Infobox4_sub>‘여기서는 진솔하게'라는
                                 섭식장애 개인 유투브를
@@ -430,7 +433,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                         </Infobox4>}
                         <Navigatebar onClick={() => {
                             setpagestate("main"); setbtnclick([0, 0, 1, 0]); window.scrollTo({ top: 0, behavior: "smooth" });
-                        }}>고백, 들으러가기{`>`}</Navigatebar>
+                        }}><text style={{position:"absolute",right:"2%"}}>고백, 들으러가기&nbsp;{`>`}</text></Navigatebar>
                     </motion.div>
                 </AnimatePresence>
             </ScrollContainer>
@@ -494,6 +497,7 @@ font-size: 42px;
 font-style: normal;
 font-weight: 600;
 cursor: pointer;
+position:absolute;
 &:hover {
     background-color: #FFFFA3;
     transition: background-color 0.3s ease-in-out
