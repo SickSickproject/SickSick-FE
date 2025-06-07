@@ -3,7 +3,7 @@ import Babara from "../../datas/BabaraVideoimg"
 
 const Babaravideo_list = ({setisoverlay,setoverlayinfo})=>{
     return <Container>
-        <Namebar>&nbsp;&nbsp;{">>>"} 바바라</Namebar>
+        <Namebar><text style={{position:"absolute", left:"1%"}}>&nbsp;&nbsp;{">>>"} 바바라</text></Namebar>
         <Listcontainer>{
             Babara.map((v,i)=>{return <Listelement onClick={()=>{
                 setoverlayinfo({title:v.title,name:v.name,time:v.time,youtubeid:v.youtubeid,id:v.id}); setisoverlay(true); window.scrollTo({ top: 0 }); 
@@ -55,7 +55,6 @@ font-size: 28px;
 font-style: normal;
 font-weight: 400;
 line-height: 152%; /* 42.56px */
-letter-spacing: -2.24px;
 `
 const Listcontainer = styled.div`
 width:1604px;

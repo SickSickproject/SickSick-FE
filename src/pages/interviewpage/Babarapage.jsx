@@ -200,6 +200,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+                        {mouseenter2 && <div style={{position:"absolute",left:"712px",borderBottom:"3px solid black",width:"35px",height:"50px",top:"420px"}}></div>}
                         {mouseenter2 && <Infobox2>
                             <Infobox2_sub>다이어트 약을<br></br>
                                 처방받은 적이 있다.</Infobox2_sub>
@@ -272,7 +273,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-
+                        {mouseenter3 && <div style={{position:"absolute",left:"862px",borderBottom:"3px solid black",width:"35px",height:"50px",top:"610px"}}></div>}
                         {mouseenter3 && <Infobox3>
                             <Infobox3_sub>2011년 가수로<br></br>
                                 데뷔했다.</Infobox3_sub>
@@ -345,13 +346,14 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+                        {mouseenter1 && <div style={{position:"absolute",left:"1122px",borderBottom:"3px solid black",width:"35px",height:"50px",top:"330px"}}></div>}
                         {mouseenter1 && <Infobox1>
                             <Infobox1_sub>현재 보컬 트레이너로서
                                 학생들을 가르치고 있다.</Infobox1_sub>
                         </Infobox1>}
                         <Navigatebar onClick={() => {
                             setpagestate("main"); setbtnclick([0, 0, 0, 1]); window.scrollTo({ top: 0, behavior: "smooth" });
-                        }}>고백, 들으러가기{`>`}</Navigatebar>
+                        }}><text style={{position:"absolute",right:"2%"}}>고백, 들으러가기&nbsp;{`>`}</text></Navigatebar>
                     </motion.div>
                 </AnimatePresence>
             </ScrollContainer>
@@ -405,6 +407,7 @@ const Navigatebar = styled.div`
 display: flex;
 width: 1605px;
 height: 82px;
+position:relative;
 align-items: center;
 justify-content:right;
 flex-shrink: 0;
