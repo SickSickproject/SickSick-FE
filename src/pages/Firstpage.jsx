@@ -333,6 +333,8 @@ const Sidebar = styled.div`
   border-right: 1px solid black;
 `;
 
+// src/pages/Firstpage.jsx의 SidebarBtn 스타일 컴포넌트 수정
+
 const SidebarBtn = styled.div`
   width: 296px;
   background-color: ${props => props.active ? "#FFFF00" : "white"};
@@ -340,12 +342,15 @@ const SidebarBtn = styled.div`
   height: 52px;
   display: flex;
   align-items: center;
-  font-size: 28px;
+  font-size: 24px; /* 폰트 크기를 28px에서 24px로 줄임 */
   font-style: normal;
   border-top: 1px solid black;
   padding-left: 19px;
   font-weight: ${props => props.active ? "600" : "400"};
   font-family: "Gothic A1", sans-serif;
+  white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 함 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 ... 으로 표시 (필요시) */
   
   &:hover {
     background-color: #FFFF00;

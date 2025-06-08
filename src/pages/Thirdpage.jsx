@@ -32,6 +32,7 @@ const Thirdpage = () => {
   const [writerName, setWriterName] = useState("작성자명");
   const [currentPage, setCurrentPage] = useState(1);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [clickedPlates, setClickedPlates] = useState({}); 
   const itemsPerPage = windowWidth <= 768 ? 3 : windowWidth <= 1024 ? 6 : 9; // 화면 크기에 따라 페이지당 아이템 수 조정
   
   // 윈도우 크기 변경 감지
@@ -133,6 +134,13 @@ const Thirdpage = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const handlePlateClick = (messageId) => {
+    setClickedPlates(prev => ({
+      ...prev,
+      [messageId]: !prev[messageId] // 클릭된 상태를 토글
+    }));
   };
 
   // 현재 페이지에 표시할 메시지 계산
@@ -318,18 +326,18 @@ const Thirdpage = () => {
         {registeredMessages.length > 0 && (
           <PlatesGridSection>
             <PlatesGrid windowWidth={windowWidth}>
-              {getCurrentPageItems().map((message) => (
-                <PlateGridItem key={message.id}>
-                  <PlateCircle 
-                    src={message.plateType === 1 ? plate1 : message.plateType === 2 ? plate2 : plate3} 
-                    alt={`Plate ${message.plateType}`} 
-                  />
-                  <PlateMessageOverlay>
-                    <PlateWriter>{message.writer}</PlateWriter>
-                    <PlateMessage>{message.text}</PlateMessage>
-                    <PlateDate>{message.date}</PlateDate>
-                  </PlateMessageOverlay>
-                </PlateGridItem>
+            {getCurrentPageItems().map((message) => (
+              <PlateGridItem key={message.id} onClick={() => handlePlateClick(message.id)}>
+                <PlateCircle 
+                  src={message.plateType === 1 ? plate1 : message.plateType === 2 ? plate2 : plate3} 
+                  alt={`Plate ${message.plateType}`} 
+                />
+                <PlateMessageOverlay isClicked={clickedPlates[message.id]}>
+                  <PlateWriter>{message.writer}</PlateWriter>
+                  <PlateMessage>{message.text}</PlateMessage>
+                  <PlateDate>{message.date}</PlateDate>
+                </PlateMessageOverlay>
+              </PlateGridItem>
               ))}
             </PlatesGrid>
           </PlatesGridSection>
@@ -537,18 +545,18 @@ const InputLabelBox = styled.div`
   width: 40%;
   display: flex;
   justify-content: center;
-  margin-bottom: 5vh; /* 여백 증가 */
+  margin-bottom: 3vh; /* 여백 증가 */
   
   @media (max-width: 768px) {
     width: 60%;
-    margin-bottom: 3vh;
+    margin-bottom: 2vh;
   }
 `;
 
 const InputLabel = styled.div`
-  font-size: 1.2vw; /* 크기 증가 */
-  font-weight: 600;
-  padding: 0.8vh 1.5vw; /* 패딩 증가 */
+  font-size: 1.4vw; /* 크기 증가 */
+  font-weight: 1000;
+  padding: 0.8vh 1vw; /* 패딩 증가 */
   background-color: white;
   border: 2px solid black;
   display: inline-block;
@@ -556,7 +564,7 @@ const InputLabel = styled.div`
   
   @media (max-width: 768px) {
     font-size: 3vw;
-    padding: 0.5vh 3vw;
+    padding: 0.5vh 2vw;
   }
 `;
 
@@ -592,6 +600,8 @@ const Instruction = styled.div`
 const FormSection = styled.div`
   width: 100%;
   margin-bottom: 6vh; /* 여백 증가 */
+  display: flex;
+  justify-content: center; /* 가운데 정렬 추가 */
   
   @media (max-width: 768px) {
     margin-bottom: 4vh;
@@ -599,22 +609,28 @@ const FormSection = styled.div`
 `;
 
 const FormContainer = styled.div`
-  width: 100%;
+  width: 90%;
   background-color: white;
   border: 1px solid #000;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* 그림자 강화 */
   overflow: hidden;
   position: relative;
-  border-radius: 4px; /* 모서리 약간 둥글게 */
+  min-height: 45vh; /* 높이를 1.5배로 증가 (기존 30vh의 1.5배) */
+  display: flex;
+  flex-direction: column;
+  
+  @media (max-width: 768px) {
+    min-height: 40vh; /* 모바일에서도 높이 증가 */
+  }
 `;
 
 const FormHeader = styled.div`
+  color: #000; 
   display: flex;
   align-items: center;
-  padding: 2vh 2vw; /* 패딩 증가 */
-  font-size: 1.4vw; /* 크기 증가 */
-  font-weight: 600;
-  border-bottom: 1px solid #eee;
+  padding: 2vh 2vw; 
+  font-size: 1.4vw; 
+  font-weight: 800; 
   position: relative;
   
   @media (max-width: 768px) {
@@ -641,9 +657,9 @@ const Divider = styled.span`
 `;
 
 const WriterNameInput = styled.input`
-  color: ${props => props.isfocused === "true" ? "#000" : "#777"};
-  font-size: 1.4vw; /* 크기 증가 */
-  font-weight: 600;
+  color: #000; 
+  font-size: 1.4vw; 
+  font-weight: 600; 
   border: none;
   outline: none;
   background: transparent;
@@ -673,17 +689,18 @@ const WriterNameCount = styled.div`
 
 const FormTextarea = styled.textarea`
   width: 100%;
-  min-height: 18vh; /* 높이 증가 */
-  padding: 2vh 2vw; /* 패딩 증가 */
+  min-height: 18vh; 
+  padding: 2vh 2vw; 
   border: none;
   resize: vertical;
   font-family: "Gothic A1", sans-serif;
-  font-size: 1.2vw; /* 크기 증가 */
+  font-size: 1.2vw; 
   line-height: 1.6;
   margin: 0;
   box-sizing: border-box;
   display: block;
   color: ${props => props.isfocused === "true" ? "#000" : "#777"};
+  flex: 1; 
   
   @media (max-width: 768px) {
     min-height: 22vh;
@@ -712,10 +729,16 @@ const CharacterCount = styled.div`
 `;
 
 const FormDivider = styled.div`
-  width: 100%;
+  width: calc(100% - 4vw);
   height: 1px;
-  background-color: #ddd;
-  margin: 0;
+  background-color: #000;
+  margin: 0 2vw;
+  margin-top: auto; 
+  
+  @media (max-width: 768px) {
+    width: calc(100% - 6vw);
+    margin: auto 3vw 0 3vw;
+  }
 `;
 
 const SubmitButtonWrapper = styled.div`
@@ -802,8 +825,8 @@ const PlateGridItem = styled.div`
   cursor: pointer;
   transition: transform 0.3s ease;
   width: 100%;
-  aspect-ratio: 1/1; /* 정사각형 비율 유지 */
-  max-width: 220px; /* 크기 증가 */
+  aspect-ratio: 1/1; 
+  max-width: 330px; /* 크기 1.2배 증가 (220px × 1.5) */
   
   &:hover {
     transform: translateY(-8px); /* 효과 강화 */
@@ -821,7 +844,6 @@ const PlateCircle = styled.img`
   object-fit: cover;
   background-color: white;
   border: 3px  #ffff00; /* 테두리 두께 증가 */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 그림자 강화 */
 `;
 
 const PlateMessageOverlay = styled.div`
@@ -831,16 +853,16 @@ const PlateMessageOverlay = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: white; /* 배경색을 하얀색으로 변경 */
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  opacity: 0;
+  opacity: ${props => props.isClicked ? 1 : 0};
   transition: opacity 0.3s ease;
   padding: 10% 8%;
   box-sizing: border-box;
-  border: 1px  solid grey;
+  border: 1px solid grey;
   
   &::after {
     content: '';
@@ -849,9 +871,9 @@ const PlateMessageOverlay = styled.div`
     left: 7%;
     right: 7%;
     bottom: 7%;
-    border: 1px solid #444; /* 내부 원 테두리 색상을 어두운 회색으로 변경 */
+    border: 1px solid #444;
     border-radius: 50%;
-    pointer-events: none; /* 클릭 이벤트를 방해하지 않도록 */
+    pointer-events: none;
   }
   
   @media (max-width: 768px) {
