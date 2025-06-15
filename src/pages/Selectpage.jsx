@@ -42,7 +42,7 @@ const Selectpage = () => {
   };
 
   // SplashScreen 관련
-  const [showSplash, setShowSplash] = useState(!sessionStorage.getItem("visited"));
+  const [showSplash, setShowSplash] = useState(!sessionStorage.getItem("visited")); // 
   const navigate = useNavigate();
   const img1 = sicksicklogo;
 
@@ -62,14 +62,29 @@ const Selectpage = () => {
         <SplashScreen />
       ) : (
         <ScrollContainer
-          ref={scrollRef}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-          isDragging={isDragging.current}
         >
-          <ContentWrapper>
+          <div
+              style={{
+                position: "absolute",
+                width: "45.9%",
+                right: "26%",
+                top: "5%",
+                aspectRatio:"882.927/199",
+              }}
+            >
+              <img src={img1} style={{ width: "100%", height: "100%" }} alt="sicksick1" />
+            </div>
+            <Textbox>
+              식식은 섭식장애 인식 확산을 위한 당사자 고백 프로젝트입니다.
+            </Textbox>
+            <Circle style={{ left: "20%",textAlign:"center" }} onClick={() => navigate(`/main/one`, { replace: false })}>
+              ①<br/>섭식장애란<br />
+              무엇일까?
+            </Circle>
+            <Circle style={{ left: "52%",textAlign:"center" }} onClick={() => navigate(`/main/two`, { replace: false })}>
+              ②<br/>고백 들으러<br/> 가기
+            </Circle>
+          {/* <ContentWrapper>
             <div
               style={{
                 position: "absolute",
@@ -93,7 +108,7 @@ const Selectpage = () => {
             <Circle style={{ left: "996px",textAlign:"center" }} onClick={() => navigate(`/main/two`, { replace: false })}>
               ②<br/>고백 들으러<br/> 가기
             </Circle>
-          </ContentWrapper>
+          </ContentWrapper> */}
         </ScrollContainer>
       )}
     </>
@@ -107,18 +122,8 @@ export default Selectpage;
 const ScrollContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  overflow: scroll;
-  user-select: none;
-  cursor: ${(props) => (props.isDragging ? "grabbing" : "grab")};
   position: relative;
-  /* Chrome, Safari, Opera에서 스크롤바 숨기기 */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* IE, Edge, Firefox에서 스크롤바 숨기기 */
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+ background-color: yellow;
 `;
 
 // 고정 크기 콘텐츠 영역
@@ -134,13 +139,13 @@ const Circle = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 666px;
-  height: 666px;
+  width: 28%;
+  aspect-ratio:1/1;
   background-color: white;
   border: 2px solid #000;
-  top: 407px;
+  top: 40%;
   border-radius: 50%;
-  font-size: 65.766px;
+  font-size: 3vw;
   font-style: normal;
   line-height:136%;
   font-weight: 800;
@@ -159,11 +164,11 @@ const Textbox = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 1430px;
-  height: 33px;
-  left: 245px;
-  top: 310px;
-  font-size: 42.505px;
+  aspect-ratio:1430/33;
+  width: 74.47%;
+  left: 12.765%;
+  top: 32%;
+  font-size: 2vw;
   font-family: "Gothic A1";
   font-style: normal;
   font-weight: 800;

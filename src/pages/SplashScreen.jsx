@@ -25,13 +25,13 @@ const SplashScreen = () => {
                 className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
             >
                 <Container>
-                    <div style={{ width: "1837.8px", height: "414.216px", left: "41px", top: "182px", position: "absolute" }}>
+                    <div style={{ width: "95.71%",left: "2.4%", top: "15%", position: "absolute",aspectRatio:"1837.8/414.216" }}>
                         <img src={img1} alt="" style={{ width: "100%", height: "100%" }} />
                     </div>
-                    <div style={{ width: "314px", height: "86px", left: "677px", top: "712.43px", position: "absolute" }}>밥짓는중...</div>
+                    <div style={{ width: "16.35%", aspectRatio:"314/86",left: "35.26%", top: "70%", position: "absolute",fontSize:"3vw" }}>밥짓는중...</div>
 
                     <motion.img
-                        style={{ width: "50px", height: "50px", left: "991px", top: "725px", position: "absolute" }}
+                        style={{ width: "3vw", aspectRatio:"1/1", left: "51.6%", top: "71%", position: "absolute" }}
                         src={img2}
                         alt="Rotating Stick"
                         className="w-20 h-2"
@@ -43,7 +43,7 @@ const SplashScreen = () => {
                         }}
                     />
                     <motion.img
-                        style={{ width: "46px", height: "46px", left: "1041px", top: "728px", position: "absolute" }}
+                        style={{ width: "2.8vw", aspectRatio:"1/1", left: "54.6%", top: "71.3%", position: "absolute" }}
                         src={img3}
                         alt="Rotating Stick"
                         className="w-20 h-2"
@@ -55,7 +55,7 @@ const SplashScreen = () => {
                         }}
                     />
                     <motion.img
-                        style={{ width: "50px", height: "50px", left: "1091px", top: "725px", position: "absolute" }}
+                        style={{ width: "3vw", aspectRatio:"1/1", left: "57.6%", top: "71%", position: "absolute" }}
                         src={img2}
                         alt="Rotating Stick"
                         className="w-20 h-2"
@@ -67,7 +67,7 @@ const SplashScreen = () => {
                         }}
                     />
                     <motion.img
-                        style={{ width: "46px", height: "46px", left: "1141px", top: "728px", position: "absolute" }}
+                        style={{ width: "2.8vw", aspectRatio:"1/1", left: "60.6%", top: "71.3%", position: "absolute" }}
                         src={img3}
                         alt="Rotating Stick"
                         className="w-20 h-2"
@@ -79,7 +79,7 @@ const SplashScreen = () => {
                         }}
                     />
                     <motion.img
-                        style={{ width: "50px", height: "50px", left: "1191px", top: "725px", position: "absolute" }}
+                        style={{ width: "3vw", aspectRatio:"1/1", left: "63.6%", top: "71%", position: "absolute" }}
                         src={img2}
                         alt="Rotating Stick"
                         className="w-20 h-2"
@@ -102,8 +102,8 @@ const SplashScreen = () => {
 export default SplashScreen
 
 const Container = styled.div`
-width:1920px;
-height:1200px;
+width:100vw;
+height:100vh;
 background-color:yellow;
 position:relative;
 font-size: 57.886px;
