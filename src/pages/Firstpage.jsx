@@ -493,7 +493,7 @@ const ContentTitle = styled.h2`
 const Paragraph = styled.p`
   font-size: clamp(14px, 2vw, 18px);
   font-family: "Gothic A1", sans-serif;
-  line-height: 1.6;
+  line-height: 150%;
   margin-bottom: 15px;
   
   @media (max-width: 768px) {
