@@ -22,7 +22,7 @@ const Babaravideo_grid = ({ setisoverlay, setoverlayinfo }) => {
                                 ))}
                                 <VerticalLine /></Videoelement_stitle2>
                             <Videoelement_title style={{ fontSize: "20px" }}>{v.title}</Videoelement_title>
-                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "15px" }}>인터뷰이 | 이선민</div>
+                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "15px",left:"0" }}>인터뷰이 | 바바라</div>
                         </Videoelement>
                     })}
                 </Smallvideocontainer>
@@ -55,7 +55,7 @@ const Babaravideo_grid = ({ setisoverlay, setoverlayinfo }) => {
                                     <div key={i} style={char === ' ' ? { fontSize: "0.1vw", height: "0.5vh", display: 'inline-block' } : {}}>{char === ' ' ? '\u00A0' : char}</div>
                                 ))}<VerticalLine /></Videoelement_stitle>
                             <Videoelement_title>{v.title}</Videoelement_title>
-                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "0.9vw" }}>인터뷰이 | 바바라</div>
+                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "1.1vw" ,left:"0"}}>인터뷰이 | 바바라</div>
                         </Videoelement>
                     })}
                 </Videocontainer>
@@ -207,6 +207,7 @@ const Videoelement_title = styled.div`
 width:90%;
 height:auto;
 position:absolute;
+left:0;
 top:75%;
 color: #000;
 leading-trim: both;

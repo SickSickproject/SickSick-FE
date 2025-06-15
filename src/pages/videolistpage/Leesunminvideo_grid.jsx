@@ -26,7 +26,7 @@ const Leesunminvideo_grid = ({ setisoverlay, setoverlayinfo }) => {
                                 ))}
                                 <VerticalLine /></Videoelement_stitle2>
                             <Videoelement_title style={{ fontSize: "20px" }}>{v.title}</Videoelement_title>
-                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "15px" }}>인터뷰이 | 이선민</div>
+                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "15px",left:"0" }}>인터뷰이 | 이선민</div>
                         </Videoelement>
                     })}
                 </Smallvideocontainer>
@@ -60,7 +60,7 @@ const Leesunminvideo_grid = ({ setisoverlay, setoverlayinfo }) => {
                                 ))}
                                 <VerticalLine /></Videoelement_stitle>
                             <Videoelement_title>{v.title}</Videoelement_title>
-                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "0.9vw" }}>인터뷰이 | {v.name}</div>
+                            <div style={{ width: "90%", height: "1.5%", position: "absolute", top: "95%", fontSize: "1.1vw",left:"0" }}>인터뷰이 | {v.name}</div>
                             {/* <img src={v.image} style={{ top: "21px", position: "absolute" }}></img>
                             <Videoelement_stitle>{v.stitle}</Videoelement_stitle>
                             <Videoelement_title>{v.title}</Videoelement_title>
@@ -216,6 +216,7 @@ display: -webkit-box;
 width:90%;
 height:auto;
 position:absolute;
+left:0;
 top:75%;
 color: #000;
 leading-trim: both;
