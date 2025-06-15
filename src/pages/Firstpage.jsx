@@ -5,6 +5,7 @@ import YouTube from "react-youtube";
 import { useNavigate } from "react-router-dom";
 import NavContext from "./Navcontext";
 import { useContext } from "react";
+import Arrow1 from "../assets/FirstPageimg/Arrow1.svg";
 
 
 const Firstpage = () => {
@@ -286,15 +287,21 @@ const Firstpage = () => {
         <BottomLinks>
           <BottomLink onClick={() => {setbtnclick([0,1,0]); window.scrollTo({ top: 0}); handleNavigation("/main/two")}}>
             <LinkText>식식한 고백들</LinkText>
-            <LinkArrow>→</LinkArrow>
+            <LinkArrow>
+              <img src={Arrow1} alt="arrow" />
+            </LinkArrow>
           </BottomLink>
           <BottomLink onClick={() => {setbtnclick([0,0,1]); window.scrollTo({ top: 0}); handleNavigation('/main/three');}}>
             <LinkText>식식한 연결하기</LinkText>
-            <LinkArrow>→</LinkArrow>
+            <LinkArrow>
+              <img src={Arrow1} alt="arrow" />
+            </LinkArrow>
           </BottomLink>
           <BottomLink onClick={() => {window.scrollTo({ top: 0, behavior: "smooth" })}}>
             <LinkText>식식에 대하여</LinkText>
-            <LinkArrow>→</LinkArrow>
+            <LinkArrow>
+              <img src={Arrow1} alt="arrow" />
+            </LinkArrow>
           </BottomLink>
         </BottomLinks>
         
@@ -396,13 +403,14 @@ const MobileTab = styled.div`
 
 const MainContent = styled.div`
   margin-left: ${props => props.isMobile ? '0' : '316px'};
-  width: ${props => props.isMobile ? '100%' : 'calc(100vw - 297px)'};
+  width: ${props => props.isMobile ? '100%' : 'calc(100vw - 316px)'};
   font-family: "Gothic A1", sans-serif;
   overflow-x: hidden;
   position: relative;
   background-color: white;
   min-height: 100vh;
 `;
+
 const ContentWrapper = styled.div`
   width: 100%;
   font-family: "Gothic A1", sans-serif;
@@ -544,7 +552,7 @@ const BottomLink = styled.div`
 `;
 
 const LinkText = styled.div`
-  font-size: clamp(14px, 2vw, 18px);
+  font-size: 40px;
   font-weight: 600;
   font-family: "Gothic A1", sans-serif;
 `;
@@ -553,33 +561,43 @@ const LinkArrow = styled.div`
   font-size: clamp(16px, 2.5vw, 20px);
   font-weight: bold;
   font-family: "Gothic A1", sans-serif;
-  transition: transform 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+  }
   
   ${BottomLink}:hover & {
-    transform: scaleX(1.5);
-    transform-origin: left;
+    img {
+      transform: scaleX(1.5);
+      transform-origin: right;
+    }
   }
 `;
 
 const Footer = styled.div`
   width: 100%;
-  height: 140px;
+  aspect-ratio: 1604/157;
   background-color: black;
   position: relative;
 `;
 
 const Teaminfo = styled.div`
-  width: 324px;
-  height: 100px;
+  width: 20.1995%;
+  aspect-ratio: 324/100;
   padding: 20px;
   color: white;
   font-family: "Gothic A1", sans-serif;
-  font-size: 18px;
+  font-size: 1vw;
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
   position: absolute;
-  left: 20px;
+  left: 0;
   top: 0;
 `;
 
@@ -587,10 +605,10 @@ const Teaminfo2 = styled.div`
   top: 20px;
   width: 263.3277px;
   height: 50px;
-  left: 337.42px;
+  left: 23%;
   color: #FFF;
   font-family: "Gothic A1", sans-serif;
-  font-size: 18px;
+  font-size: 1vw;
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
