@@ -18,7 +18,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
 
     useEffect(() => {
-        
+
         // 마우스가 올라가면 1초마다 콜백 호출
         if (isHovered) {
             intervalRef.current = window.setInterval(() => {
@@ -43,17 +43,17 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
     }, [isHovered]);
 
     useEffect(() => {
-  const updatePosition = () => {
-    if (containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      setLeftPos(containerWidth);
-    }
-  };
+        const updatePosition = () => {
+            if (containerRef.current) {
+                const containerWidth = containerRef.current.offsetWidth;
+                setLeftPos(containerWidth);
+            }
+        };
 
-  updatePosition();
-  window.addEventListener("resize", updatePosition);
-  return () => window.removeEventListener("resize", updatePosition);
-}, []);
+        updatePosition();
+        window.addEventListener("resize", updatePosition);
+        return () => window.removeEventListener("resize", updatePosition);
+    }, []);
 
     const scrollRef = useRef(null);
     const isDragging = useRef(false);
@@ -106,7 +106,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
     const moving = (i) => {
         if (i) {
-            setmove(-70)
+            setmove(-30)
             setmove2(200)
         }
         else {
@@ -117,36 +117,37 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
     return (
         <>
+
             <AnimatePresence>
-                    <motion.div
-                        initial={{ opacity: 0.8 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                        style={{ userSelect: "none" }}
-                    >
-                        <Container clicked={isClicked} ref={containerRef}>
-                <Namebar>이진솔</Namebar>
-                <Titlebar move2={move2} src={leejinsoltitle}></Titlebar>
-            
-                <Discriptbar>
-                                섭식장애  상담사이자 경험자 입니다.  유튜브와 블로그에 관련 주제를 다루며,
+                <motion.div
+                    initial={{ opacity: 0.8 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
+                    style={{ userSelect: "none", display: "flex", alignItems: "center" }}
+                >
+                    <Container clicked={isClicked} ref={containerRef}>
+                        <Namebar>이진솔</Namebar>
+                        <Titlebar move2={move2} src={leejinsoltitle}></Titlebar>
+
+                        <Discriptbar>
+                            섭식장애  상담사이자 경험자 입니다.  유튜브와 블로그에 관련 주제를 다루며,
                                 대학원에서 연구를 병행하고 있습니다.
                                 특히 섭식장애를 단순히  개인 문제가 아닌 주변인이 함께 겪는 질병으로 바라보며,
                                 자조 모임을  운영하는 등  다각적인 지원 활동을 하고 있습니다.
-                </Discriptbar>
+                        </Discriptbar>
 
-            </Container>
-            <Personimg
-                            src={img2}
-                            left={leftPos}
-                            isClicked={isClicked}
-                            onClick={() => { setIsClicked(!isClicked); moving(!isClicked) }}
-                            move={move}
-                        />
+                    </Container>
+                    <Personimg
 
-                         <AnimatePresence>
+                        left={leftPos}
+                        isClicked={isClicked}
+                        onClick={() => { setIsClicked(!isClicked); moving(!isClicked) }}
+                        move={move}
+                    >
+                        <img src={img2} style={{ width: "100%", height: "100%" }}></img>
+                        <AnimatePresence>
                             {isClicked && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
@@ -155,7 +156,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
                                     <Commentbox
-                                        style={{left: `calc(316px + ${leftPos*0.56}px)`, top: "16%" ,width:`${leftPos*0.017}px`,height:`${leftPos*0.017}px`}}
+                                        style={{ left: "27%", top: "53%", width: `${leftPos * 0.017}px`, height: `${leftPos * 0.017}px` }}
                                         isClicked={isClicked}
                                         onMouseEnter={() => { setIsHovered(true); setmouseenter1(true) }}
                                         onMouseLeave={() => { setIsHovered(false); setmouseenter1(false) }}
@@ -166,7 +167,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                     key="diamond"
                                                     src={recbtn}
                                                     alt="button"
-                                                    style={{width: "1.2vw", height: "1.2vw"}}
+                                                    style={{ width: "1.2vw", height: "1.2vw" }}
 
                                                     // 등장 시: 회전 0°에서 바로 보이기
                                                     initial={{ opacity: 1, rotate: 0 }}
@@ -204,7 +205,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                         }}         // Commentbox 안에서 위치 조절이 필요하면 추가
                                                     >
                                                         {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
-                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{width: "1.2vw", height: "1.2vw"}}/>}
+                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{ width: "1.2vw", height: "1.2vw" }} />}
 
                                                     </motion.div>
 
@@ -215,12 +216,11 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                        {mouseenter1 && <div style={{position:"absolute",left:`calc(316px + ${leftPos*0.581}px)`,borderBottom:"3px solid black",width:`${leftPos*0.02}px`,height:"50px",top:"11%"}}></div>}
-                        {mouseenter1 && <Infobox1 style={{width:`${leftPos*0.13}px`,height:`${leftPos*0.05}px`,left:`calc(316px + ${leftPos*0.6}px)`}}>
-                            <Infobox1_sub>섭식장애 상담자이자
-                                경험자이다.</Infobox1_sub>
+                        {mouseenter1 && <div style={{ position: "absolute", left: "32%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "53%" }}></div>}
+                        {mouseenter1 && <Infobox1 style={{ width: `${leftPos * 0.15}px`, height: `${leftPos * 0.04}px`, left: "35%" }}>
+                            <Infobox1_sub>논문 기재 이후 2024년 현재,
+                                박사과정을 지내고 있다.</Infobox1_sub>
                         </Infobox1>}
-
 
 
                         <AnimatePresence>
@@ -232,7 +232,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
                                     <Commentbox
-                                        style={{left: `calc(316px + ${leftPos*0.71}px)`, top: "47%" ,width:`${leftPos*0.017}px`,height:`${leftPos*0.017}px`}}
+                                        style={{ left: "97%", top: "38%", width: `${leftPos * 0.017}px`, height: `${leftPos * 0.017}px` }}
                                         isClicked={isClicked}
                                         onMouseEnter={() => { setIsHovered(true); setmouseenter2(true) }}
                                         onMouseLeave={() => { setIsHovered(false); setmouseenter2(false) }}
@@ -243,7 +243,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                     key="diamond"
                                                     src={recbtn}
                                                     alt="button"
-                                                    style={{width: "1.2vw", height: "1.2vw"}}
+                                                    style={{ width: "1.2vw", height: "1.2vw" }}
 
                                                     // 등장 시: 회전 0°에서 바로 보이기
                                                     initial={{ opacity: 1, rotate: 0 }}
@@ -281,7 +281,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                         }}         // Commentbox 안에서 위치 조절이 필요하면 추가
                                                     >
                                                         {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
-                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{width: "1.2vw", height: "1.2vw"}}/>}
+                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{ width: "1.2vw", height: "1.2vw" }} />}
 
                                                     </motion.div>
 
@@ -292,12 +292,11 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                        {mouseenter2 && <div style={{position:"absolute",left:`calc(316px + ${leftPos*0.731}px)`,borderBottom:"3px solid black",width:`${leftPos*0.02}px`,height:"50px",top:"42%"}}></div>}
-                        {mouseenter2 && <Infobox2 style={{width:`${leftPos*0.13}px`,height:`${leftPos*0.05}px`,left:`calc(316px + ${leftPos*0.75}px)`}}>
+                        {mouseenter2 && <div style={{ position: "absolute", left: "102%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "38%" }}></div>}
+                        {mouseenter2 && <Infobox2 style={{ width: `${leftPos * 0.13}px`, height: `${leftPos * 0.03}px`, left: "105%" }}>
                             <Infobox2_sub>섭식장애에 대한
                                 논문을 기재한 바 있다.</Infobox2_sub>
                         </Infobox2>}
-
 
                         <AnimatePresence>
                             {isClicked && (
@@ -308,7 +307,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
                                     <Commentbox
-                                        style={{left: `calc(316px + ${leftPos*0.41}px)`, top: "56%" ,width:`${leftPos*0.017}px`,height:`${leftPos*0.017}px`}}
+                                        style={{ left: "78%", top: "79%", width: `${leftPos * 0.017}px`, height: `${leftPos * 0.017}px` }}
                                         isClicked={isClicked}
                                         onMouseEnter={() => { setIsHovered(true); setmouseenter3(true) }}
                                         onMouseLeave={() => { setIsHovered(false); setmouseenter3(false) }}
@@ -319,7 +318,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                     key="diamond"
                                                     src={recbtn}
                                                     alt="button"
-                                                    style={{width: "1.2vw", height: "1.2vw"}}
+                                                    style={{ width: "1.2vw", height: "1.2vw" }}
 
                                                     // 등장 시: 회전 0°에서 바로 보이기
                                                     initial={{ opacity: 1, rotate: 0 }}
@@ -357,7 +356,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                         }}         // Commentbox 안에서 위치 조절이 필요하면 추가
                                                     >
                                                         {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
-                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{width: "1.2vw", height: "1.2vw"}}/>}
+                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{ width: "1.2vw", height: "1.2vw" }} />}
 
                                                     </motion.div>
 
@@ -368,13 +367,12 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                        {mouseenter3 && <div style={{position:"absolute",left:`calc(316px + ${leftPos*0.43}px)`,borderBottom:"3px solid black",width:`${leftPos*0.02}px`,height:"50px",top:"51%"}}></div>}
-                        {mouseenter3 && <Infobox3 style={{width:`${leftPos*0.13}px`,height:`${leftPos*0.05}px`,left:`calc(316px + ${leftPos*0.45}px)`}}>
-                            <Infobox3_sub>논문 기재 이후 2024년 현재,
-                                박사과정을 지내고 있다.</Infobox3_sub>
+                        {mouseenter3 && <div style={{ position: "absolute", left: "83%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "79%" }}></div>}
+                        {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.08}px`, height: `${leftPos * 0.02}px`, left: "86%" }}>
+                            <Infobox3_sub>예술기획자로 일하고 있다.</Infobox3_sub>
                         </Infobox3>}
 
-            
+
                         <AnimatePresence>
                             {isClicked && (
                                 <motion.div
@@ -384,10 +382,10 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
                                     <Commentbox
-                                        style={{ left: `calc(316px + ${leftPos*0.62}px)`, top: "78%" ,width:`${leftPos*0.017}px`,height:`${leftPos*0.017}px`}}
+                                        style={{ left: "63%", top: "-1%", width: `${leftPos * 0.017}px`, height: `${leftPos * 0.017}px` }}
                                         isClicked={isClicked}
-                                        onMouseEnter={() => {setIsHovered(true);setmouseenter4(true)}}
-                                        onMouseLeave={() => {setIsHovered(false); setmouseenter4(false)}}
+                                        onMouseEnter={() => { setIsHovered(true); setmouseenter4(true) }}
+                                        onMouseLeave={() => { setIsHovered(false); setmouseenter4(false) }}
                                     >
                                         <AnimatePresence>
                                             {mouseenter4 && divIndex === 2 ? (
@@ -395,7 +393,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                     key="diamond"
                                                     src={recbtn}
                                                     alt="button"
-                                                    style={{width: "1.2vw", height: "1.2vw"}}
+                                                    style={{ width: "1.2vw", height: "1.2vw" }}
 
                                                     // 등장 시: 회전 0°에서 바로 보이기
                                                     initial={{ opacity: 1, rotate: 0 }}
@@ -433,7 +431,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                                         }}         // Commentbox 안에서 위치 조절이 필요하면 추가
                                                     >
                                                         {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
-                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{width: "1.2vw", height: "1.2vw"}}/>}
+                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{ width: "1.2vw", height: "1.2vw" }} />}
 
                                                     </motion.div>
 
@@ -444,24 +442,30 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                         {mouseenter4 && <div style={{position:"absolute",left:`calc(316px + ${leftPos*0.641}px)`,borderBottom:"3px solid black",width:`${leftPos*0.02}px`,height:"50px",top:"73%"}}></div>}
-                        {mouseenter4 && <Infobox4 style={{width:`${leftPos*0.13}px`,height:`${leftPos*0.05}px`,left:`calc(316px + ${leftPos*0.66}px)`}}>
-                            <Infobox4_sub>‘여기서는 진솔하게'라는
-                                섭식장애 개인 유투브를
-                                운영 중이다.</Infobox4_sub>
+                        {mouseenter4 && <div style={{ position: "absolute", left: "68%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "-1%" }}></div>}
+                        {mouseenter4 && <Infobox4 style={{ width: `${leftPos * 0.11}px`, height: `${leftPos * 0.02}px`, left: "71%" }}>
+                            <Infobox4_sub>
+                                섭식장애 상담자이자
+                                경험자이다.
+                            </Infobox4_sub>
                         </Infobox4>}
 
-                        
-                        
+                    </Personimg>
 
 
-            <Navigatebar onClick={() => {
-                            setpagestate("main"); setbtnclick([0, 0, 1, 0]); window.scrollTo({ top: 0, behavior: "smooth" });
-                        }}><text style={{position:"absolute",right:"2%"}}>고백, 들으러가기&nbsp;{`>`}</text></Navigatebar>
-                        
-                    </motion.div>
-                </AnimatePresence>
-            
+
+
+
+
+
+
+
+                </motion.div>
+                <Navigatebar onClick={() => {
+                    setpagestate("main"); setbtnclick([0, 0, 1, 0]); window.scrollTo({ top: 0, behavior: "smooth" });
+                }}><text style={{ position: "absolute", right: "1%" }}>고백, 들으러가기&nbsp;{`>`}</text></Navigatebar>
+            </AnimatePresence>
+
             {/* <ScrollContainer
                 ref={scrollRef}
                 onMouseDown={handleMouseDown}
@@ -832,7 +836,7 @@ const Overlay = styled.div`
 // 내비게이션 바 (기본 유지)
 const Navigatebar = styled.div`
 display: flex;
-width: 1605px;
+width: calc(100vw - 316px);
 height: 82px;
 align-items: center;
 justify-content:right;
@@ -890,8 +894,8 @@ const Discriptbar = styled.div`
     position: absolute;
     left: 22px;
     color: white;
-    top: 82%;
-    font-size: 1.8vw;
+    bottom: 1%;
+    font-size: 1.7vw;
     font-style: normal;
     font-weight: 600;
     line-height: 125%;
@@ -899,15 +903,14 @@ const Discriptbar = styled.div`
 `;
 
 // 이미지 스타일 (클릭했을 때 강조)
-const Personimg = styled.img`
-     left: ${({ left }) => `calc(316px + ${left*0.3}px)`};
-    width:35%;
-    height:75%;
+const Personimg = styled.div`
+     left: ${({ left }) => `calc(316px + ${left * 0.325}px)`};
+    width:32%;
+    aspect-ratio:721/771;
     position:absolute;
     transform-origin: top left;
     transform: ${({ move }) => `translateY(${move}px)`};
     opacity: ${({ isClicked }) => (isClicked ? 0.8 : 0.5)};
-    top: 25%;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
     &:hover {
@@ -932,7 +935,7 @@ align-items:center;
 const Infobox1 = styled.div`
 left: 997px;
 position:absolute;
-top:16%;
+top:53%;
 background-color:yellow;
 width:227px;
 height:79px;
@@ -958,7 +961,7 @@ line-height: 140%;
 const Infobox2 = styled.div`
 left: 1247px;
 position:absolute;
-top:46%;
+top:38%;
 background-color:yellow;
 width:244px;
 height:79px;
@@ -983,7 +986,7 @@ line-height: 140%;
 const Infobox3 = styled.div`
 left: 737px;
 position:absolute;
-top:56%;
+top:79%;
 width:294px;
 height:79px;
 display: flex;
@@ -1007,7 +1010,7 @@ line-height: 140%;
 
 const Infobox4 = styled.div`
 position:absolute;
-top:78%;
+top:-1%;
 background-color:yellow;
 
 display: flex;
