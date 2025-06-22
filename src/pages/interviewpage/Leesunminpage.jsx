@@ -7,7 +7,7 @@ import { useRef, useEffect } from "react";
 import recbtn from "../../assets/changebtnimg/ractanglebtn.png"
 
 
-const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
+const Leesunminpage = ({ setpagestate, setbtnclick }) => {
 
     const containerRef = useRef(null);
     const [leftPos, setLeftPos] = useState(0);
@@ -18,7 +18,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
 
     useEffect(() => {
-        
+
         // 마우스가 올라가면 1초마다 콜백 호출
         if (isHovered) {
             intervalRef.current = window.setInterval(() => {
@@ -43,17 +43,17 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
     }, [isHovered]);
 
     useEffect(() => {
-  const updatePosition = () => {
-    if (containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      setLeftPos(containerWidth);
-    }
-  };
+        const updatePosition = () => {
+            if (containerRef.current) {
+                const containerWidth = containerRef.current.offsetWidth;
+                setLeftPos(containerWidth);
+            }
+        };
 
-  updatePosition();
-  window.addEventListener("resize", updatePosition);
-  return () => window.removeEventListener("resize", updatePosition);
-}, []);
+        updatePosition();
+        window.addEventListener("resize", updatePosition);
+        return () => window.removeEventListener("resize", updatePosition);
+    }, []);
 
     const scrollRef = useRef(null);
     const isDragging = useRef(false);
@@ -104,7 +104,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
     const moving = (i) => {
         if (i) {
-            setmove(-70)
+            setmove(-30)
             setmove2(200)
         }
         else {
@@ -117,275 +117,277 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
         <>
 
             <AnimatePresence>
-                    <motion.div
-                        initial={{ opacity: 0.8 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                        style={{ userSelect: "none" }}
+                <motion.div
+                    initial={{ opacity: 0.8 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
+                    style={{ userSelect: "none", display: "flex", alignItems: "center" }}
+                >
+                    <Container clicked={isClicked} ref={containerRef}>
+                        <Namebar>이선민</Namebar>
+                        <Titlebar move2={move2} src={leesunmintitle}></Titlebar>
+
+                        <Discriptbar>
+                            예술가이자 아트디렉터로 활동하고 있는 이선민님은
+                            ‘섭식장애건강권연대’를 만들어 다양한 활동과 프로그램을
+                            기획하는데 앞장서고 있습니다. 무용수를 준비하던 학창시절부터 긴 시간동안 함께해온 섭식장애와의 이야기를 가진 선민님은
+                            '안전한 식탁'과 같은 여러 프로그램을 기획하며 섭식장애는 남녀노소를 불문하고 누구에게나 일어날 수 있음을 이야기합니다.
+                            섭식장애를 겪는 모든 사람들이 건강한 식습관과 관련된 경험을 꼭 해보고, 그를 통해 식사와 자기 스스로에게 긍정적인 태도를 가질 수 있도록 기획자로서의 정진을 멈추지 않고 계속해서 나아가고 있습니다.
+                        </Discriptbar>
+
+                    </Container>
+                    <Personimg
+
+                        left={leftPos}
+                        isClicked={isClicked}
+                        onClick={() => { setIsClicked(!isClicked); moving(!isClicked) }}
+                        move={move}
                     >
-                        <Container clicked={isClicked} ref={containerRef}>
-                <Namebar>이선민</Namebar>
-                <Titlebar move2={move2} src={leesunmintitle}></Titlebar>
-            
-                <Discriptbar>
-                                예술가이자 아트디렉터로 활동하고 있는 이선민님은
-                                ‘섭식장애건강권연대’를 만들어 다양한 활동과 프로그램을
-                                기획하는데 앞장서고 있습니다. 무용수를 준비하던 학창시절부터 긴 시간동안 함께해온 섭식장애와의 이야기를 가진 선민님은
-                                '안전한 식탁'과 같은 여러 프로그램을 기획하며 섭식장애는 남녀노소를 불문하고 누구에게나 일어날 수 있음을 이야기합니다.
-                                섭식장애를 겪는 모든 사람들이 건강한 식습관과 관련된 경험을 꼭 해보고, 그를 통해 식사와 자기 스스로에게 긍정적인 태도를 가질 수 있도록 기획자로서의 정진을 멈추지 않고 계속해서 나아가고 있습니다.
-                </Discriptbar>
-
-            </Container>
-            <Personimg
-                            src={img2}
-                            left={leftPos}
-                            isClicked={isClicked}
-                            onClick={() => { setIsClicked(!isClicked); moving(!isClicked) }}
-                            move={move}
-                        />
-
-                         <AnimatePresence>
-                            {isClicked && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                                >
-                                    <Commentbox
-                                        style={{left: `calc(316px + ${leftPos*0.4}px)`, top: "72%" ,width:`${leftPos*0.017}px`,height:`${leftPos*0.017}px`}}
-                                        isClicked={isClicked}
-                                        onMouseEnter={() => { setIsHovered(true); setmouseenter1(true) }}
-                                        onMouseLeave={() => { setIsHovered(false); setmouseenter1(false) }}
-                                    >
-                                        <AnimatePresence>
-                                            {mouseenter1 && divIndex === 2 ? (
-                                                <motion.img
-                                                    key="diamond"
-                                                    src={recbtn}
-                                                    alt="button"
-                                                    style={{width: "1.2vw", height: "1.2vw"}}
-
-                                                    // 등장 시: 회전 0°에서 바로 보이기
-                                                    initial={{ opacity: 1, rotate: 0 }}
-
-                                                    // 한 번만 45° 회전
-                                                    animate={{ rotate: 45, opacity: 1 }}
-
-                                                    // 사라질 때: 그 상태(45°) 그대로 페이드아웃
-                                                    exit={{ opacity: 0 }}
-
-                                                    transition={{
-                                                        // 회전에만 0.5초
-                                                        rotate: { duration: 0.5, ease: "easeInOut" },
-                                                        // 페이드아웃에만 0.3초
-                                                        opacity: { duration: 0.3, ease: "easeInOut" }
-                                                    }}
-                                                />
-                                            ) : (
-                                                mouseenter1 && (
-                                                    <motion.div
-                                                        key={divIndex}                           // divIndex가 바뀔 때마다 AnimatePresence가 새로 렌더
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        exit={{ opacity: 0 }}
-                                                        transition={{ duration: 0.5 }}           // 페이드 인/아웃 속도 (0.5초)
-                                                        style={{
-                                                            position: "absolute",
-                                                            top: 0,
-                                                            left: 0,
-                                                            width: "100%",
-                                                            height: "100%",
-                                                            display: "flex",
-                                                            justifyContent: "center",
-                                                            alignItems: "center"
-                                                        }}         // Commentbox 안에서 위치 조절이 필요하면 추가
-                                                    >
-                                                        {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
-                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{width: "1.2vw", height: "1.2vw"}}/>}
-
-                                                    </motion.div>
-
-                                                )
-                                            )}
-                                        </AnimatePresence>
-                                    </Commentbox>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                        {mouseenter1 && <div style={{position:"absolute",left:`calc(316px + ${leftPos*0.42}px)`,borderBottom:"3px solid black",width:`${leftPos*0.02}px`,height:"50px",top:"67%"}}></div>}
-                        {mouseenter1 && <Infobox1 style={{width:`${leftPos*0.13}px`,height:`${leftPos*0.04}px`,left:`calc(316px + ${leftPos*0.44}px)`}}>
-                            <Infobox1_sub>예술로서 섭식장애를
-                                이야기 하는 방법을
-                                찾아가고 있다.</Infobox1_sub>
-                        </Infobox1>}
-
-
-
+                        <img src={img2} style={{width:"100%",height:"100%"}}></img>
                         <AnimatePresence>
-                            {isClicked && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                        {isClicked && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            >
+                                <Commentbox
+                                    style={{ left: "22%", top: "72%", width: `${leftPos * 0.017}px`, height: `${leftPos * 0.017}px` }}
+                                    isClicked={isClicked}
+                                    onMouseEnter={() => { setIsHovered(true); setmouseenter1(true) }}
+                                    onMouseLeave={() => { setIsHovered(false); setmouseenter1(false) }}
                                 >
-                                    <Commentbox
-                                        style={{left: `calc(316px + ${leftPos*0.68}px)`, top: "47%" ,width:`${leftPos*0.017}px`,height:`${leftPos*0.017}px`}}
-                                        isClicked={isClicked}
-                                        onMouseEnter={() => { setIsHovered(true); setmouseenter2(true) }}
-                                        onMouseLeave={() => { setIsHovered(false); setmouseenter2(false) }}
-                                    >
-                                        <AnimatePresence>
-                                            {mouseenter2 && divIndex === 2 ? (
-                                                <motion.img
-                                                    key="diamond"
-                                                    src={recbtn}
-                                                    alt="button"
-                                                    style={{width: "1.2vw", height: "1.2vw"}}
+                                    <AnimatePresence>
+                                        {mouseenter1 && divIndex === 2 ? (
+                                            <motion.img
+                                                key="diamond"
+                                                src={recbtn}
+                                                alt="button"
+                                                style={{ width: "1.2vw", height: "1.2vw" }}
 
-                                                    // 등장 시: 회전 0°에서 바로 보이기
-                                                    initial={{ opacity: 1, rotate: 0 }}
+                                                // 등장 시: 회전 0°에서 바로 보이기
+                                                initial={{ opacity: 1, rotate: 0 }}
 
-                                                    // 한 번만 45° 회전
-                                                    animate={{ rotate: 45, opacity: 1 }}
+                                                // 한 번만 45° 회전
+                                                animate={{ rotate: 45, opacity: 1 }}
 
-                                                    // 사라질 때: 그 상태(45°) 그대로 페이드아웃
+                                                // 사라질 때: 그 상태(45°) 그대로 페이드아웃
+                                                exit={{ opacity: 0 }}
+
+                                                transition={{
+                                                    // 회전에만 0.5초
+                                                    rotate: { duration: 0.5, ease: "easeInOut" },
+                                                    // 페이드아웃에만 0.3초
+                                                    opacity: { duration: 0.3, ease: "easeInOut" }
+                                                }}
+                                            />
+                                        ) : (
+                                            mouseenter1 && (
+                                                <motion.div
+                                                    key={divIndex}                           // divIndex가 바뀔 때마다 AnimatePresence가 새로 렌더
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
                                                     exit={{ opacity: 0 }}
+                                                    transition={{ duration: 0.5 }}           // 페이드 인/아웃 속도 (0.5초)
+                                                    style={{
+                                                        position: "absolute",
+                                                        top: 0,
+                                                        left: 0,
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "center",
+                                                        alignItems: "center"
+                                                    }}         // Commentbox 안에서 위치 조절이 필요하면 추가
+                                                >
+                                                    {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
+                                                    {divIndex === 1 && <img src={recbtn} alt="button" style={{ width: "1.2vw", height: "1.2vw" }} />}
 
-                                                    transition={{
-                                                        // 회전에만 0.5초
-                                                        rotate: { duration: 0.5, ease: "easeInOut" },
-                                                        // 페이드아웃에만 0.3초
-                                                        opacity: { duration: 0.3, ease: "easeInOut" }
-                                                    }}
-                                                />
-                                            ) : (
-                                                mouseenter2 && (
-                                                    <motion.div
-                                                        key={divIndex}                           // divIndex가 바뀔 때마다 AnimatePresence가 새로 렌더
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        exit={{ opacity: 0 }}
-                                                        transition={{ duration: 0.5 }}           // 페이드 인/아웃 속도 (0.5초)
-                                                        style={{
-                                                            position: "absolute",
-                                                            top: 0,
-                                                            left: 0,
-                                                            width: "100%",
-                                                            height: "100%",
-                                                            display: "flex",
-                                                            justifyContent: "center",
-                                                            alignItems: "center"
-                                                        }}         // Commentbox 안에서 위치 조절이 필요하면 추가
-                                                    >
-                                                        {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
-                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{width: "1.2vw", height: "1.2vw"}}/>}
+                                                </motion.div>
 
-                                                    </motion.div>
-
-                                                )
-                                            )}
-                                        </AnimatePresence>
-                                    </Commentbox>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                        {mouseenter2 && <div style={{position:"absolute",left:`calc(316px + ${leftPos*0.70}px)`,borderBottom:"3px solid black",width:`${leftPos*0.02}px`,height:"50px",top:"42%"}}></div>}
-                        {mouseenter2 && <Infobox2 style={{width:`${leftPos*0.17}px`,height:`${leftPos*0.03}px`,left:`calc(316px + ${leftPos*0.72}px)`}}>
-                            <Infobox2_sub>최근에 아이를 출산해 한 아이의 
-                                엄마가 되었다.</Infobox2_sub>
-                        </Infobox2>}
+                                            )
+                                        )}
+                                    </AnimatePresence>
+                                </Commentbox>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    {mouseenter1 && <div style={{ position: "absolute", left:"27.5%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "72%" }}></div>}
+                    {mouseenter1 && <Infobox1 style={{ width: `${leftPos * 0.13}px`, height: `${leftPos * 0.04}px`, left: "32%" }}>
+                        <Infobox1_sub>예술로서 섭식장애를
+                            이야기 하는 방법을
+                            찾아가고 있다.</Infobox1_sub>
+                    </Infobox1>}
 
 
-                        <AnimatePresence>
-                            {isClicked && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    <AnimatePresence>
+                        {isClicked && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            >
+                                <Commentbox
+                                    style={{ left: "98%", top: "38%", width: `${leftPos * 0.017}px`, height: `${leftPos * 0.017}px` }}
+                                    isClicked={isClicked}
+                                    onMouseEnter={() => { setIsHovered(true); setmouseenter2(true) }}
+                                    onMouseLeave={() => { setIsHovered(false); setmouseenter2(false) }}
                                 >
-                                    <Commentbox
-                                        style={{left: `calc(316px + ${leftPos*0.635}px)`, top: "21%" ,width:`${leftPos*0.017}px`,height:`${leftPos*0.017}px`}}
-                                        isClicked={isClicked}
-                                        onMouseEnter={() => { setIsHovered(true); setmouseenter3(true) }}
-                                        onMouseLeave={() => { setIsHovered(false); setmouseenter3(false) }}
-                                    >
-                                        <AnimatePresence>
-                                            {mouseenter3 && divIndex === 2 ? (
-                                                <motion.img
-                                                    key="diamond"
-                                                    src={recbtn}
-                                                    alt="button"
-                                                    style={{width: "1.2vw", height: "1.2vw"}}
+                                    <AnimatePresence>
+                                        {mouseenter2 && divIndex === 2 ? (
+                                            <motion.img
+                                                key="diamond"
+                                                src={recbtn}
+                                                alt="button"
+                                                style={{ width: "1.2vw", height: "1.2vw" }}
 
-                                                    // 등장 시: 회전 0°에서 바로 보이기
-                                                    initial={{ opacity: 1, rotate: 0 }}
+                                                // 등장 시: 회전 0°에서 바로 보이기
+                                                initial={{ opacity: 1, rotate: 0 }}
 
-                                                    // 한 번만 45° 회전
-                                                    animate={{ rotate: 45, opacity: 1 }}
+                                                // 한 번만 45° 회전
+                                                animate={{ rotate: 45, opacity: 1 }}
 
-                                                    // 사라질 때: 그 상태(45°) 그대로 페이드아웃
+                                                // 사라질 때: 그 상태(45°) 그대로 페이드아웃
+                                                exit={{ opacity: 0 }}
+
+                                                transition={{
+                                                    // 회전에만 0.5초
+                                                    rotate: { duration: 0.5, ease: "easeInOut" },
+                                                    // 페이드아웃에만 0.3초
+                                                    opacity: { duration: 0.3, ease: "easeInOut" }
+                                                }}
+                                            />
+                                        ) : (
+                                            mouseenter2 && (
+                                                <motion.div
+                                                    key={divIndex}                           // divIndex가 바뀔 때마다 AnimatePresence가 새로 렌더
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
                                                     exit={{ opacity: 0 }}
+                                                    transition={{ duration: 0.5 }}           // 페이드 인/아웃 속도 (0.5초)
+                                                    style={{
+                                                        position: "absolute",
+                                                        top: 0,
+                                                        left: 0,
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "center",
+                                                        alignItems: "center"
+                                                    }}         // Commentbox 안에서 위치 조절이 필요하면 추가
+                                                >
+                                                    {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
+                                                    {divIndex === 1 && <img src={recbtn} alt="button" style={{ width: "1.2vw", height: "1.2vw" }} />}
 
-                                                    transition={{
-                                                        // 회전에만 0.5초
-                                                        rotate: { duration: 0.5, ease: "easeInOut" },
-                                                        // 페이드아웃에만 0.3초
-                                                        opacity: { duration: 0.3, ease: "easeInOut" }
-                                                    }}
-                                                />
-                                            ) : (
-                                                mouseenter3 && (
-                                                    <motion.div
-                                                        key={divIndex}                           // divIndex가 바뀔 때마다 AnimatePresence가 새로 렌더
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        exit={{ opacity: 0 }}
-                                                        transition={{ duration: 0.5 }}           // 페이드 인/아웃 속도 (0.5초)
-                                                        style={{
-                                                            position: "absolute",
-                                                            top: 0,
-                                                            left: 0,
-                                                            width: "100%",
-                                                            height: "100%",
-                                                            display: "flex",
-                                                            justifyContent: "center",
-                                                            alignItems: "center"
-                                                        }}         // Commentbox 안에서 위치 조절이 필요하면 추가
-                                                    >
-                                                        {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
-                                                        {divIndex === 1 && <img src={recbtn} alt="button" style={{width: "1.2vw", height: "1.2vw"}}/>}
+                                                </motion.div>
 
-                                                    </motion.div>
+                                            )
+                                        )}
+                                    </AnimatePresence>
+                                </Commentbox>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    {mouseenter2 && <div style={{ position: "absolute", left: "103.5%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "38%" }}></div>}
+                    {mouseenter2 && <Infobox2 style={{ width: `${leftPos * 0.17}px`, height: `${leftPos * 0.03}px`, left: "108%" }}>
+                        <Infobox2_sub>최근에 아이를 출산해 한 아이의
+                            엄마가 되었다.</Infobox2_sub>
+                    </Infobox2>}
 
-                                                )
-                                            )}
-                                        </AnimatePresence>
-                                    </Commentbox>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                        {mouseenter3 && <div style={{position:"absolute",left:`calc(316px + ${leftPos*0.655}px)`,borderBottom:"3px solid black",width:`${leftPos*0.02}px`,height:"50px",top:"16%"}}></div>}
-                        {mouseenter3 && <Infobox3 style={{width:`${leftPos*0.08}px`,height:`${leftPos*0.02}px`,left:`calc(316px + ${leftPos*0.675}px)`}}>
-                            <Infobox3_sub>예술기획자로 일하고 있다.</Infobox3_sub>
-                        </Infobox3>}
+                    <AnimatePresence>
+                        {isClicked && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            >
+                                <Commentbox
+                                    style={{ left: "86%", top: "5%", width: `${leftPos * 0.017}px`, height: `${leftPos * 0.017}px` }}
+                                    isClicked={isClicked}
+                                    onMouseEnter={() => { setIsHovered(true); setmouseenter3(true) }}
+                                    onMouseLeave={() => { setIsHovered(false); setmouseenter3(false) }}
+                                >
+                                    <AnimatePresence>
+                                        {mouseenter3 && divIndex === 2 ? (
+                                            <motion.img
+                                                key="diamond"
+                                                src={recbtn}
+                                                alt="button"
+                                                style={{ width: "1.2vw", height: "1.2vw" }}
 
+                                                // 등장 시: 회전 0°에서 바로 보이기
+                                                initial={{ opacity: 1, rotate: 0 }}
 
+                                                // 한 번만 45° 회전
+                                                animate={{ rotate: 45, opacity: 1 }}
+
+                                                // 사라질 때: 그 상태(45°) 그대로 페이드아웃
+                                                exit={{ opacity: 0 }}
+
+                                                transition={{
+                                                    // 회전에만 0.5초
+                                                    rotate: { duration: 0.5, ease: "easeInOut" },
+                                                    // 페이드아웃에만 0.3초
+                                                    opacity: { duration: 0.3, ease: "easeInOut" }
+                                                }}
+                                            />
+                                        ) : (
+                                            mouseenter3 && (
+                                                <motion.div
+                                                    key={divIndex}                           // divIndex가 바뀔 때마다 AnimatePresence가 새로 렌더
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    exit={{ opacity: 0 }}
+                                                    transition={{ duration: 0.5 }}           // 페이드 인/아웃 속도 (0.5초)
+                                                    style={{
+                                                        position: "absolute",
+                                                        top: 0,
+                                                        left: 0,
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "center",
+                                                        alignItems: "center"
+                                                    }}         // Commentbox 안에서 위치 조절이 필요하면 추가
+                                                >
+                                                    {divIndex === 0 && <div style={{ width: "1vw", height: "1vw", backgroundColor: "black", borderRadius: "50%" }} />}
+                                                    {divIndex === 1 && <img src={recbtn} alt="button" style={{ width: "1.2vw", height: "1.2vw" }} />}
+
+                                                </motion.div>
+
+                                            )
+                                        )}
+                                    </AnimatePresence>
+                                </Commentbox>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    {mouseenter3 && <div style={{ position: "absolute", left: "91.5%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "5%" }}></div>}
+                    {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.08}px`, height: `${leftPos * 0.02}px`, left:"96%" }}>
+                        <Infobox3_sub>예술기획자로 일하고 있다.</Infobox3_sub>
+                    </Infobox3>}
                         
-                        
+                    </Personimg>
 
 
-            <Navigatebar onClick={() => {
-                            setpagestate("main"); setbtnclick([0, 0, 1, 0]); window.scrollTo({ top: 0, behavior: "smooth" });
-                        }}><text style={{position:"absolute",right:"2%"}}>고백, 들으러가기&nbsp;{`>`}</text></Navigatebar>
-                        
-                    </motion.div>
-                </AnimatePresence>
-            
+
+
+
+
+
+
+
+                </motion.div>
+                <Navigatebar onClick={() => {
+                    setpagestate("main"); setbtnclick([0, 0, 1, 0]); window.scrollTo({ top: 0, behavior: "smooth" });
+                }}><text style={{ position: "absolute", right: "1%" }}>고백, 들으러가기&nbsp;{`>`}</text></Navigatebar>
+            </AnimatePresence>
+
             {/* <ScrollContainer
                 ref={scrollRef}
                 onMouseDown={handleMouseDown}
@@ -728,7 +730,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
 
 }
 
-export default Leejinsolpage
+export default Leesunminpage
 
 
 const Container = styled.div`
@@ -756,7 +758,7 @@ const Overlay = styled.div`
 // 내비게이션 바 (기본 유지)
 const Navigatebar = styled.div`
 display: flex;
-width: 1605px;
+width: calc(100vw - 316px);
 height: 82px;
 align-items: center;
 justify-content:right;
@@ -814,8 +816,8 @@ const Discriptbar = styled.div`
     position: absolute;
     left: 22px;
     color: white;
-    top: 74%;
-    font-size: 1.6vw;
+    bottom: 1%;
+    font-size: 1.7vw;
     font-style: normal;
     font-weight: 600;
     line-height: 125%;
@@ -823,15 +825,14 @@ const Discriptbar = styled.div`
 `;
 
 // 이미지 스타일 (클릭했을 때 강조)
-const Personimg = styled.img`
-     left: ${({ left }) => `calc(316px + ${left*0.325}px)`};
-    width:30%;
-    height:75%;
+const Personimg = styled.div`
+     left: ${({ left }) => `calc(316px + ${left * 0.325}px)`};
+    width:29.426%;
+    aspect-ratio:594.66/754.14;
     position:absolute;
     transform-origin: top left;
     transform: ${({ move }) => `translateY(${move}px)`};
     opacity: ${({ isClicked }) => (isClicked ? 0.8 : 0.5)};
-    top: 25%;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
     &:hover {
@@ -882,7 +883,7 @@ line-height: 140%;
 const Infobox2 = styled.div`
 left: 1247px;
 position:absolute;
-top:47%;
+top:38%;
 background-color:yellow;
 width:244px;
 height:79px;
@@ -907,7 +908,7 @@ line-height: 140%;
 const Infobox3 = styled.div`
 left: 737px;
 position:absolute;
-top:21%;
+top:5%;
 width:294px;
 height:79px;
 display: flex;
