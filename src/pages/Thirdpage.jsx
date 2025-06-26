@@ -412,9 +412,9 @@ const SubtitleWrapper = styled.div`
 `;
 
 const Subtitle = styled.p`
-  font-size: 2vw; /* 크기 유지 */
-  line-height: 1.2; /* 줄 간격 축소 */
-  margin: 0; /* 줄 간격 제거 */
+  font-size: 2vw; 
+  line-height: 1.2; 
+  margin: 0; 
   text-align: center;
   color: #000;
   font-weight: 1000;

@@ -324,7 +324,7 @@ const Firstpage = () => {
 
 export default Firstpage;
 
-// 스타일 컴포넌트
+// 스타일 컴포넌트 - 사이드바 너비를 230px로 수정
 const Container = styled.div`
   width: 100%;
   font-family: "Gothic A1", sans-serif;
@@ -336,7 +336,7 @@ const Sidebar = styled.div`
   position: fixed;
   top: 95px;
   left: 0;
-  width: 296px;
+  width: 316px;
   height: calc(100vh - 95px);
   display: flex;
   flex-direction: column;
@@ -456,10 +456,10 @@ const LeftSide = styled.div`
 `;
 
 const LeftTitle = styled.div`
-  font-size: clamp(24px, 4vw, 32px);
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 800; /* Extra Bold */
   font-family: "Gothic A1", sans-serif;
-  padding: 10px 20px;
+  padding: 0px 20px;
   line-height: 1.4;
   text-align: left;
   width: 100%;
@@ -468,7 +468,7 @@ const LeftTitle = styled.div`
 
 const RightSide = styled.div`
   flex: 1;
-  padding: 30px 20px;
+  padding: 15px 20px;
   font-family: "Gothic A1", sans-serif;
   box-sizing: border-box;
   
@@ -478,8 +478,8 @@ const RightSide = styled.div`
 `;
 
 const ContentTitle = styled.h2`
-  font-size: clamp(18px, 3vw, 27px);
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 800; /* Extra Bold */
   font-family: "Gothic A1", sans-serif;
   margin: 0 0 20px 0;
   line-height: 1.8;
@@ -491,7 +491,8 @@ const ContentTitle = styled.h2`
 `;
 
 const Paragraph = styled.p`
-  font-size: clamp(14px, 2vw, 18px);
+  font-size: 26px;
+  font-weight: 400; /* Regular */
   font-family: "Gothic A1", sans-serif;
   line-height: 150%;
   margin-bottom: 15px;
@@ -504,12 +505,11 @@ const Paragraph = styled.p`
 `;
 
 const YoutubeWrapper = styled.div`
-  width: 100%;
+  width: 1246px;
+  height: 662px;
   margin: 20px 0;
-  max-width: 800px;
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%;
   
   iframe {
     position: absolute;
@@ -522,6 +522,9 @@ const YoutubeWrapper = styled.div`
   
   @media (max-width: 768px) {
     margin: 15px 0;
+    width: 100%;
+    height: auto;
+    padding-top: 56.25%; /* 모바일에서는 반응형 유지 */
   }
 `;
 
@@ -552,7 +555,7 @@ const BottomLink = styled.div`
 `;
 
 const LinkText = styled.div`
-  font-size: 40px;
+  font-size: 70px;
   font-weight: 600;
   font-family: "Gothic A1", sans-serif;
 `;
