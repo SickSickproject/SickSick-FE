@@ -336,7 +336,7 @@ const ArrowImage = styled.img`
     width: 89.31px;
     height: 75.55px;
     opacity: 1;
-    right: 0; /* 오른쪽 끝 기준으로 정렬 */
+    right: 0;
     
     @media (max-width: 1440px) {
       width: 80.38px;
@@ -368,7 +368,7 @@ const ArrowImage = styled.img`
     width: 89.31px;
     height: 75.55px;
     opacity: 0;
-    right: 0; /* 오른쪽 끝 기준으로 정렬 */
+    right: 0;
     
     @media (max-width: 1440px) {
       width: 80.38px;
@@ -403,6 +403,7 @@ const Container = styled.div`
   font-family: "Gothic A1", sans-serif;
   margin-top: 95px;
   position: relative;
+  overflow-x: auto;
 `;
 
 const Sidebar = styled.div`
@@ -494,6 +495,8 @@ const MobileTabMenu = styled.div`
   border-bottom: 2px solid #000;
   margin-bottom: 20px;
   font-family: "Gothic A1", sans-serif;
+  overflow-x: auto;
+  white-space: nowrap;
 `;
 
 const MobileTab = styled.div`
@@ -504,6 +507,7 @@ const MobileTab = styled.div`
   font-weight: ${props => props.active ? "600" : "400"};
   font-family: "Gothic A1", sans-serif;
   background-color: ${props => props.active ? "#FFFF00" : "white"};
+  min-width: 100px;
   
   &:not(:last-child) {
     border-right: 2px solid #000;
@@ -517,6 +521,7 @@ const MobileTab = styled.div`
   @media (max-width: 480px) {
     font-size: 14px;
     padding: 12px 8px;
+    min-width: 80px;
   }
 `;
 
@@ -524,10 +529,11 @@ const MainContent = styled.div`
   margin-left: ${props => props.isMobile ? '0' : '316px'};
   width: ${props => props.isMobile ? '100%' : 'calc(100vw - 316px)'};
   font-family: "Gothic A1", sans-serif;
-  overflow-x: hidden;
   position: relative;
   background-color: white;
   min-height: 100vh;
+  padding: 0 10px;
+  box-sizing: border-box;
   
   @media (max-width: 1440px) and (min-width: 769px) {
     margin-left: 280px;
@@ -548,11 +554,16 @@ const MainContent = styled.div`
     margin-left: 180px;
     width: calc(100vw - 180px);
   }
+  
+  @media (max-width: 768px) {
+    padding: 0 15px;
+  }
 `;
 
 const ContentWrapper = styled.div`
   width: 100%;
   font-family: "Gothic A1", sans-serif;
+  overflow-x: auto;
 `;
 
 const Section = styled.section`
@@ -561,6 +572,7 @@ const Section = styled.section`
   border-bottom: 1.5px solid #000000;
   scroll-margin-top: 95px;
   font-family: "Gothic A1", sans-serif;
+  min-width: 100%;
   
   &:last-child {
     border-bottom: none;
@@ -624,13 +636,15 @@ const LeftSide = styled.div`
 
 const LeftTitle = styled.div`
   font-size: 40px;
-  font-weight: 800; /* Extra Bold */
+  font-weight: 800;
   font-family: "Gothic A1", sans-serif;
   margin-left: 10px;
   line-height: 1.4;
   text-align: left;
   width: 100%;
   box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   
   @media (max-width: 1440px) and (min-width: 769px) {
     font-size: 36px;
@@ -661,7 +675,12 @@ const LeftTitle = styled.div`
     font-size: 24px;
     margin-left: 10px;
   }
-`;
+  
+  @media (max-width: 320px) {
+    font-size: 20px;
+    margin-left: 8px;
+  }
+`; 
 
 const RightSide = styled.div`
   flex: 1;
@@ -671,7 +690,7 @@ const RightSide = styled.div`
   box-sizing: border-box;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  min-width: 0; /* flex item이 축소될 수 있도록 */
+  min-width: 0;
   
   @media (max-width: 1440px) and (min-width: 769px) {
     margin-left: 20px;
@@ -694,19 +713,23 @@ const RightSide = styled.div`
   }
   
   @media (max-width: 768px) {
-    margin-left: 20px;
+    margin-left: 0;
     padding: 12px 15px;
   }
   
   @media (max-width: 480px) {
-    margin-left: 20px;
+    margin-left: 0;
     padding: 10px 12px;
+  }
+  
+  @media (max-width: 320px) {
+    padding: 8px 10px;
   }
 `;
 
 const ContentTitle = styled.h2`
   font-size: 32px;
-  font-weight: 800; /* Extra Bold */
+  font-weight: 800;
   font-family: "Gothic A1", sans-serif;
   margin: 0 0 20px 0;
   line-height: 1.8;
@@ -753,11 +776,16 @@ const ContentTitle = styled.h2`
     font-size: 18px;
     margin-bottom: 14px;
   }
+  
+  @media (max-width: 320px) {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
 `;
 
 const Paragraph = styled.p`
   font-size: 24px;
-  font-weight: 400; /* Regular */
+  font-weight: 400;
   font-family: "Gothic A1", sans-serif;
   line-height: 150%;
   margin-bottom: 15px;
@@ -798,6 +826,11 @@ const Paragraph = styled.p`
   @media (max-width: 480px) {
     font-size: 14px;
     margin-bottom: 11px;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 12px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -844,6 +877,13 @@ const BottomLinks = styled.div`
   width: 100%;
   border-top: 2px solid #000;
   font-family: "Gothic A1", sans-serif;
+  margin-left: -10px;
+  margin-right: -10px;
+  
+  @media (max-width: 768px) {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 `;
 
 const BottomLink = styled.div`
@@ -854,6 +894,7 @@ const BottomLink = styled.div`
   border-bottom: 2px solid #000;
   cursor: pointer;
   font-family: "Gothic A1", sans-serif;
+  overflow-x: auto;
   
   @media (max-width: 1440px) {
     padding: 14px 18px;
@@ -872,11 +913,11 @@ const BottomLink = styled.div`
   }
   
   @media (max-width: 768px) {
-    padding: 12px 15px;
+    padding: 12px 25px;
   }
   
   @media (max-width: 480px) {
-    padding: 10px 12px;
+    padding: 10px 22px;
   }
   
   &:hover {
@@ -894,6 +935,7 @@ const LinkText = styled.div`
   font-size: 70px;
   font-weight: 600;
   font-family: "Gothic A1", sans-serif;
+  white-space: nowrap;
   
   @media (max-width: 1440px) {
     font-size: 60px;
@@ -910,6 +952,10 @@ const LinkText = styled.div`
   @media (max-width: 480px) {
     font-size: 32px;
   }
+  
+  @media (max-width: 320px) {
+    font-size: 28px;
+  }
 `;
 
 const LinkArrow = styled.div`
@@ -920,8 +966,9 @@ const LinkArrow = styled.div`
   display: flex;
   align-items: center;
   margin-right: 0px;
-  width: 89.31px; /* Arrow1과 동일한 크기로 설정 */
-  height: 75.55px; /* 이미지 높이 설정 */
+  width: 89.31px;
+  height: 75.55px;
+  flex-shrink: 0;
   
   @media (max-width: 1440px) {
     margin-right: 0px;
@@ -955,103 +1002,125 @@ const LinkArrow = styled.div`
 `;
 
 const Footer = styled.div`
-  width: 100%;
-  aspect-ratio: 1604/157;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+  margin-right: -10px;
+  min-height: 140px;
   background-color: black;
   position: relative;
-  padding: 20px 0;
+  padding: 30px 0;
   box-sizing: border-box;
   
   @media (max-width: 768px) {
-    aspect-ratio: 1/0.15;
-    padding: 15px 0;
+    min-height: 120px;
+    padding: 20px 0;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-right: -15px;
   }
   
   @media (max-width: 480px) {
+    min-height: 100px;
+    padding: 15px 0;
+  }
+  
+  @media (max-width: 320px) {
+    min-height: 90px;
     padding: 12px 0;
   }
 `;
 
 const Teaminfo = styled.div`
-  width: 20.1995%;
+  max-width: 300px;
   padding: 0 20px;
   color: white;
   font-family: "Gothic A1", sans-serif;
-  font-size: 1vw;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
   position: absolute;
   left: 0;
-  top: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   
   @media (max-width: 1440px) {
-    font-size: 1.2vw;
+    font-size: 16px;
     padding: 0 18px;
-    top: 18px;
   }
   
   @media (max-width: 1024px) {
-    font-size: 1.4vw;
+    font-size: 14px;
     padding: 0 16px;
-    top: 16px;
   }
   
   @media (max-width: 768px) {
-    font-size: 12px;
-    padding: 0 15px;
-    width: 60%;
-    top: 15px;
+    font-size: 13px;
+    padding: 0 25px;
+    max-width: 60%;
   }
   
   @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 0 12px;
-    width: 65%;
-    top: 12px;
+    font-size: 12px;
+    padding: 0 22px;
+    max-width: 65%;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 11px;
+    padding: 0 20px;
+    max-width: 70%;
   }
 `;
 
 const Teaminfo2 = styled.div`
-  width: 263.3277px;
-  left: 23%;
+  max-width: 300px;
+  left: 320px;
   color: #FFF;
   font-family: "Gothic A1", sans-serif;
-  font-size: 1vw;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
   position: absolute;
-  top: 20px;
+  top: 33%;
+  transform: translateY(-50%);
   padding: 0 20px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   
   @media (max-width: 1440px) {
-    font-size: 1.2vw;
-    left: 25%;
+    font-size: 16px;
     padding: 0 18px;
-    top: 18px;
+    left: 300px;
   }
   
   @media (max-width: 1024px) {
-    font-size: 1.4vw;
-    left: 27%;
+    font-size: 14px;
     padding: 0 16px;
-    top: 16px;
+    left: 280px;
   }
   
   @media (max-width: 768px) {
-    font-size: 12px;
-    left: 65%;
-    width: 30%;
-    padding: 0 15px;
-    top: 15px;
+    font-size: 13px;
+    left: 250px;
+    max-width: 150px;
+    padding: 0 25px;
   }
   
   @media (max-width: 480px) {
-    font-size: 10px;
-    left: 67%;
-    width: 30%;
-    padding: 0 12px;
-    top: 12px;
+    font-size: 12px;
+    left: 220px;
+    max-width: 120px;
+    padding: 0 22px;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 11px;
+    left: 200px;
+    max-width: 100px;
+    padding: 0 20px;
   }
 `;
