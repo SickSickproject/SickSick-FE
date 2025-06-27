@@ -379,24 +379,33 @@ const HeaderSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8vh 0 5vh; /* 여백 증가 */
+  padding: 100px 0 80px;
   
   @media (max-width: 768px) {
-    padding: 5vh 0 3vh;
+    padding: 60px 0 40px;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 5.5vw; /* 크기 증가 */
-  max-font-size: 80px;
-  font-weight: 1000;
-  margin-bottom: 4vh; /* 여백 증가 */
+  font-size: 100px;
+  font-weight: 800; /* Gothic A1 Extra Bold */
+  margin-bottom: 60px;
   text-align: center;
   color: #000;
   
+  @media (max-width: 1440px) {
+    font-size: 88px;
+    margin-bottom: 50px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 72px;
+    margin-bottom: 40px;
+  }
+  
   @media (max-width: 768px) {
-    font-size: 8vw;
-    margin-bottom: 2.5vh;
+    font-size: 56px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -404,90 +413,124 @@ const SubtitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 5vh; /* 여백 유지 */
+  margin-bottom: 20px;
   
   @media (max-width: 768px) {
-    margin-bottom: 3vh;
+    margin-bottom: 15px;
   }
 `;
 
 const Subtitle = styled.p`
-  font-size: 2vw; 
-  line-height: 1.2; 
-  margin: 0; 
+  font-size: 36px;
+  font-weight: 500; /* Gothic A1 Medium */
+  line-height: 1.3;
+  margin: 0;
+  margin-bottom: 8px;
   text-align: center;
   color: #000;
-  font-weight: 1000;
+  
+  @media (max-width: 1440px) {
+    font-size: 32px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 28px;
+  }
   
   @media (max-width: 768px) {
-    font-size: 3.5vw;
-    line-height: 1.2; /* 모바일에서도 줄 간격 축소 */
+    font-size: 24px;
+    margin-bottom: 6px;
   }
 `;
 
-// PlatesStrip은 원래 크기로 유지
 const PlatesStrip = styled.div`
   width: 100%;
+  max-width: 1920px;
   background-color: #232323;
-  padding: 6vh 0; /* 원래 패딩 유지 */
+  padding: 0;
   overflow: hidden;
   position: relative;
-  min-height: 180px; /* 명시적인 최소 높이 설정 */
+  height: 303px;
+  
+  @media (max-width: 1920px) {
+    max-width: 100%;
+  }
+  
+  @media (max-width: 1440px) {
+    height: 270px;
+  }
+  
+  @media (max-width: 1024px) {
+    height: 240px;
+  }
   
   @media (max-width: 768px) {
-    padding: 5vh 0;
-    min-height: 150px;
+    height: 200px;
   }
 `;
 
-// PlatesContainer만 수정하여 내용물이 짤리지 않도록 함
 const PlatesContainer = styled.div`
   width: 100%;
-  overflow: visible; /* overflow를 visible로 변경 */
+  overflow: visible;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 0; /* 상하 패딩 추가 */
-  height: auto; /* 자동 높이 지정 */
+  height: 303px;
+  padding: 0;
+  
+  @media (max-width: 1440px) {
+    height: 270px;
+  }
+  
+  @media (max-width: 1024px) {
+    height: 240px;
+  }
+  
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 `;
 
-// PlatesRow도 수정
 const PlatesRow = styled.div`
   display: flex;
   align-items: center;
-  width: 450%; /* 3개 세트 유지 */
+  width: 450%;
   animation: ${slideAnimation} 35s linear infinite;
-  height: auto; /* 내용물에 맞게 높이 조절 */
+  height: auto;
 `;
 
-// 접시 아이템 간격 조정
 const PlateItem = styled.div`
-  width: calc((100vw - 200px) / 6);
-  height: calc((100vw - 200px) / 6);
-  margin: 0 35px; /* 좌우 간격 증가 */
+  width: 220px;
+  height: 220px;
+  margin: 0 35px;
   flex-shrink: 0;
-  max-width: 170px;
-  max-height: 170px;
-  min-width: 90px;
-  min-height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
   
+  @media (max-width: 1440px) {
+    width: 190px;
+    height: 190px;
+    margin: 0 30px;
+  }
+  
+  @media (max-width: 1024px) {
+    width: 160px;
+    height: 160px;
+    margin: 0 25px;
+  }
+  
   @media (max-width: 768px) {
-    width: calc((100vw - 120px) / 3);
-    height: calc((100vw - 120px) / 3);
-    margin: 0 25px; /* 모바일에서도 간격 증가 */
-    max-width: 130px;
-    max-height: 130px;
+    width: 130px;
+    height: 130px;
+    margin: 0 20px;
   }
 `;
 
-// 접시 이미지 크기를 1.2배로 키움
 const PlateImage = styled.img`
-  width: 120%; /* 1.2배로 크기 증가 */
-  height: 120%; /* 1.2배로 크기 증가 */
+  width: 120%;
+  height: 120%;
   border-radius: 50%;
   object-fit: cover;
   background-color: white;
@@ -497,13 +540,13 @@ const PlateImage = styled.img`
 
 const DownArrowSection = styled.div`
   width: 100%;
-  padding: 5vh 0; /* 패딩 증가 */
+  padding: 50px 0px;
   display: flex;
   justify-content: center;
   background-color: #ffff00;
   
   @media (max-width: 768px) {
-    padding: 3vh 0;
+    padding: 40px 0;
   }
 `;
 
@@ -512,7 +555,7 @@ const DownArrowWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(1.2); /* 크기 증가 */
+  transform: scale(1.2);
   
   &:hover {
     transform: translateY(5px) scale(1.2);
@@ -521,62 +564,82 @@ const DownArrowWrapper = styled.div`
 `;
 
 const DownArrow = styled.img`
-  width: 2vw; /* 크기 증가 */
+  width: 48px;
   height: auto;
-  max-width: 60px;
-  min-width: 35px;
+  
+  @media (max-width: 1440px) {
+    width: 44px;
+  }
+  
+  @media (max-width: 1024px) {
+    width: 40px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 36px;
+  }
 `;
 
 const MainContent = styled.div`
-  width: 80%;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2vh 0 5vh; /* 패딩 증가 */
+  padding: 0 0 80px;
   
   @media (max-width: 768px) {
-    width: 90%;
-    padding: 1vh 0 4vh;
+    width: 95%;
+    padding: 0 0 60px;
   }
 `;
 
 const InputLabelBox = styled.div`
-  width: 40%;
   display: flex;
   justify-content: center;
-  margin-bottom: 3vh; /* 여백 증가 */
+  margin-bottom: 60px;
+  margin-top: 0px;
   
   @media (max-width: 768px) {
-    width: 60%;
-    margin-bottom: 2vh;
+    margin-bottom: 40px;
+    margin-top: 0px;
   }
 `;
 
 const InputLabel = styled.div`
-  font-size: 1.4vw; /* 크기 증가 */
-  font-weight: 1000;
-  padding: 0.8vh 1vw; /* 패딩 증가 */
+  font-size: 22px;
+  font-weight: 800; /* Gothic A1 Medium */
+  padding: 12px 20px;
   background-color: white;
-  border: 2px solid black;
-  display: inline-block;
+  border: 3px solid black;
   text-align: center;
+  white-space: nowrap;
+  
+  @media (max-width: 1440px) {
+    font-size: 20px;
+    padding: 11px 18px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 18px;
+    padding: 10px 16px;
+  }
   
   @media (max-width: 768px) {
-    font-size: 3vw;
-    padding: 0.5vh 2vw;
+    font-size: 16px;
+    padding: 9px 14px;
   }
 `;
 
 const FormInstructions = styled.div`
-  margin-bottom: 6vh; /* 여백 증가 */
+  margin-bottom: 80px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   
   @media (max-width: 768px) {
-    margin-bottom: 4vh;
+    margin-bottom: 60px;
   }
 `;
 
@@ -584,90 +647,130 @@ const InstructionWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5vh; /* 여백 증가 */
+  margin-bottom: 10px;
 `;
 
 const Instruction = styled.div`
-  font-size: 1.4vw; /* 크기 증가 */
+  font-size: 22px;
+  font-weight: 600; /* Gothic A1 Semibold */
   text-align: center;
-  font-weight: 500;
+  
+  @media (max-width: 1440px) {
+    font-size: 20px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
   
   @media (max-width: 768px) {
-    font-size: 3vw;
+    font-size: 16px;
   }
 `;
 
 const FormSection = styled.div`
   width: 100%;
-  margin-bottom: 6vh; /* 여백 증가 */
+  margin-bottom: 0px;
   display: flex;
-  justify-content: center; /* 가운데 정렬 추가 */
+  justify-content: center;
   
   @media (max-width: 768px) {
-    margin-bottom: 4vh;
+    margin-bottom: 30px;
   }
 `;
 
 const FormContainer = styled.div`
-  width: 90%;
+  width: 1420px;
+  max-width: 90vw;
+  height: 500px;
   background-color: white;
   border: 1px solid #000;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* 그림자 강화 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   position: relative;
-  min-height: 45vh; /* 높이를 1.5배로 증가 (기존 30vh의 1.5배) */
   display: flex;
   flex-direction: column;
   
+  @media (max-width: 1440px) {
+    width: 1200px;
+    height: 450px;
+  }
+  
+  @media (max-width: 1024px) {
+    width: 900px;
+    height: 400px;
+  }
+  
   @media (max-width: 768px) {
-    min-height: 40vh; /* 모바일에서도 높이 증가 */
+    width: 90vw;
+    height: 350px;
   }
 `;
 
 const FormHeader = styled.div`
-  color: #000; 
+  color: #000;
   display: flex;
   align-items: center;
-  padding: 2vh 2vw; 
-  font-size: 1.4vw; 
-  font-weight: 800; 
+  padding: 24px 32px;
+  font-size: 24px;
   position: relative;
   
+  @media (max-width: 1440px) {
+    font-size: 22px;
+    padding: 22px 30px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 20px;
+    padding: 20px 28px;
+  }
+  
   @media (max-width: 768px) {
-    padding: 1.5vh 3vw;
-    font-size: 3.5vw;
+    font-size: 18px;
+    padding: 18px 24px;
   }
 `;
 
 const WriterLabel = styled.div`
-  margin-right: 1vw;
+  margin-right: 16px;
+  font-weight: 800;
   
   @media (max-width: 768px) {
-    margin-right: 2vw;
+    margin-right: 14px;
   }
 `;
 
 const Divider = styled.span`
-  margin: 0 1.2vw; /* 간격 증가 */
+  margin: 0;
   color: #777;
-  
-  @media (max-width: 768px) {
-    margin: 0 2vw;
-  }
+  transform: translateY(4px);
 `;
 
 const WriterNameInput = styled.input`
-  color: #000; 
-  font-size: 1.4vw; 
-  font-weight: 600; 
+  color: #000;
+  font-size: 24px;
+  font-weight: 400;
   border: none;
   outline: none;
   background: transparent;
   padding: 0;
   margin: 0;
+  margin-left: 16px;
   
   @media (max-width: 768px) {
-    font-size: 3.5vw;
+    margin-left: 14px;
+  }
+  
+  @media (max-width: 1440px) {
+    font-size: 22px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 18px;
   }
   
   &:focus {
@@ -677,35 +780,57 @@ const WriterNameInput = styled.input`
 
 const WriterNameCount = styled.div`
   position: absolute;
-  right: 2vw;
-  font-size: 1vw;
+  right: 32px;
+  font-size: 16px;
   color: #777;
   
+  @media (max-width: 1440px) {
+    font-size: 15px;
+    right: 30px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 14px;
+    right: 28px;
+  }
+  
   @media (max-width: 768px) {
-    right: 3vw;
-    font-size: 2.5vw;
+    font-size: 13px;
+    right: 24px;
   }
 `;
 
 const FormTextarea = styled.textarea`
   width: 100%;
-  min-height: 18vh; 
-  padding: 2vh 2vw; 
+  min-height: 280px;
+  padding: 32px;
   border: none;
   resize: vertical;
   font-family: "Gothic A1", sans-serif;
-  font-size: 1.2vw; 
+  font-size: 24px;
   line-height: 1.6;
   margin: 0;
   box-sizing: border-box;
   display: block;
   color: ${props => props.isfocused === "true" ? "#000" : "#777"};
-  flex: 1; 
+  flex: 1;
+  
+  @media (max-width: 1440px) {
+    min-height: 260px;
+    padding: 30px;
+    font-size: 22px;
+  }
+  
+  @media (max-width: 1024px) {
+    min-height: 240px;
+    padding: 28px;
+    font-size: 20px;
+  }
   
   @media (max-width: 768px) {
-    min-height: 22vh;
-    padding: 1.5vh 3vw;
-    font-size: 3vw;
+    min-height: 220px;
+    padding: 24px;
+    font-size: 18px;
   }
   
   &:focus {
@@ -716,39 +841,69 @@ const FormTextarea = styled.textarea`
 
 const CharacterCount = styled.div`
   position: absolute;
-  bottom: 6.5vh; /* 위치 조정 */
-  right: 2vw; /* 위치 조정 */
-  font-size: 1vw;
+  bottom: 80px;
+  right: 32px;
+  font-size: 16px;
   color: #777;
   
+  @media (max-width: 1440px) {
+    bottom: 75px;
+    right: 30px;
+    font-size: 15px;
+  }
+  
+  @media (max-width: 1024px) {
+    bottom: 70px;
+    right: 28px;
+    font-size: 14px;
+  }
+  
   @media (max-width: 768px) {
-    bottom: 7vh;
-    right: 3vw;
-    font-size: 2.5vw;
+    bottom: 65px;
+    right: 24px;
+    font-size: 13px;
   }
 `;
 
 const FormDivider = styled.div`
-  width: calc(100% - 4vw);
+  width: calc(100% - 64px);
   height: 1px;
   background-color: #000;
-  margin: 0 2vw;
-  margin-top: auto; 
+  margin: 0 32px;
+  margin-top: auto;
+  
+  @media (max-width: 1440px) {
+    width: calc(100% - 60px);
+    margin: 0 30px auto 30px;
+  }
+  
+  @media (max-width: 1024px) {
+    width: calc(100% - 56px);
+    margin: 0 28px auto 28px;
+  }
   
   @media (max-width: 768px) {
-    width: calc(100% - 6vw);
-    margin: auto 3vw 0 3vw;
+    width: calc(100% - 48px);
+    margin: 0 24px auto 24px;
   }
 `;
 
 const SubmitButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end; /* 오른쪽 정렬로 변경 */
-  padding: 2vh 2vw;
+  justify-content: flex-end;
+  padding: 32px;
   margin: 0;
   
+  @media (max-width: 1440px) {
+    padding: 30px;
+  }
+  
+  @media (max-width: 1024px) {
+    padding: 28px;
+  }
+  
   @media (max-width: 768px) {
-    padding: 1.8vh 3vw;
+    padding: 24px;
   }
 `;
 
@@ -756,64 +911,85 @@ const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2vh 0;
-  background-color: transparent; /* 배경 투명 */
+  padding: 16px 0;
+  background-color: transparent;
   color: black;
-  border: none; /* 테두리 제거 */
-  font-size: 1.2vw;
+  border: none;
+  font-size: 24px;
   font-weight: 600;
   cursor: pointer;
   
+  @media (max-width: 1440px) {
+    font-size: 22px;
+    padding: 15px 0;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 20px;
+    padding: 14px 0;
+  }
+  
   @media (max-width: 768px) {
-    font-size: 3vw;
+    font-size: 18px;
+    padding: 12px 0;
   }
   
   &:hover {
-    opacity: 0.7; /* 호버 시 살짝 투명하게 */
+    opacity: 0.7;
   }
 `;
 
 const ButtonDot = styled.span`
-  width: 0.8vw;
-  height: 0.8vw;
-  min-width: 6px;
-  min-height: 6px;
+  width: 24px;
+  height: 24px;
   background-color: black;
   border-radius: 50%;
-  margin-right: 1vw;
+  margin-right: 16px;
   display: inline-block;
   
+  @media (max-width: 1440px) {
+    width: 22px;
+    height: 22px;
+    margin-right: 15px;
+  }
+  
+  @media (max-width: 1024px) {
+    width: 20px;
+    height: 20px;
+    margin-right: 14px;
+  }
+  
   @media (max-width: 768px) {
-    width: 1.5vw;
-    height: 1.5vw;
-    margin-right: 1.5vw;
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
   }
 `;
 
 const PlatesGridSection = styled.div`
   width: 100%;
-  margin: 7vh 0 3vh; /* 여백 증가 */
+  margin: 100px 0 60px;
   
   @media (max-width: 768px) {
-    margin: 5vh 0 3vh;
+    margin: 80px 0 50px;
   }
 `;
 
 const PlatesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3vw; /* 간격 증가 */
+  grid-template-columns: repeat(3, 546px);
+  gap: 40px;
   width: 100%;
-  justify-items: center;
+  justify-content: center;
   
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4vw; /* 간격 증가 */
+    grid-template-columns: repeat(2, 400px);
+    gap: 30px;
   }
   
   @media (max-width: 768px) {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 5vw; /* 간격 증가 */
+    grid-template-columns: repeat(1, 320px);
+    gap: 40px;
   }
 `;
 
@@ -823,14 +999,25 @@ const PlateGridItem = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  width: 100%;
-  aspect-ratio: 1/1; 
-  max-width: 330px; /* 크기 1.2배 증가 (220px × 1.5) */
+  width: 546px;
+  height: 546px;
+  
+  @media (max-width: 1440px) {
+    width: 480px;
+    height: 480px;
+  }
+  
+  @media (max-width: 1024px) {
+    width: 400px;
+    height: 400px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 320px;
+    height: 320px;
+  }
   
   &:hover {
-    transform: translateY(-8px); /* 효과 강화 */
-    
     > div {
       opacity: 1;
     }
@@ -843,7 +1030,7 @@ const PlateCircle = styled.img`
   border-radius: 50%;
   object-fit: cover;
   background-color: white;
-  border: 3px  #ffff00; /* 테두리 두께 증가 */
+  border: 3px solid #ffff00;
 `;
 
 const PlateMessageOverlay = styled.div`
@@ -867,11 +1054,11 @@ const PlateMessageOverlay = styled.div`
   &::after {
     content: '';
     position: absolute;
-    top: 7%;
-    left: 7%;
-    right: 7%;
-    bottom: 7%;
-    border: 1px solid #444;
+    top: 6.5%;
+    left: 6.5%;
+    right: 6.5%;
+    bottom: 6.5%;
+    border: 2px solid #444;
     border-radius: 50%;
     pointer-events: none;
   }
@@ -882,23 +1069,31 @@ const PlateMessageOverlay = styled.div`
 `;
 
 const PlateWriter = styled.div`
-  color: black; /* 글자색을 검정색으로 변경 */
-  font-size: 1.1vw;
+  color: black;
+  font-size: 20px;
   font-weight: 600;
   text-align: center;
   width: 100%;
   margin-bottom: auto;
   margin-top: 10%;
   
+  @media (max-width: 1440px) {
+    font-size: 19px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
+  
   @media (max-width: 768px) {
-    font-size: 3.5vw;
+    font-size: 17px;
     margin-top: 8%;
   }
 `;
 
 const PlateMessage = styled.div`
-  color: black; /* 글자색을 검정색으로 변경 */
-  font-size: 1vw;
+  color: black;
+  font-size: 20px;
   text-align: center;
   word-break: break-word;
   overflow: hidden;
@@ -908,22 +1103,38 @@ const PlateMessage = styled.div`
   max-height: 50%;
   width: 100%;
   
+  @media (max-width: 1440px) {
+    font-size: 19px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
+  
   @media (max-width: 768px) {
-    font-size: 3vw;
+    font-size: 17px;
     -webkit-line-clamp: 4;
   }
 `;
 
 const PlateDate = styled.div`
-  color: black; /* 글자색을 검정색으로 변경 */
-  font-size: 0.8vw;
+  color: black;
+  font-size: 18px;
   text-align: center;
   width: 100%;
   margin-top: auto;
   margin-bottom: 10%;
   
+  @media (max-width: 1440px) {
+    font-size: 17px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+  
   @media (max-width: 768px) {
-    font-size: 2.5vw;
+    font-size: 15px;
     margin-bottom: 8%;
   }
 `;
@@ -932,40 +1143,50 @@ const Pagination = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 4vh; /* 여백 증가 */
+  margin-top: 60px;
   flex-wrap: wrap;
   
   @media (max-width: 768px) {
-    margin-top: 3vh;
+    margin-top: 50px;
   }
 `;
 
 const PageNumber = styled.div`
-  width: 3vw; /* 크기 증가 */
-  height: 3vw;
-  min-width: 30px;
-  min-height: 30px;
-  max-width: 45px;
-  max-height: 45px;
+  width: 48px;
+  height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  margin: 0.8vh 0.8vw; /* 여백 증가 */
-  background-color: white;
-  border: 1px solid #000;
-  font-size: 1.2vw; /* 크기 증가 */
+  margin: 12px 16px;
+  background-color: #ffff00;
+  border: 2px solid #000;
+  font-size: 18px;
   cursor: pointer;
   
+  @media (max-width: 1440px) {
+    width: 44px;
+    height: 44px;
+    font-size: 17px;
+    margin: 11px 15px;
+  }
+  
+  @media (max-width: 1024px) {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    margin: 10px 14px;
+  }
+  
   @media (max-width: 768px) {
-    width: 9vw;
-    height: 9vw;
-    font-size: 3.5vw;
-    margin: 1.2vw;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    margin: 8px 12px;
   }
   
   &.active {
     background-color: #000;
-    color: #fff;
+    color: #ffff00;
   }
 `;

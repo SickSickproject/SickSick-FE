@@ -545,10 +545,6 @@ const BottomLink = styled.div`
   cursor: pointer;
   font-family: "Gothic A1", sans-serif;
   
-  &:hover {
-    background-color: #f5f5f5;
-  }
-  
   @media (max-width: 768px) {
     padding: 12px 15px;
   }
@@ -572,13 +568,6 @@ const LinkArrow = styled.div`
     width: 40px;
     height: 40px;
     transition: transform 0.3s ease;
-  }
-  
-  ${BottomLink}:hover & {
-    img {
-      transform: scaleX(1.5);
-      transform-origin: right;
-    }
   }
 `;
 
