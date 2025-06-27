@@ -741,9 +741,25 @@ const WriterLabel = styled.div`
 `;
 
 const Divider = styled.span`
-  margin: 0;
-  color: #777;
-  transform: translateY(4px);
+  margin: 0 12px;
+  color: solid #000000;
+  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  transform: scaleY(0.9) scaleX(0.9); /* 세로 70%, 가로 60%로 줄임 */
+  
+  @media (max-width: 1440px) {
+    font-size: 22px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 18px;
+    transform: scaleY(0.6) scaleX(0.5); /* 모바일에서는 더 얇고 짧게 */
+  }
 `;
 
 const WriterNameInput = styled.input`
@@ -755,7 +771,7 @@ const WriterNameInput = styled.input`
   background: transparent;
   padding: 0;
   margin: 0;
-  margin-left: 16px;
+  margin-left: 12px;
   
   @media (max-width: 768px) {
     margin-left: 14px;

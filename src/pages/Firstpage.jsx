@@ -365,33 +365,33 @@ const ArrowImage = styled.img`
   }
   
   &.arrow-hover {
-    width: 109.32px;
+    width: 89.31px;
     height: 75.55px;
     opacity: 0;
     right: 0; /* 오른쪽 끝 기준으로 정렬 */
     
     @media (max-width: 1440px) {
-      width: 98.39px;
+      width: 80.38px;
       height: 68px;
     }
     
     @media (max-width: 1200px) {
-      width: 87.46px;
+      width: 71.45px;
       height: 60.44px;
     }
     
     @media (max-width: 1024px) {
-      width: 76.53px;
+      width: 62.52px;
       height: 52.89px;
     }
     
     @media (max-width: 768px) {
-      width: 65.59px;
+      width: 53.59px;
       height: 45.33px;
     }
     
     @media (max-width: 480px) {
-      width: 54.66px;
+      width: 44.66px;
       height: 37.78px;
     }
   }
@@ -491,7 +491,7 @@ const SidebarBtn = styled.div`
 const MobileTabMenu = styled.div`
   display: flex;
   width: 100%;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #000;
   margin-bottom: 20px;
   font-family: "Gothic A1", sans-serif;
 `;
@@ -506,7 +506,7 @@ const MobileTab = styled.div`
   background-color: ${props => props.active ? "#FFFF00" : "white"};
   
   &:not(:last-child) {
-    border-right: 1px solid #000;
+    border-right: 2px solid #000;
   }
   
   &:hover {
@@ -558,7 +558,7 @@ const ContentWrapper = styled.div`
 const Section = styled.section`
   display: flex;
   flex-direction: ${props => props.isMobile ? 'column' : 'row'};
-  border-bottom: 1px solid #000;
+  border-bottom: 1.5px solid #000000;
   scroll-margin-top: 95px;
   font-family: "Gothic A1", sans-serif;
   
@@ -616,8 +616,8 @@ const LeftSide = styled.div`
     top: 20px;
     right: 0;
     bottom: 20px;
-    width: 1px;
-    background-color: #000;
+    width: 1.5px;
+    background-color: #000000;
     display: ${props => props.isMobile ? 'none' : 'block'};
   }
 `;
@@ -626,7 +626,7 @@ const LeftTitle = styled.div`
   font-size: 40px;
   font-weight: 800; /* Extra Bold */
   font-family: "Gothic A1", sans-serif;
-  padding: 0px 20px;
+  margin-left: 10px;
   line-height: 1.4;
   text-align: left;
   width: 100%;
@@ -634,36 +634,38 @@ const LeftTitle = styled.div`
   
   @media (max-width: 1440px) and (min-width: 769px) {
     font-size: 36px;
-    padding: 0px 18px;
+    margin-left: 10px;
   }
   
   @media (max-width: 1200px) and (min-width: 769px) {
     font-size: 32px;
-    padding: 0px 16px;
+    margin-left: 10px;
   }
   
   @media (max-width: 1024px) and (min-width: 769px) {
     font-size: 28px;
-    padding: 0px 14px;
+    margin-left: 10px;
   }
   
   @media (max-width: 900px) and (min-width: 769px) {
     font-size: 24px;
-    padding: 0px 12px;
+    margin-left: 10px;
   }
   
   @media (max-width: 768px) {
     font-size: 28px;
-    padding: 0px 15px;
+    margin-left: 10px;
   }
   
   @media (max-width: 480px) {
     font-size: 24px;
+    margin-left: 10px;
   }
 `;
 
 const RightSide = styled.div`
   flex: 1;
+  margin-left: 10px;
   padding: 15px 20px;
   font-family: "Gothic A1", sans-serif;
   box-sizing: border-box;
@@ -672,26 +674,32 @@ const RightSide = styled.div`
   min-width: 0; /* flex item이 축소될 수 있도록 */
   
   @media (max-width: 1440px) and (min-width: 769px) {
+    margin-left: 20px;
     padding: 14px 18px;
   }
   
   @media (max-width: 1200px) and (min-width: 769px) {
+    margin-left: 20px;
     padding: 13px 16px;
   }
   
   @media (max-width: 1024px) and (min-width: 769px) {
+    margin-left: 20px;
     padding: 12px 14px;
   }
   
   @media (max-width: 900px) and (min-width: 769px) {
+    margin-left: 20px;
     padding: 10px 12px;
   }
   
   @media (max-width: 768px) {
+    margin-left: 20px;
     padding: 12px 15px;
   }
   
   @media (max-width: 480px) {
+    margin-left: 20px;
     padding: 10px 12px;
   }
 `;
@@ -834,7 +842,7 @@ const BottomLinks = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-top: 1px solid #000;
+  border-top: 2px solid #000;
   font-family: "Gothic A1", sans-serif;
 `;
 
@@ -843,7 +851,7 @@ const BottomLink = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #000;
   cursor: pointer;
   font-family: "Gothic A1", sans-serif;
   
@@ -912,36 +920,36 @@ const LinkArrow = styled.div`
   display: flex;
   align-items: center;
   margin-right: 0px;
-  width: 109.32px; /* hover 상태 이미지의 최대 너비로 설정 */
+  width: 89.31px; /* Arrow1과 동일한 크기로 설정 */
   height: 75.55px; /* 이미지 높이 설정 */
   
   @media (max-width: 1440px) {
     margin-right: 0px;
-    width: 98.39px;
+    width: 80.38px;
     height: 68px;
   }
   
   @media (max-width: 1200px) {
     margin-right: 0px;
-    width: 87.46px;
+    width: 71.45px;
     height: 60.44px;
   }
   
   @media (max-width: 1024px) {
     margin-right: 0px;
-    width: 76.53px;
+    width: 62.52px;
     height: 52.89px;
   }
   
   @media (max-width: 768px) {
     margin-right: 0px;
-    width: 65.59px;
+    width: 53.59px;
     height: 45.33px;
   }
   
   @media (max-width: 480px) {
     margin-right: 0px;
-    width: 54.66px;
+    width: 44.66px;
     height: 37.78px;
   }
 `;
@@ -951,16 +959,22 @@ const Footer = styled.div`
   aspect-ratio: 1604/157;
   background-color: black;
   position: relative;
+  padding: 20px 0;
+  box-sizing: border-box;
   
   @media (max-width: 768px) {
     aspect-ratio: 1/0.15;
+    padding: 15px 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 12px 0;
   }
 `;
 
 const Teaminfo = styled.div`
   width: 20.1995%;
-  aspect-ratio: 324/100;
-  padding: 20px;
+  padding: 0 20px;
   color: white;
   font-family: "Gothic A1", sans-serif;
   font-size: 1vw;
@@ -969,35 +983,37 @@ const Teaminfo = styled.div`
   line-height: 140%;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 20px;
   
   @media (max-width: 1440px) {
     font-size: 1.2vw;
-    padding: 18px;
+    padding: 0 18px;
+    top: 18px;
   }
   
   @media (max-width: 1024px) {
     font-size: 1.4vw;
-    padding: 16px;
+    padding: 0 16px;
+    top: 16px;
   }
   
   @media (max-width: 768px) {
     font-size: 12px;
-    padding: 15px;
+    padding: 0 15px;
     width: 60%;
+    top: 15px;
   }
   
   @media (max-width: 480px) {
     font-size: 10px;
-    padding: 12px;
+    padding: 0 12px;
     width: 65%;
+    top: 12px;
   }
 `;
 
 const Teaminfo2 = styled.div`
-  top: 20px;
   width: 263.3277px;
-  height: 50px;
   left: 23%;
   color: #FFF;
   font-family: "Gothic A1", sans-serif;
@@ -1006,30 +1022,36 @@ const Teaminfo2 = styled.div`
   font-weight: 400;
   line-height: 140%;
   position: absolute;
+  top: 20px;
+  padding: 0 20px;
   
   @media (max-width: 1440px) {
     font-size: 1.2vw;
-    top: 18px;
     left: 25%;
+    padding: 0 18px;
+    top: 18px;
   }
   
   @media (max-width: 1024px) {
     font-size: 1.4vw;
-    top: 16px;
     left: 27%;
+    padding: 0 16px;
+    top: 16px;
   }
   
   @media (max-width: 768px) {
     font-size: 12px;
-    top: 15px;
     left: 65%;
     width: 30%;
+    padding: 0 15px;
+    top: 15px;
   }
   
   @media (max-width: 480px) {
     font-size: 10px;
-    top: 12px;
     left: 67%;
     width: 30%;
+    padding: 0 12px;
+    top: 12px;
   }
 `;
