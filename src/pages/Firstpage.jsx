@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import NavContext from "./Navcontext";
 import { useContext } from "react";
 import Arrow1 from "../assets/FirstPageimg/Arrow1.svg";
-
+import Arrow2 from "../assets/FirstPageimg/Arrow2.svg";
 
 const Firstpage = () => {
   const { setbtnclick } = useContext(NavContext);
@@ -26,7 +26,7 @@ const Firstpage = () => {
   }, []);
   
   const youtubeOpts = {
-    height: windowWidth <= 768 ? '200' : '390',
+    height: windowWidth <= 768 ? '200' : windowWidth <= 1024 ? '300' : windowWidth <= 1200 ? '350' : windowWidth <= 1440 ? '380' : '390',
     width: '100%',
     playerVars: {
       autoplay: 0,
@@ -167,11 +167,11 @@ const Firstpage = () => {
               <Paragraph>
                 우리는 모두 매일 끼니를 챙깁니다. 식구라는 말은 음식이 우리에게 무엇이나 소중하고<br/>
                 일상적임을 느낄 수 있는 친숙한 단어입니다. 그러나, 만약 우리가 더이상 즐겁게 식사를 할 수 없다면<br/>
-                우리 삶은 어떡해 변화할까요?
+                우리 삶은 어떻게 변화할까요?
               </Paragraph>
               
               <Paragraph>
-                섭식 장애는 음식 섭취에 어려움을 겪는 정신적, 사회적 질환을 말합니다. 대한민국에는 약 10만명의 사람들이<br/>
+                섭식 장애는 음식섭취에 어려움을 겪는 정신적, 사회적 질환을 말합니다. 대한민국에는 약 10만명의 사람들이<br/>
                 섭식장애로 어려움을 겪고 있다고 합니다. 하지만 공식적으로 집계되는 자료나 시스템이 없어, 잠재적으로는<br/>
                 얼마나 더 많은 사람들이 고통받고 있을지 모릅니다.
               </Paragraph>
@@ -258,10 +258,10 @@ const Firstpage = () => {
               </Paragraph>
 
               <Paragraph>
-              ❷ <u>사회의 낙착한 이해</u><br/>
+              ❷ <u>사회의 납작한 이해</u><br/>
               <strong>"다른 사람들처럼 우리(섭식장애 당사자)는 엄마도 됐다가 딸도 됐다가 또 환자도 됩니다.<br/>
               직업이 있을 수도 있고, 없을 수도 있죠. 다양한 역할과 정체성 속에서 자기의 삶을 살고 있어요."</strong><br/>
-              이진슬씨는 미디어의 틀에 박힌 이미지가 다양한 삶을 살아가는 이들을 포용하기에 너무나도 납작하다고<br/>
+              이진솔씨는 미디어의 틀에 박힌 이미지가 다양한 삶을 살아가는 이들을 포용하기에 너무나도 납작하다고<br/>
               이야기합니다. 미디어는 우리의 이야기를 포용할 준비가 되어있을까요? 몇가지 틀에 맞춘, 예컨대 마른 몸과<br/>
               같은 것들이 정작 당사자들이 스스로의 상태를 인지하는데에 어려움을 주고 있지 않는냐는 겁니다.
               </Paragraph>
@@ -277,8 +277,8 @@ const Firstpage = () => {
               ❹ <u>회복의 여정</u><br/>
               섭식장애는 적절한 치료를 받으면 크게 개선되거나 '회복'될 수 있다고 합니다. 이를 위해서는 섭식장애를 조기에<br/>
               발견하고 치료하는 것이 매우 중요합니다. 특히 사람마다 섭식장애의 원인이 다르기 때문에 관련 전문가와의<br/>
-              긴밀한 소통이 필요합니다. 우리나라에서도 섭식장애 관련 정보 제공, 지지집단 조직, 전문가 상담 등의 인프라가<br/>
-              조금씩 구축되고 있으나 아직 충분하지 않습니다. 섭식장애에 대한 사회의 관심과 적극적인 대응이 필요한<br/> 시점입니다.
+              긴밀한 소통이 필요합니다. 우리나라에서도 섭식장애 관련 정보 제공, 지지집단 조직, 전문가 상담 등의 인프라가 조금씩<br/>
+              구축되고 있으나 아직 충분하지 않습니다. 섭식장애에 대한 사회의 관심과 적극적인 대응이 필요한 시점입니다.
               </Paragraph>
             </RightSide>
           </Section>
@@ -288,19 +288,22 @@ const Firstpage = () => {
           <BottomLink onClick={() => {setbtnclick([0,1,0]); window.scrollTo({ top: 0}); handleNavigation("/main/two")}}>
             <LinkText>식식한 고백들</LinkText>
             <LinkArrow>
-              <img src={Arrow1} alt="arrow" />
+              <ArrowImage src={Arrow1} alt="arrow" className="arrow-default" />
+              <ArrowImage src={Arrow2} alt="arrow" className="arrow-hover" />
             </LinkArrow>
           </BottomLink>
           <BottomLink onClick={() => {setbtnclick([0,0,1]); window.scrollTo({ top: 0}); handleNavigation('/main/three');}}>
             <LinkText>식식한 연결하기</LinkText>
             <LinkArrow>
-              <img src={Arrow1} alt="arrow" />
+              <ArrowImage src={Arrow1} alt="arrow" className="arrow-default" />
+              <ArrowImage src={Arrow2} alt="arrow" className="arrow-hover" />
             </LinkArrow>
           </BottomLink>
           <BottomLink onClick={() => {window.scrollTo({ top: 0, behavior: "smooth" })}}>
             <LinkText>식식에 대하여</LinkText>
             <LinkArrow>
-              <img src={Arrow1} alt="arrow" />
+              <ArrowImage src={Arrow1} alt="arrow" className="arrow-default" />
+              <ArrowImage src={Arrow2} alt="arrow" className="arrow-hover" />
             </LinkArrow>
           </BottomLink>
         </BottomLinks>
@@ -324,7 +327,77 @@ const Firstpage = () => {
 
 export default Firstpage;
 
-// 스타일 컴포넌트 - 사이드바 너비를 230px로 수정
+// 스타일 컴포넌트들 - ArrowImage를 먼저 정의
+const ArrowImage = styled.img`
+  position: absolute;
+  transition: opacity 0.3s ease;
+  
+  &.arrow-default {
+    width: 89.31px;
+    height: 75.55px;
+    opacity: 1;
+    right: 0; /* 오른쪽 끝 기준으로 정렬 */
+    
+    @media (max-width: 1440px) {
+      width: 80.38px;
+      height: 68px;
+    }
+    
+    @media (max-width: 1200px) {
+      width: 71.45px;
+      height: 60.44px;
+    }
+    
+    @media (max-width: 1024px) {
+      width: 62.52px;
+      height: 52.89px;
+    }
+    
+    @media (max-width: 768px) {
+      width: 53.59px;
+      height: 45.33px;
+    }
+    
+    @media (max-width: 480px) {
+      width: 44.66px;
+      height: 37.78px;
+    }
+  }
+  
+  &.arrow-hover {
+    width: 109.32px;
+    height: 75.55px;
+    opacity: 0;
+    right: 0; /* 오른쪽 끝 기준으로 정렬 */
+    
+    @media (max-width: 1440px) {
+      width: 98.39px;
+      height: 68px;
+    }
+    
+    @media (max-width: 1200px) {
+      width: 87.46px;
+      height: 60.44px;
+    }
+    
+    @media (max-width: 1024px) {
+      width: 76.53px;
+      height: 52.89px;
+    }
+    
+    @media (max-width: 768px) {
+      width: 65.59px;
+      height: 45.33px;
+    }
+    
+    @media (max-width: 480px) {
+      width: 54.66px;
+      height: 37.78px;
+    }
+  }
+`;
+
+// 나머지 스타일 컴포넌트들
 const Container = styled.div`
   width: 100%;
   font-family: "Gothic A1", sans-serif;
@@ -342,10 +415,26 @@ const Sidebar = styled.div`
   flex-direction: column;
   background-color: white;
   z-index: 998;
+  
+  @media (max-width: 1440px) and (min-width: 769px) {
+    width: 280px;
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    width: 240px;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    width: 200px;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    width: 180px;
+  }
 `;
 
 const SidebarBtn = styled.div`
-  width: 296px;
+  width: calc(100% - 20px);
   background-color: ${props => props.active ? "#FFFF00" : "white"};
   position: relative;
   height: 52px;
@@ -357,6 +446,31 @@ const SidebarBtn = styled.div`
   padding-left: 19px;
   font-weight: ${props => props.active ? "600" : "400"};
   font-family: "Gothic A1", sans-serif;
+  box-sizing: border-box;
+  
+  @media (max-width: 1440px) and (min-width: 769px) {
+    font-size: 24px;
+    height: 48px;
+    padding-left: 16px;
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    font-size: 20px;
+    height: 44px;
+    padding-left: 14px;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    font-size: 18px;
+    height: 40px;
+    padding-left: 12px;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    font-size: 16px;
+    height: 36px;
+    padding-left: 10px;
+  }
   
   &:hover {
     background-color: #FFFF00;
@@ -399,6 +513,11 @@ const MobileTab = styled.div`
     background-color: #FFFF00;
     cursor: pointer;
   }
+  
+  @media (max-width: 480px) {
+    font-size: 14px;
+    padding: 12px 8px;
+  }
 `;
 
 const MainContent = styled.div`
@@ -409,6 +528,26 @@ const MainContent = styled.div`
   position: relative;
   background-color: white;
   min-height: 100vh;
+  
+  @media (max-width: 1440px) and (min-width: 769px) {
+    margin-left: 280px;
+    width: calc(100vw - 280px);
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    margin-left: 240px;
+    width: calc(100vw - 240px);
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    margin-left: 200px;
+    width: calc(100vw - 200px);
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    margin-left: 180px;
+    width: calc(100vw - 180px);
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -443,6 +582,34 @@ const LeftSide = styled.div`
   position: relative;
   margin-left: 0;
   
+  @media (max-width: 1440px) and (min-width: 769px) {
+    width: 260px;
+    min-width: 260px;
+    min-height: 280px;
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    width: 220px;
+    min-width: 220px;
+    min-height: 260px;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    width: 180px;
+    min-width: 180px;
+    min-height: 240px;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    width: 160px;
+    min-width: 160px;
+    min-height: 220px;
+  }
+  
+  @media (max-width: 768px) {
+    min-height: 120px;
+  }
+  
   &::after {
     content: "";
     position: absolute;
@@ -464,6 +631,35 @@ const LeftTitle = styled.div`
   text-align: left;
   width: 100%;
   box-sizing: border-box;
+  
+  @media (max-width: 1440px) and (min-width: 769px) {
+    font-size: 36px;
+    padding: 0px 18px;
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    font-size: 32px;
+    padding: 0px 16px;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    font-size: 28px;
+    padding: 0px 14px;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    font-size: 24px;
+    padding: 0px 12px;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 28px;
+    padding: 0px 15px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 const RightSide = styled.div`
@@ -471,9 +667,32 @@ const RightSide = styled.div`
   padding: 15px 20px;
   font-family: "Gothic A1", sans-serif;
   box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-width: 0; /* flex item이 축소될 수 있도록 */
+  
+  @media (max-width: 1440px) and (min-width: 769px) {
+    padding: 14px 18px;
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    padding: 13px 16px;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    padding: 12px 14px;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    padding: 10px 12px;
+  }
   
   @media (max-width: 768px) {
-    padding: 20px 15px;
+    padding: 12px 15px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 10px 12px;
   }
 `;
 
@@ -483,33 +702,104 @@ const ContentTitle = styled.h2`
   font-family: "Gothic A1", sans-serif;
   margin: 0 0 20px 0;
   line-height: 1.8;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   
-  @media (max-width: 768px) {
-    line-height: 1.5;
-    margin-bottom: 15px;
+  @media (max-width: 1440px) and (min-width: 769px) {
+    font-size: 28px;
+    margin-bottom: 18px;
+    line-height: 1.7;
   }
-`;
-
-const Paragraph = styled.p`
-  font-size: 26px;
-  font-weight: 400; /* Regular */
-  font-family: "Gothic A1", sans-serif;
-  line-height: 150%;
-  margin-bottom: 15px;
   
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) and (min-width: 769px) {
+    font-size: 24px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    font-size: 22px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    font-size: 20px;
+    margin-bottom: 15px;
+    line-height: 1.5;
     br {
       display: none;
     }
   }
+  
+  @media (max-width: 768px) {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    br {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+`;
+
+const Paragraph = styled.p`
+  font-size: 24px;
+  font-weight: 400; /* Regular */
+  font-family: "Gothic A1", sans-serif;
+  line-height: 150%;
+  margin-bottom: 15px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  
+  @media (max-width: 1440px) and (min-width: 769px) {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    font-size: 20px;
+    margin-bottom: 13px;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    font-size: 18px;
+    margin-bottom: 13px;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    font-size: 16px;
+    margin-bottom: 12px;
+    br {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 12px;
+    br {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-bottom: 11px;
+  }
 `;
 
 const YoutubeWrapper = styled.div`
-  width: 1246px;
-  height: 662px;
+  width: 100%;
+  max-width: 1246px;
   margin: 20px 0;
   position: relative;
   overflow: hidden;
+  aspect-ratio: 16/9;
   
   iframe {
     position: absolute;
@@ -520,11 +810,23 @@ const YoutubeWrapper = styled.div`
     border: none;
   }
   
+  @media (max-width: 1440px) {
+    max-width: 1000px;
+    margin: 18px 0;
+  }
+  
+  @media (max-width: 1024px) {
+    max-width: 800px;
+    margin: 16px 0;
+  }
+  
   @media (max-width: 768px) {
     margin: 15px 0;
-    width: 100%;
-    height: auto;
-    padding-top: 56.25%; /* 모바일에서는 반응형 유지 */
+    max-width: 100%;
+  }
+  
+  @media (max-width: 480px) {
+    margin: 12px 0;
   }
 `;
 
@@ -545,8 +847,38 @@ const BottomLink = styled.div`
   cursor: pointer;
   font-family: "Gothic A1", sans-serif;
   
+  @media (max-width: 1440px) {
+    padding: 14px 18px;
+  }
+  
+  @media (max-width: 1200px) and (min-width: 769px) {
+    padding: 13px 16px;
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    padding: 12px 14px;
+  }
+  
+  @media (max-width: 900px) and (min-width: 769px) {
+    padding: 10px 12px;
+  }
+  
   @media (max-width: 768px) {
     padding: 12px 15px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 10px 12px;
+  }
+  
+  &:hover {
+    .arrow-default {
+      opacity: 0;
+    }
+    
+    .arrow-hover {
+      opacity: 1;
+    }
   }
 `;
 
@@ -554,6 +886,22 @@ const LinkText = styled.div`
   font-size: 70px;
   font-weight: 600;
   font-family: "Gothic A1", sans-serif;
+  
+  @media (max-width: 1440px) {
+    font-size: 60px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 50px;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 40px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 32px;
+  }
 `;
 
 const LinkArrow = styled.div`
@@ -563,11 +911,38 @@ const LinkArrow = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  margin-right: 0px;
+  width: 109.32px; /* hover 상태 이미지의 최대 너비로 설정 */
+  height: 75.55px; /* 이미지 높이 설정 */
   
-  img {
-    width: 40px;
-    height: 40px;
-    transition: transform 0.3s ease;
+  @media (max-width: 1440px) {
+    margin-right: 0px;
+    width: 98.39px;
+    height: 68px;
+  }
+  
+  @media (max-width: 1200px) {
+    margin-right: 0px;
+    width: 87.46px;
+    height: 60.44px;
+  }
+  
+  @media (max-width: 1024px) {
+    margin-right: 0px;
+    width: 76.53px;
+    height: 52.89px;
+  }
+  
+  @media (max-width: 768px) {
+    margin-right: 0px;
+    width: 65.59px;
+    height: 45.33px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-right: 0px;
+    width: 54.66px;
+    height: 37.78px;
   }
 `;
 
@@ -576,6 +951,10 @@ const Footer = styled.div`
   aspect-ratio: 1604/157;
   background-color: black;
   position: relative;
+  
+  @media (max-width: 768px) {
+    aspect-ratio: 1/0.15;
+  }
 `;
 
 const Teaminfo = styled.div`
@@ -591,6 +970,28 @@ const Teaminfo = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  
+  @media (max-width: 1440px) {
+    font-size: 1.2vw;
+    padding: 18px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 1.4vw;
+    padding: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 15px;
+    width: 60%;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 12px;
+    width: 65%;
+  }
 `;
 
 const Teaminfo2 = styled.div`
@@ -605,4 +1006,30 @@ const Teaminfo2 = styled.div`
   font-weight: 400;
   line-height: 140%;
   position: absolute;
+  
+  @media (max-width: 1440px) {
+    font-size: 1.2vw;
+    top: 18px;
+    left: 25%;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 1.4vw;
+    top: 16px;
+    left: 27%;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 12px;
+    top: 15px;
+    left: 65%;
+    width: 30%;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 10px;
+    top: 12px;
+    left: 67%;
+    width: 30%;
+  }
 `;
