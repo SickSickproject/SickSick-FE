@@ -5,8 +5,6 @@ import YouTube from "react-youtube";
 import { useNavigate } from "react-router-dom";
 import NavContext from "./Navcontext";
 import { useContext } from "react";
-import Arrow1 from "../assets/FirstPageimg/Arrow1.svg";
-import Arrow2 from "../assets/FirstPageimg/Arrow2.svg";
 
 const Firstpage = () => {
   const { setbtnclick } = useContext(NavContext);
@@ -287,24 +285,15 @@ const Firstpage = () => {
         <BottomLinks>
           <BottomLink onClick={() => {setbtnclick([0,1,0]); window.scrollTo({ top: 0}); handleNavigation("/main/two")}}>
             <LinkText>식식한 고백들</LinkText>
-            <LinkArrow>
-              <ArrowImage src={Arrow1} alt="arrow" className="arrow-default" />
-              <ArrowImage src={Arrow2} alt="arrow" className="arrow-hover" />
-            </LinkArrow>
+            <CSSArrow className="css-arrow" />
           </BottomLink>
           <BottomLink onClick={() => {setbtnclick([0,0,1]); window.scrollTo({ top: 0}); handleNavigation('/main/three');}}>
             <LinkText>식식한 연결하기</LinkText>
-            <LinkArrow>
-              <ArrowImage src={Arrow1} alt="arrow" className="arrow-default" />
-              <ArrowImage src={Arrow2} alt="arrow" className="arrow-hover" />
-            </LinkArrow>
+            <CSSArrow className="css-arrow" />
           </BottomLink>
           <BottomLink onClick={() => {window.scrollTo({ top: 0, behavior: "smooth" })}}>
             <LinkText>식식에 대하여</LinkText>
-            <LinkArrow>
-              <ArrowImage src={Arrow1} alt="arrow" className="arrow-default" />
-              <ArrowImage src={Arrow2} alt="arrow" className="arrow-hover" />
-            </LinkArrow>
+            <CSSArrow className="css-arrow" />
           </BottomLink>
         </BottomLinks>
         
@@ -327,77 +316,7 @@ const Firstpage = () => {
 
 export default Firstpage;
 
-// 스타일 컴포넌트들 - ArrowImage를 먼저 정의
-const ArrowImage = styled.img`
-  position: absolute;
-  transition: opacity 0.3s ease;
-  
-  &.arrow-default {
-    width: 89.31px;
-    height: 75.55px;
-    opacity: 1;
-    right: 0;
-    
-    @media (max-width: 1440px) {
-      width: 80.38px;
-      height: 68px;
-    }
-    
-    @media (max-width: 1200px) {
-      width: 71.45px;
-      height: 60.44px;
-    }
-    
-    @media (max-width: 1024px) {
-      width: 62.52px;
-      height: 52.89px;
-    }
-    
-    @media (max-width: 768px) {
-      width: 53.59px;
-      height: 45.33px;
-    }
-    
-    @media (max-width: 480px) {
-      width: 44.66px;
-      height: 37.78px;
-    }
-  }
-  
-  &.arrow-hover {
-    width: 89.31px;
-    height: 75.55px;
-    opacity: 0;
-    right: 0;
-    
-    @media (max-width: 1440px) {
-      width: 80.38px;
-      height: 68px;
-    }
-    
-    @media (max-width: 1200px) {
-      width: 71.45px;
-      height: 60.44px;
-    }
-    
-    @media (max-width: 1024px) {
-      width: 62.52px;
-      height: 52.89px;
-    }
-    
-    @media (max-width: 768px) {
-      width: 53.59px;
-      height: 45.33px;
-    }
-    
-    @media (max-width: 480px) {
-      width: 44.66px;
-      height: 37.78px;
-    }
-  }
-`;
-
-// 나머지 스타일 컴포넌트들
+// 스타일 컴포넌트들
 const Container = styled.div`
   width: 100%;
   font-family: "Gothic A1", sans-serif;
@@ -920,13 +839,45 @@ const BottomLink = styled.div`
     padding: 10px 22px;
   }
   
-  &:hover {
-    .arrow-default {
-      opacity: 0;
+  /* 호버 시 화살표 shaft만 왼쪽으로 확장 */
+  &:hover div::before {
+    width: 80px; /* 기본 60px에서 80px로 확장 */
+  }
+  
+  /* 반응형에 맞춰 호버 효과도 조정 */
+  @media (max-width: 1440px) {
+    &:hover div::before {
+      width: 70px;
     }
-    
-    .arrow-hover {
-      opacity: 1;
+  }
+  
+  @media (max-width: 1200px) {
+    &:hover div::before {
+      width: 65px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    &:hover div::before {
+      width: 60px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    &:hover div::before {
+      width: 55px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    &:hover div::before {
+      width: 50px;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    &:hover div::before {
+      width: 45px;
     }
   }
 `;
@@ -958,46 +909,144 @@ const LinkText = styled.div`
   }
 `;
 
-const LinkArrow = styled.div`
-  font-size: clamp(16px, 2.5vw, 20px);
-  font-weight: bold;
-  font-family: "Gothic A1", sans-serif;
+const CSSArrow = styled.div`
   position: relative;
+  width: 120px;
+  height: 80px;
   display: flex;
   align-items: center;
-  margin-right: 0px;
-  width: 89.31px;
-  height: 75.55px;
+  justify-content: center;
   flex-shrink: 0;
   
+  /* 화살표 막대기 (shaft) */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 6px;
+    background-color: #000;
+    right: 20px;
+    transition: width 0.3s ease;
+  }
+  
+  /* 화살표 머리 (arrowhead) */
+  &::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-top: 6px solid #000;
+    border-right: 6px solid #000;
+    transform: rotate(45deg);
+    right: 20px;
+  }
+  
   @media (max-width: 1440px) {
-    margin-right: 0px;
-    width: 80.38px;
-    height: 68px;
+    width: 100px;
+    height: 70px;
+    
+    &::before {
+      width: 50px;
+      height: 5px;
+      right: 18px;
+    }
+    
+    &::after {
+      width: 25px;
+      height: 25px;
+      border-width: 5px;
+      right: 18px;
+    }
   }
   
   @media (max-width: 1200px) {
-    margin-right: 0px;
-    width: 71.45px;
-    height: 60.44px;
+    width: 90px;
+    height: 65px;
+    
+    &::before {
+      width: 45px;
+      height: 4.5px;
+      right: 15px;
+    }
+    
+    &::after {
+      width: 22px;
+      height: 22px;
+      border-width: 4.5px;
+      right: 15px;
+    }
   }
   
   @media (max-width: 1024px) {
-    margin-right: 0px;
-    width: 62.52px;
-    height: 52.89px;
+    width: 80px;
+    height: 60px;
+    
+    &::before {
+      width: 40px;
+      height: 4px;
+      right: 13px;
+    }
+    
+    &::after {
+      width: 20px;
+      height: 20px;
+      border-width: 4px;
+      right: 13px;
+    }
   }
   
   @media (max-width: 768px) {
-    margin-right: 0px;
-    width: 53.59px;
-    height: 45.33px;
+    width: 70px;
+    height: 50px;
+    
+    &::before {
+      width: 35px;
+      height: 3.5px;
+      right: 11px;
+    }
+    
+    &::after {
+      width: 17px;
+      height: 17px;
+      border-width: 3.5px;
+      right: 11px;
+    }
   }
   
   @media (max-width: 480px) {
-    margin-right: 0px;
-    width: 44.66px;
-    height: 37.78px;
+    width: 60px;
+    height: 45px;
+    
+    &::before {
+      width: 30px;
+      height: 3px;
+      right: 10px;
+    }
+    
+    &::after {
+      width: 15px;
+      height: 15px;
+      border-width: 3px;
+      right: 10px;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    width: 50px;
+    height: 40px;
+    
+    &::before {
+      width: 25px;
+      height: 2.5px;
+      right: 8px;
+    }
+    
+    &::after {
+      width: 12px;
+      height: 12px;
+      border-width: 2.5px;
+      right: 8px;
+    }
   }
 `;
 
