@@ -23,7 +23,10 @@ import Leejinsol from "../datas/LeejinsolVideoimg";
 import { TfiArrowCircleRight } from "react-icons/tfi";
 import { TfiArrowCircleLeft } from "react-icons/tfi";
 import closebtn from "../assets/Videoimg/closebtn.png"
-
+import leftnextbtn from "../assets/videonextbtn/L_DefaultWhite.svg"
+import righttnextbtn from "../assets/videonextbtn/R_DefaultWhite.svg"
+import leftnextbtnhover from "../assets/videonextbtn/L_HoverGray.svg"
+import rightnextbtnhover from "../assets/videonextbtn/R_HoverGray.svg"
 
 const Secondpage = () => {
 
@@ -61,6 +64,14 @@ const Secondpage = () => {
     const img2 = gridbtn
     const img3 = changebtn
     const img4 = closebtn
+
+    const img5 = leftnextbtn
+    const img6 = righttnextbtn
+    const img7 = leftnextbtnhover
+    const img8 = rightnextbtnhover
+
+    const [btnhoverleft, setbtnhoverleft] = useState(img5)
+    const [btnhoverright, setbtnhoverright] = useState(img6)
 
 
     const [btnclick, setbtnclick] = useState([1, 0, 0, 0])
@@ -230,10 +241,20 @@ const Secondpage = () => {
                     <YouTube opts={opts} videoId={overlayinfo.youtubeid}></YouTube>
                 </Mobilepage_youtube>
                 <Pagebtn onClick={() => { prevbtnclick() }} style={{ left: "816px", top: "708px", position: "absolute" }}>
-                    <TfiArrowCircleLeft style={{ width: "40px", height: "40px" }} />
+                    <img
+                        src={btnhoverleft}
+                        alt="Hover Image"
+                        onMouseEnter={() => setbtnhoverleft(img7)}
+                        onMouseLeave={() => setbtnhoverleft(img5)}
+                    />
                 </Pagebtn>
                 <Pagebtn onClick={() => { nextbtnclick() }} style={{ left: "860px", top: "708px", position: "absolute" }}>
-                    <TfiArrowCircleRight style={{ width: "40px", height: "40px" }} />
+                    <img
+                        src={btnhoverright}
+                        alt="Hover Image2"
+                        onMouseEnter={() => setbtnhoverright(img8)}
+                        onMouseLeave={() => setbtnhoverright(img6)}
+                    />
                 </Pagebtn>
             </Mobilepage>
         }
@@ -252,10 +273,20 @@ const Secondpage = () => {
                     <YouTube opts={opts2} videoId={overlayinfo.youtubeid}></YouTube>
                 </Tabletpage_youtube>
                 <Pagebtn onClick={() => { prevbtnclick() }} style={{ left: "1242px", top: "920px", position: "absolute" }}>
-                    <TfiArrowCircleLeft style={{ width: "40px", height: "40px" }} />
+                    <img
+                        src={btnhoverleft}
+                        alt="Hover Image"
+                        onMouseEnter={() => setbtnhoverleft(img7)}
+                        onMouseLeave={() => setbtnhoverleft(img5)}
+                    />
                 </Pagebtn>
                 <Pagebtn onClick={() => { nextbtnclick() }} style={{ left: "1286px", top: "920px", position: "absolute" }}>
-                    <TfiArrowCircleRight style={{ width: "40px", height: "40px" }} />
+                    <img
+                        src={btnhoverright}
+                        alt="Hover Image2"
+                        onMouseEnter={() => setbtnhoverright(img8)}
+                        onMouseLeave={() => setbtnhoverright(img6)}
+                    />
                 </Pagebtn>
             </Tabletpage>
         }
@@ -274,10 +305,20 @@ const Secondpage = () => {
                     <YouTube opts={opts2} videoId={overlayinfo.youtubeid}></YouTube>
                 </Desktoppage_youtube>
                 <Pagebtn onClick={() => { prevbtnclick() }} style={{ left: "1482px", top: "920px", position: "absolute" }}>
-                    <TfiArrowCircleLeft style={{ width: "40px", height: "40px" }} />
+                    <img
+                        src={btnhoverleft}
+                        alt="Hover Image"
+                        onMouseEnter={() => setbtnhoverleft(img7)}
+                        onMouseLeave={() => setbtnhoverleft(img5)}
+                    />
                 </Pagebtn>
                 <Pagebtn onClick={() => { nextbtnclick() }} style={{ left: "1526px", top: "920px", position: "absolute" }}>
-                    <TfiArrowCircleRight style={{ width: "40px", height: "40px" }} />
+                    <img
+                        src={btnhoverright}
+                        alt="Hover Image2"
+                        onMouseEnter={() => setbtnhoverright(img8)}
+                        onMouseLeave={() => setbtnhoverright(img6)}
+                    />
                 </Pagebtn>
             </Desktoppage>
         }
@@ -376,7 +417,7 @@ padding-top:95px;
 height:auto;
 background-color:white;
 font-family: Gothic A1;
-width: ${(props)=>(props.isMobile ? "708px" : "calc(100vw - 316px)")};
+width: ${(props) => (props.isMobile ? "708px" : "calc(100vw - 316px)")};
 `
 const Sidebar = styled.div`
 position:fixed;
