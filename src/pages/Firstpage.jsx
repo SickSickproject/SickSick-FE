@@ -158,12 +158,12 @@ const Firstpage = () => {
           {/* 첫 번째 섹션 */}
           <Section id="section1" ref={section1Ref} isMobile={isMobile}>
             <LeftSide isMobile={isMobile}>
-              <LeftTitle>식식(食食)에<br/>대하여</LeftTitle>
+              <LeftTitle>식식(食)에<br/>대하여</LeftTitle>
             </LeftSide>
             <RightSide isMobile={isMobile}>
               <ContentTitle>식식은 먹는 아픔을 겪는 모든 식구들을 지지합니다.</ContentTitle>
               <Paragraph>
-                우리는 모두 매일 끼니를 챙깁니다. 식구라는 말은 음식이 우리에게 무엇이나 소중하고<br/>
+                우리는 모두 매일 끼니를 해결합니다. 식구라는 말은 음식이 우리에게 무엇이나 소중하고<br/>
                 일상적임을 느낄 수 있는 친숙한 단어입니다. 그러나, 만약 우리가 더이상 즐겁게 식사를 할 수 없다면<br/>
                 우리 삶은 어떻게 변화할까요?
               </Paragraph>

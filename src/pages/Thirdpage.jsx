@@ -25,7 +25,7 @@ const Thirdpage = () => {
   // 텍스트 영역 상태 관리
   const [textValue, setTextValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const defaultText = "식식은 섭식장애에 그저 '이런 법이 있습니다'라고 고하지 않습니다. '함께' 할 수 있도록 공간을 마련하는 것, 그것이 바로 식식의 중점입니다. 섭식장애 문제에 함께 목소리를 내는 것이 어려운 일이 되지 않도록 '고백접시 돌리기'는 그런 생각에서 부터 시작하게 되었습니다. 세 명의 식구들로부터 온 접시를 전달 받은 순간부터, 당신도 우리의 식구!";
+  const defaultText = "식식은 섭식장애에 그저 '이런 병이 있습니다'에서 그치지 않습니다. '함께' 할 수 있도록 공간을 마련하는 것, 그것이 바로 식식의 종착점입니다. 섭식장애 문제에 함께 목소리를 내는 것이 어려운 일이 되지 않도록 '고백접시 돌리기'는 그런 생각에서 부터 시작하게 되었습니다. 세 명의 식구들로부터 온 접시를 전달 받은 순간부터, 당신도 우리의 식구!";
   
   // 등록된 메시지 관리
   const [registeredMessages, setRegisteredMessages] = useState([]);
@@ -272,10 +272,10 @@ const Thirdpage = () => {
         
         <FormInstructions>
           <InstructionWrapper>
-            <Instruction>❶ 고백접시 돌리기 버튼을 누르면 응원의 메세지를 담긴다.</Instruction>
+            <Instruction>❶ 고백접시 돌리기 버튼을 눌러 응원의 메세지를 남긴다.</Instruction>
           </InstructionWrapper>
           <InstructionWrapper>
-            <Instruction>❷ 고백접시를 돌려 글을 읽어본다.</Instruction>
+            <Instruction>❷ 고백접시를 눌러 글을 읽어본다.</Instruction>
           </InstructionWrapper>
           <InstructionWrapper>
             <Instruction>❸ 든든한 마음과 함께 식식의 식구가 된다.</Instruction>
