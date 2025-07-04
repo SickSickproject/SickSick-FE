@@ -368,8 +368,8 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                             )}
                         </AnimatePresence>
                         {mouseenter3 && <div style={{ position: "absolute", left: "83%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "79%" }}></div>}
-                        {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.08}px`, height: `${leftPos * 0.02}px`, left: "86%" }}>
-                            <Infobox3_sub>예술기획자로 일하고 있다.</Infobox3_sub>
+                        {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.13}px`, height: `${leftPos * 0.05}px`, left: "86%" }}>
+                            <Infobox3_sub>'여기서는 진솔하게'라는 섭식장애 개인 유투브를 운영중이다.</Infobox3_sub>
                         </Infobox3>}
 
 
