@@ -365,7 +365,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     </AnimatePresence>
                     {mouseenter3 && <div style={{ position: "absolute", left: "58%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "77%" }}></div>}
                     {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.08}px`, height: `${leftPos * 0.02}px`, left:"63%" }}>
-                        <Infobox3_sub>예술기획자로 일하고 있다.</Infobox3_sub>
+                        <Infobox3_sub>2011년 가수로 데뷔했다.</Infobox3_sub>
                     </Infobox3>}
                         
                     </Personimg>
