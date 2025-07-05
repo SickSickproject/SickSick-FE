@@ -4,17 +4,14 @@ import Thirdpage from "../pages/Thirdpage.jsx";
 import Selectpage from "../pages/Selectpage.jsx";
 import Mainpage from "../pages/Mainpage.jsx";
 import VideoOverlaypage from "../pages/VideoOverlaypage.jsx";
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom"; // 👈 여기만 바꿈
 import AdminPage from "../pages/AdminPage.jsx"; 
 
-
-
-const routes = createBrowserRouter([
+const routes = createHashRouter([
   {
     path: "/admin",
     element: <AdminPage />,
   },
-  // 지도(메인)
   {
     path: "/",
     element: <Selectpage />,
@@ -22,7 +19,7 @@ const routes = createBrowserRouter([
   {
     path: "/main",
     element: <Mainpage />,
-    children:[
+    children: [
       {
         path: "one",
         element: <Firstpage />,
@@ -34,15 +31,13 @@ const routes = createBrowserRouter([
       {
         path: "three",
         element: <Thirdpage />,
-      },  
+      },
       {
         path: "overlay",
-        element: <VideoOverlaypage/>,
+        element: <VideoOverlaypage />,
       },
     ]
   }
- 
-  
 ]);
 
 export default routes;
