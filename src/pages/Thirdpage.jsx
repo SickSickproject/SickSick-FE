@@ -35,6 +35,31 @@ const Thirdpage = () => {
   const [clickedPlates, setClickedPlates] = useState({}); 
   const itemsPerPage = windowWidth <= 768 ? 3 : windowWidth <= 1024 ? 6 : 9; // 화면 크기에 따라 페이지당 아이템 수 조정
   
+  // localStorage에서 데이터 불러오기
+  useEffect(() => {
+    try {
+      const savedMessages = localStorage.getItem('confessionPlates');
+      if (savedMessages) {
+        const parsedMessages = JSON.parse(savedMessages);
+        setRegisteredMessages(parsedMessages);
+      }
+    } catch (error) {
+      console.error('localStorage에서 데이터를 불러오는 중 오류 발생:', error);
+      // 오류 발생 시 빈 배열로 초기화
+      setRegisteredMessages([]);
+    }
+  }, []);
+  
+  // localStorage에 데이터 저장하는 함수
+  const saveToLocalStorage = (messages) => {
+    try {
+      localStorage.setItem('confessionPlates', JSON.stringify(messages));
+    } catch (error) {
+      console.error('localStorage에 데이터를 저장하는 중 오류 발생:', error);
+      alert('데이터 저장 중 오류가 발생했습니다. 브라우저 저장소를 확인해주세요.');
+    }
+  };
+  
   // 윈도우 크기 변경 감지
   useEffect(() => {
     const handleResize = () => {
@@ -100,7 +125,11 @@ const Thirdpage = () => {
       };
       
       // 새 메시지를 기존 메시지 배열에 추가
-      setRegisteredMessages([...registeredMessages, newMessage]);
+      const updatedMessages = [...registeredMessages, newMessage];
+      setRegisteredMessages(updatedMessages);
+      
+      // localStorage에 저장
+      saveToLocalStorage(updatedMessages);
       
       // 새 메시지 등록 시 첫 페이지로 이동 (최신 메시지가 첫 페이지에 표시됨)
       setCurrentPage(1);
