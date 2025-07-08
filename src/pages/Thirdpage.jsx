@@ -1,13 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-
-// 이미지 가져오기 (경로는 실제 위치에 맞게 수정해주세요)
+import { supabase } from "../SupabaseClient";
 import plate1 from "../assets/Achiveimg/plate4.svg";
 import plate2 from "../assets/Achiveimg/plate5.svg";
 import plate3 from "../assets/Achiveimg/plate6.svg";
 import downArrow from "../assets/Achiveimg/downArrow.png"; 
 
-// 애니메이션 정의 - 세 개의 세트를 위한 애니메이션
 const slideAnimation = keyframes`
   0% {
     transform: translateX(0);
@@ -33,34 +31,43 @@ const Thirdpage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [clickedPlates, setClickedPlates] = useState({}); 
+  const [isLoading, setIsLoading] = useState(false);
   const itemsPerPage = windowWidth <= 768 ? 3 : windowWidth <= 1024 ? 6 : 9; // 화면 크기에 따라 페이지당 아이템 수 조정
   
-  // localStorage에서 데이터 불러오기
+  // Supabase에서 데이터 불러오기
   useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  const fetchMessages = async () => {
     try {
-      const savedMessages = localStorage.getItem('confessionPlates');
-      if (savedMessages) {
-        const parsedMessages = JSON.parse(savedMessages);
-        setRegisteredMessages(parsedMessages);
+      setIsLoading(true);
+      const { data, error } = await supabase
+        .from('cheering')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('데이터 불러오기 오류:', error);
+        alert('데이터를 불러오는 중 오류가 발생했습니다.');
+      } else {
+        const transformedData = data.map(item => ({
+          id: item.id,
+          text: item.text,
+          writer: item.name || "익명",
+          plateType: item.plate_type || Math.floor(Math.random() * 3) + 1,
+          date: new Date(item.created_at).toISOString().split('T')[0] 
+        }));
+        setRegisteredMessages(transformedData);
       }
     } catch (error) {
-      console.error('localStorage에서 데이터를 불러오는 중 오류 발생:', error);
-      // 오류 발생 시 빈 배열로 초기화
-      setRegisteredMessages([]);
-    }
-  }, []);
-  
-  // localStorage에 데이터 저장하는 함수
-  const saveToLocalStorage = (messages) => {
-    try {
-      localStorage.setItem('confessionPlates', JSON.stringify(messages));
-    } catch (error) {
-      console.error('localStorage에 데이터를 저장하는 중 오류 발생:', error);
-      alert('데이터 저장 중 오류가 발생했습니다. 브라우저 저장소를 확인해주세요.');
+      console.error('데이터 불러오기 중 예외 발생:', error);
+      alert('데이터를 불러오는 중 오류가 발생했습니다.');
+    } finally {
+      setIsLoading(false);
     }
   };
   
-  // 윈도우 크기 변경 감지
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -72,27 +79,23 @@ const Thirdpage = () => {
     };
   }, []);
   
-  // 텍스트 입력 처리
   const handleTextChange = (e) => {
     const inputText = e.target.value;
-    // 180자 제한 적용 (공백 제외)
     const textWithoutSpaces = inputText.replace(/\s/g, "");
     if (textWithoutSpaces.length <= 180) {
       setTextValue(inputText);
     }
   };
   
-  // 작성자명 입력 처리 - 8자 제한 추가
   const handleWriterNameChange = (e) => {
     const inputName = e.target.value;
-    // 8자 제한 적용 (공백 제외)
     const nameWithoutSpaces = inputName.replace(/\s/g, "");
     if (nameWithoutSpaces.length <= 8) {
       setWriterName(inputName);
     }
   };
   
-  // 텍스트 영역 포커스 처리
+
   const handleFocus = () => {
     setIsFocused(true);
     if (!textValue) {
@@ -100,7 +103,7 @@ const Thirdpage = () => {
     }
   };
   
-  // 텍스트 영역 포커스 아웃 처리
+
   const handleBlur = () => {
     setIsFocused(false);
     if (!textValue.trim()) {
@@ -108,56 +111,68 @@ const Thirdpage = () => {
     }
   };
   
-  // 메시지 등록 처리
-  const handleRegisterMessage = () => {
-    if (textValue.trim()) {
-      // 현재 날짜 포맷팅 (YYYY-MM-DD)
-      const today = new Date();
-      const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-      
-      // 사용자 입력 텍스트가 있을 때만 메시지 등록
-      const newMessage = {
-        id: Date.now(), // 고유 ID
-        text: textValue,
-        writer: writerName !== "작성자명" ? writerName : "익명",
-        plateType: Math.floor(Math.random() * 3) + 1, // 1, 2, 3 중 랜덤 접시 타입
-        date: formattedDate // 등록 날짜 추가
-      };
-      
-      // 새 메시지를 기존 메시지 배열에 추가
-      const updatedMessages = [...registeredMessages, newMessage];
-      setRegisteredMessages(updatedMessages);
-      
-      // localStorage에 저장
-      saveToLocalStorage(updatedMessages);
-      
-      // 새 메시지 등록 시 첫 페이지로 이동 (최신 메시지가 첫 페이지에 표시됨)
-      setCurrentPage(1);
-      
-      // 입력 폼 초기화
-      setTextValue("");
-      if (writerName !== "작성자명") {
-        setWriterName("작성자명");
-      }
-      alert("고백접시가 등록되었습니다!");
-    } else {
+  const handleRegisterMessage = async () => {
+    if (!textValue.trim()) {
       alert("메시지를 입력해주세요!");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      
+      const { data, error } = await supabase
+        .from('cheering')
+        .insert([
+          {
+            name: writerName !== "작성자명" ? writerName : "익명",
+            text: textValue.trim(),
+            plate_type: Math.floor(Math.random() * 3) + 1 
+          }
+        ])
+        .select();
+
+      if (error) {
+        console.error('데이터 저장 오류:', error);
+        alert('메시지 저장 중 오류가 발생했습니다.');
+        return;
+      }
+
+      if (data && data.length > 0) {
+        const newMessage = {
+          id: data[0].id,
+          text: data[0].text,
+          writer: data[0].name || "익명",
+          plateType: data[0].plate_type,
+          date: new Date(data[0].created_at).toISOString().split('T')[0]
+        };
+        
+        setRegisteredMessages(prev => [newMessage, ...prev]);
+        
+        setCurrentPage(1);
+        
+        setTextValue("");
+        if (writerName !== "작성자명") {
+          setWriterName("작성자명");
+        }
+        
+        alert("고백접시가 등록되었습니다!");
+      }
+    } catch (error) {
+      console.error('메시지 저장 중 예외 발생:', error);
+      alert('메시지 저장 중 오류가 발생했습니다.');
+    } finally {
+      setIsLoading(false);
     }
   };
   
-  // 화살표 클릭 시 화살표가 화면 상단에 오도록 스크롤하는 함수
   const scrollToArrow = () => {
     if (arrowRef.current) {
-      // 화살표 요소의 위치 정보 가져오기
       const arrowRect = arrowRef.current.getBoundingClientRect();
       
-      // 현재 스크롤 위치에 화살표의 상대적 위치를 더해서 화살표의 절대 위치 계산
       const arrowPosition = window.scrollY + arrowRect.top;
       
-      // 헤더 높이를 고려한 오프셋 (navbar 높이)
       const offset = 95;
       
-      // 화살표가 화면 최상단에 오도록 스크롤
       window.scrollTo({
         top: arrowPosition - offset,
         behavior: 'smooth'
@@ -168,17 +183,17 @@ const Thirdpage = () => {
   const handlePlateClick = (messageId) => {
     setClickedPlates(prev => ({
       ...prev,
-      [messageId]: !prev[messageId] // 클릭된 상태를 토글
+      [messageId]: !prev[messageId]
     }));
   };
 
-  // 현재 페이지에 표시할 메시지 계산
   const getCurrentPageItems = () => {
-    // 최신 메시지가 먼저 오도록 배열을 역순으로 정렬
-    const reversedMessages = [...registeredMessages].reverse();
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return reversedMessages.slice(startIndex, endIndex);
+    return registeredMessages.slice(startIndex, endIndex).map((message, index) => ({
+      ...message,
+      plateType: ((startIndex + index) % 3) + 1
+    }));
   };
 
   // 총 페이지 수 계산
@@ -344,15 +359,17 @@ const Thirdpage = () => {
             <FormDivider />
             
             <SubmitButtonWrapper>
-              <SubmitButton onClick={handleRegisterMessage}>
+              <SubmitButton onClick={handleRegisterMessage} disabled={isLoading}>
                 <ButtonDot />
-                고백접시 돌리기
+                {isLoading ? "등록 중..." : "고백접시 돌리기"}
               </SubmitButton>
             </SubmitButtonWrapper>
           </FormContainer>
         </FormSection>
         
-        {registeredMessages.length > 0 && (
+        {isLoading && registeredMessages.length === 0 ? (
+          <LoadingMessage>메시지를 불러오는 중...</LoadingMessage>
+        ) : registeredMessages.length > 0 ? (
           <PlatesGridSection>
             <PlatesGrid windowWidth={windowWidth}>
             {getCurrentPageItems().map((message) => (
@@ -370,7 +387,7 @@ const Thirdpage = () => {
               ))}
             </PlatesGrid>
           </PlatesGridSection>
-        )}
+        ) : null}
         
         {registeredMessages.length > 0 && (
           <Pagination>
@@ -392,6 +409,7 @@ const Thirdpage = () => {
 
 export default Thirdpage;
 
+// 기존 스타일 컴포넌트들은 그대로 유지
 const Container = styled.div`
   width: 100%;
   height: auto;
@@ -982,6 +1000,11 @@ const SubmitButton = styled.button`
   &:hover {
     opacity: 0.7;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 const ButtonDot = styled.span`
@@ -1008,6 +1031,20 @@ const ButtonDot = styled.span`
     width: 18px;
     height: 18px;
     margin-right: 12px;
+  }
+`;
+
+const LoadingMessage = styled.div`
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin: 60px 0;
+  
+  @media (max-width: 768px) {
+    font-size: 20px;
+    margin: 40px 0;
   }
 `;
 
@@ -1115,50 +1152,53 @@ const PlateMessageOverlay = styled.div`
 
 const PlateWriter = styled.div`
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-align: center;
   width: 100%;
   margin-bottom: auto;
-  margin-top: 10%;
+  margin-top: 8%;
   
   @media (max-width: 1440px) {
-    font-size: 19px;
+    font-size: 17px;
   }
   
   @media (max-width: 1024px) {
-    font-size: 18px;
+    font-size: 16px;
   }
   
   @media (max-width: 768px) {
-    font-size: 17px;
-    margin-top: 8%;
+    font-size: 15px;
+    margin-top: 6%;
   }
 `;
 
 const PlateMessage = styled.div`
   color: black;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   word-break: break-word;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
-  max-height: 50%;
+  max-height: 60%;
   width: 100%;
+  line-height: 1.3;
   
   @media (max-width: 1440px) {
-    font-size: 19px;
+    font-size: 15px;
+    -webkit-line-clamp: 7;
   }
   
   @media (max-width: 1024px) {
-    font-size: 18px;
+    font-size: 14px;
+    -webkit-line-clamp: 6;
   }
   
   @media (max-width: 768px) {
-    font-size: 17px;
-    -webkit-line-clamp: 4;
+    font-size: 13px;
+    -webkit-line-clamp: 5;
   }
 `;
 
