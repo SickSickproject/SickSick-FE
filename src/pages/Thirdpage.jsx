@@ -6,6 +6,7 @@ import plate2 from "../assets/Achiveimg/plate5.svg";
 import plate3 from "../assets/Achiveimg/plate6.svg";
 import downArrow from "../assets/Achiveimg/downArrow.png"; 
 
+// 애니메이션 정의 - 세 개의 세트를 위한 애니메이션
 const slideAnimation = keyframes`
   0% {
     transform: translateX(0);
@@ -42,32 +43,42 @@ const Thirdpage = () => {
   const fetchMessages = async () => {
     try {
       setIsLoading(true);
+      console.log('메시지 불러오기 시작...');
+      
       const { data, error } = await supabase
         .from('cheering')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('데이터 불러오기 오류:', error);
-        alert('데이터를 불러오는 중 오류가 발생했습니다.');
+        console.error('데이터 불러오기 오류 상세:', error);
+        console.error('에러 메시지:', error.message);
+        console.error('에러 코드:', error.code);
+        alert(`데이터를 불러오는 중 오류가 발생했습니다: ${error.message}`);
       } else {
-        const transformedData = data.map(item => ({
+        console.log('불러온 데이터:', data);
+        
+        // Supabase 데이터를 기존 형태로 변환
+        const transformedData = data.map((item, index) => ({
           id: item.id,
           text: item.text,
           writer: item.name || "익명",
-          plateType: item.plate_type || Math.floor(Math.random() * 3) + 1,
-          date: new Date(item.created_at).toISOString().split('T')[0] 
+          plateType: (index % 3) + 1, // 순서대로 1, 2, 3 할당
+          date: new Date(item.created_at).toISOString().split('T')[0] // YYYY-MM-DD 형태로 변환
         }));
+        
+        console.log('변환된 데이터:', transformedData);
         setRegisteredMessages(transformedData);
       }
     } catch (error) {
       console.error('데이터 불러오기 중 예외 발생:', error);
-      alert('데이터를 불러오는 중 오류가 발생했습니다.');
+      alert(`데이터를 불러오는 중 오류가 발생했습니다: ${error.message || error}`);
     } finally {
       setIsLoading(false);
     }
   };
   
+  // 윈도우 크기 변경 감지
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -79,23 +90,27 @@ const Thirdpage = () => {
     };
   }, []);
   
+  // 텍스트 입력 처리
   const handleTextChange = (e) => {
     const inputText = e.target.value;
+    // 180자 제한 적용 (공백 제외)
     const textWithoutSpaces = inputText.replace(/\s/g, "");
     if (textWithoutSpaces.length <= 180) {
       setTextValue(inputText);
     }
   };
   
+  // 작성자명 입력 처리 - 8자 제한 추가
   const handleWriterNameChange = (e) => {
     const inputName = e.target.value;
+    // 8자 제한 적용 (공백 제외)
     const nameWithoutSpaces = inputName.replace(/\s/g, "");
     if (nameWithoutSpaces.length <= 8) {
       setWriterName(inputName);
     }
   };
   
-
+  // 텍스트 영역 포커스 처리
   const handleFocus = () => {
     setIsFocused(true);
     if (!textValue) {
@@ -103,7 +118,7 @@ const Thirdpage = () => {
     }
   };
   
-
+  // 텍스트 영역 포커스 아웃 처리
   const handleBlur = () => {
     setIsFocused(false);
     if (!textValue.trim()) {
@@ -111,6 +126,7 @@ const Thirdpage = () => {
     }
   };
   
+  // 메시지 등록 처리 - Supabase 연동
   const handleRegisterMessage = async () => {
     if (!textValue.trim()) {
       alert("메시지를 입력해주세요!");
@@ -120,36 +136,51 @@ const Thirdpage = () => {
     try {
       setIsLoading(true);
       
+      console.log('저장할 데이터:', {
+        name: writerName !== "작성자명" ? writerName.trim() : "익명",
+        text: textValue.trim()
+      });
+      
+      // Supabase에 데이터 저장 (plate_type 필드 제거)
       const { data, error } = await supabase
         .from('cheering')
         .insert([
           {
-            name: writerName !== "작성자명" ? writerName : "익명",
-            text: textValue.trim(),
-            plate_type: Math.floor(Math.random() * 3) + 1 
+            name: writerName !== "작성자명" ? writerName.trim() : "익명",
+            text: textValue.trim()
           }
         ])
         .select();
 
       if (error) {
-        console.error('데이터 저장 오류:', error);
-        alert('메시지 저장 중 오류가 발생했습니다.');
+        console.error('데이터 저장 오류 상세:', error);
+        console.error('에러 메시지:', error.message);
+        console.error('에러 코드:', error.code);
+        alert(`메시지 저장 중 오류가 발생했습니다: ${error.message}`);
         return;
       }
 
+      console.log('저장된 데이터:', data);
+
+      // 성공적으로 저장되면 새로운 메시지를 로컬 상태에도 추가
       if (data && data.length > 0) {
         const newMessage = {
           id: data[0].id,
           text: data[0].text,
           writer: data[0].name || "익명",
-          plateType: data[0].plate_type,
+          plateType: Math.floor(Math.random() * 3) + 1, // 로컬에서만 랜덤 생성
           date: new Date(data[0].created_at).toISOString().split('T')[0]
         };
         
+        console.log('로컬 상태에 추가할 메시지:', newMessage);
+        
+        // 새 메시지를 기존 메시지 배열의 맨 앞에 추가 (최신순)
         setRegisteredMessages(prev => [newMessage, ...prev]);
         
+        // 새 메시지 등록 시 첫 페이지로 이동
         setCurrentPage(1);
         
+        // 입력 폼 초기화
         setTextValue("");
         if (writerName !== "작성자명") {
           setWriterName("작성자명");
@@ -159,20 +190,25 @@ const Thirdpage = () => {
       }
     } catch (error) {
       console.error('메시지 저장 중 예외 발생:', error);
-      alert('메시지 저장 중 오류가 발생했습니다.');
+      alert(`메시지 저장 중 오류가 발생했습니다: ${error.message || error}`);
     } finally {
       setIsLoading(false);
     }
   };
   
+  // 화살표 클릭 시 화살표가 화면 상단에 오도록 스크롤하는 함수
   const scrollToArrow = () => {
     if (arrowRef.current) {
+      // 화살표 요소의 위치 정보 가져오기
       const arrowRect = arrowRef.current.getBoundingClientRect();
       
+      // 현재 스크롤 위치에 화살표의 상대적 위치를 더해서 화살표의 절대 위치 계산
       const arrowPosition = window.scrollY + arrowRect.top;
       
+      // 헤더 높이를 고려한 오프셋 (navbar 높이)
       const offset = 95;
       
+      // 화살표가 화면 최상단에 오도록 스크롤
       window.scrollTo({
         top: arrowPosition - offset,
         behavior: 'smooth'
@@ -183,15 +219,17 @@ const Thirdpage = () => {
   const handlePlateClick = (messageId) => {
     setClickedPlates(prev => ({
       ...prev,
-      [messageId]: !prev[messageId]
+      [messageId]: !prev[messageId] // 클릭된 상태를 토글
     }));
   };
 
+  // 현재 페이지에 표시할 메시지 계산 (이미 최신순으로 정렬되어 있음)
   const getCurrentPageItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return registeredMessages.slice(startIndex, endIndex).map((message, index) => ({
       ...message,
+      // 페이지 내에서 순서대로 접시 타입 배정 (1, 2, 3 순환)
       plateType: ((startIndex + index) % 3) + 1
     }));
   };
@@ -1129,24 +1167,24 @@ const PlateMessageOverlay = styled.div`
   align-items: center;
   opacity: ${props => props.isClicked ? 1 : 0};
   transition: opacity 0.3s ease;
-  padding: 10% 8%;
+  padding: 8% 6%;
   box-sizing: border-box;
   border: 1px solid grey;
   
   &::after {
     content: '';
     position: absolute;
-    top: 6.5%;
-    left: 6.5%;
-    right: 6.5%;
-    bottom: 6.5%;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
     border: 2px solid #444;
     border-radius: 50%;
     pointer-events: none;
   }
   
   @media (max-width: 768px) {
-    padding: 15% 10%;
+    padding: 10% 8%;
   }
 `;
 
@@ -1204,23 +1242,23 @@ const PlateMessage = styled.div`
 
 const PlateDate = styled.div`
   color: black;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   width: 100%;
   margin-top: auto;
-  margin-bottom: 10%;
+  margin-bottom: 8%;
   
   @media (max-width: 1440px) {
-    font-size: 17px;
+    font-size: 15px;
   }
   
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 14px;
   }
   
   @media (max-width: 768px) {
-    font-size: 15px;
-    margin-bottom: 8%;
+    font-size: 13px;
+    margin-bottom: 6%;
   }
 `;
 
