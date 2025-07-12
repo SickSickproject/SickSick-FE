@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { supabase } from "../SupabaseClient";
+
+// 이미지 가져오기 (경로는 실제 위치에 맞게 수정해주세요)
 import plate1 from "../assets/Achiveimg/plate4.svg";
 import plate2 from "../assets/Achiveimg/plate5.svg";
 import plate3 from "../assets/Achiveimg/plate6.svg";
@@ -1167,76 +1169,77 @@ const PlateMessageOverlay = styled.div`
   align-items: center;
   opacity: ${props => props.isClicked ? 1 : 0};
   transition: opacity 0.3s ease;
-  padding: 8% 6%;
+  padding: 8% 10%;
   box-sizing: border-box;
   border: 1px solid grey;
   
   &::after {
     content: '';
     position: absolute;
-    top: 5%;
-    left: 5%;
-    right: 5%;
-    bottom: 5%;
+    top: 6.5%;
+    left: 6.5%;
+    right: 6.5%;
+    bottom: 6.5%;
     border: 2px solid #444;
     border-radius: 50%;
     pointer-events: none;
   }
   
   @media (max-width: 768px) {
-    padding: 10% 8%;
+    padding: 10% 12%;
   }
 `;
 
 const PlateWriter = styled.div`
   color: black;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   text-align: center;
   width: 100%;
   margin-bottom: auto;
-  margin-top: 8%;
+  margin-top: 6%;
   
   @media (max-width: 1440px) {
-    font-size: 17px;
+    font-size: 19px;
   }
   
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 18px;
   }
   
   @media (max-width: 768px) {
-    font-size: 15px;
-    margin-top: 6%;
+    font-size: 17px;
+    margin-top: 5%;
   }
 `;
 
 const PlateMessage = styled.div`
   color: black;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   word-break: break-word;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 8;
+  -webkit-line-clamp: 12;
   -webkit-box-orient: vertical;
-  max-height: 60%;
+  max-height: 65%;
   width: 100%;
-  line-height: 1.3;
+  line-height: 1.4;
+  margin: 0 auto;
   
   @media (max-width: 1440px) {
-    font-size: 15px;
-    -webkit-line-clamp: 7;
+    font-size: 17px;
+    -webkit-line-clamp: 11;
   }
   
   @media (max-width: 1024px) {
-    font-size: 14px;
-    -webkit-line-clamp: 6;
+    font-size: 16px;
+    -webkit-line-clamp: 10;
   }
   
   @media (max-width: 768px) {
-    font-size: 13px;
-    -webkit-line-clamp: 5;
+    font-size: 15px;
+    -webkit-line-clamp: 8;
   }
 `;
 
@@ -1246,7 +1249,7 @@ const PlateDate = styled.div`
   text-align: center;
   width: 100%;
   margin-top: auto;
-  margin-bottom: 8%;
+  margin-bottom: 6%;
   
   @media (max-width: 1440px) {
     font-size: 15px;
@@ -1258,7 +1261,7 @@ const PlateDate = styled.div`
   
   @media (max-width: 768px) {
     font-size: 13px;
-    margin-bottom: 6%;
+    margin-bottom: 5%;
   }
 `;
 
