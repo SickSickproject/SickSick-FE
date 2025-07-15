@@ -89,7 +89,7 @@ const Leesunmin = [
         title:"만약, 아이가 성장하면서 섭식장애와 관련한 고민을 가지게 된다면?",
         stitle:"⑩ 아이와 섭식장애",
         time:"1분 9초",
-        youtubeid:"f09YYKaew0",
+        youtubeid:"-f09YYKaew0",
         id:9
     },
     {
