@@ -365,7 +365,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     </AnimatePresence>
                     {mouseenter3 && <div style={{ position: "absolute", left: "58%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "77%" }}></div>}
                     {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.08}px`, height: `${leftPos * 0.02}px`, left:"63%" }}>
-                        <Infobox3_sub>2011년 가수로 데뷔했다.</Infobox3_sub>
+                        <Infobox3_sub>2011년 가수로<br></br> 데뷔했다.</Infobox3_sub>
                     </Infobox3>}
                         
                     </Personimg>
@@ -731,7 +731,7 @@ export default Babarapage
 
 const Container = styled.div`
     width: calc(100vw - 316px);
-    height: calc(100vh - 95px);
+    height: calc(100vh - 95px - 82px);
     background-color: black;
     position: relative;
     overflow: hidden;
@@ -832,9 +832,10 @@ const Personimg = styled.div`
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
     &:hover {
-        transform: ${({ move }) => `translateY(${move}px) scale(1.1)`};
-        opacity: 0.8;
-    }
+    transform: ${({ move, isClicked }) => 
+      isClicked ? `translateY(${move}px) scale(1)` : `translateY(${move}px) scale(1.1)`};
+    opacity: ${({ isClicked }) => (isClicked ? 0.9 : 0.9)};
+  }
     
 `;
 

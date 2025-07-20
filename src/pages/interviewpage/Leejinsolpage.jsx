@@ -813,7 +813,7 @@ export default Leejinsolpage
 
 const Container = styled.div`
     width: calc(100vw - 316px);
-    height: calc(100vh - 95px);
+    height: calc(100vh - 95px - 82px);
     background-color: black;
     position: relative;
     overflow: hidden;
@@ -914,9 +914,10 @@ const Personimg = styled.div`
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
     &:hover {
-        transform: ${({ move }) => `translateY(${move}px) scale(1.1)`};
-        opacity: 0.8;
-    }
+    transform: ${({ move, isClicked }) => 
+      isClicked ? `translateY(${move}px) scale(1)` : `translateY(${move}px) scale(1.1)`};
+    opacity: ${({ isClicked }) => (isClicked ? 0.9 : 0.9)};
+  }
     
 `;
 
