@@ -269,6 +269,9 @@ const Thirdpage = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     
+    // 페이지 변경 시 클릭된 접시 상태 초기화
+    setClickedPlates({});
+    
     // 약간의 딜레이 후 스크롤 실행 (상태 업데이트 후)
     setTimeout(() => {
       if (formSectionRef.current) {
