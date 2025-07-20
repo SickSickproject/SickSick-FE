@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { supabase } from "../SupabaseClient";
+import { useLocation } from "react-router-dom";
 
 // 이미지 가져오기 (경로는 실제 위치에 맞게 수정해주세요)
 import plate1 from "../assets/Achiveimg/plate4.svg";
@@ -19,6 +20,8 @@ const slideAnimation = keyframes`
 `;
 
 const Thirdpage = () => {
+  const location = useLocation(); // 현재 위치 추적
+  
   // 화살표 ref와 폼 ref 생성
   const arrowRef = useRef(null);
   const formSectionRef = useRef(null);
@@ -40,6 +43,29 @@ const Thirdpage = () => {
   // Supabase에서 데이터 불러오기
   useEffect(() => {
     fetchMessages();
+  }, []);
+
+  // 페이지 경로가 변경될 때마다 접시 상태 초기화 (더 강력한 초기화)
+  useEffect(() => {
+    // 강제로 상태를 완전히 리셋
+    setClickedPlates({});
+    
+    // 약간의 지연을 두고 한 번 더 초기화 (혹시 모를 상태 동기화 문제 방지)
+    const timer = setTimeout(() => {
+      setClickedPlates({});
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  // 컴포넌트가 마운트될 때마다 클릭된 접시 상태 초기화
+  useEffect(() => {
+    setClickedPlates({});
+  }, []);
+
+  // 컴포넌트가 마운트될 때마다 클릭된 접시 상태 초기화
+  useEffect(() => {
+    setClickedPlates({});
   }, []);
 
   const fetchMessages = async () => {
@@ -219,10 +245,17 @@ const Thirdpage = () => {
   };
 
   const handlePlateClick = (messageId) => {
-    setClickedPlates(prev => ({
-      ...prev,
-      [messageId]: !prev[messageId] // 클릭된 상태를 토글
-    }));
+    console.log('접시 클릭됨:', messageId);
+    console.log('현재 clickedPlates 상태:', clickedPlates);
+    
+    setClickedPlates(prev => {
+      const newState = {
+        ...prev,
+        [messageId]: !prev[messageId] // 클릭된 상태를 토글
+      };
+      console.log('새로운 clickedPlates 상태:', newState);
+      return newState;
+    });
   };
 
   // 현재 페이지에 표시할 메시지 계산 (이미 최신순으로 정렬되어 있음)
@@ -265,6 +298,10 @@ const Thirdpage = () => {
     if (writerName === "작성자명") return 8;
     return 8 - writerName.replace(/\s/g, "").length;
   };
+
+  // 디버깅용 로그
+  console.log('Thirdpage 렌더링 - clickedPlates:', clickedPlates);
+  console.log('현재 location:', location.pathname);
 
   return (
     <Container>
@@ -379,7 +416,7 @@ const Thirdpage = () => {
                 isfocused={writerName !== "작성자명" ? "true" : "false"}
               />
               {writerName !== "작성자명" && (
-                <WriterNameCount>{getRemainingNameChars()}자 남음</WriterNameCount>
+                <WriterNameCount>*{getRemainingNameChars()}자 남음</WriterNameCount>
               )}
             </FormHeader>
             
@@ -393,7 +430,7 @@ const Thirdpage = () => {
             />
             
             {(isFocused || textValue) && (
-              <CharacterCount>{180 - textValue.replace(/\s/g, "").length}자 남음</CharacterCount>
+              <CharacterCount>*{180 - textValue.replace(/\s/g, "").length}자 남음</CharacterCount>
             )}
             
             <FormDivider />
