@@ -265,26 +265,15 @@ const Thirdpage = () => {
     }
   };
 
-  // 페이지 변경 핸들러 (스크롤 포함)
+  // 페이지 변경 핸들러
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     
     // 페이지 변경 시 클릭된 접시 상태 초기화
     setClickedPlates({});
     
-    // 약간의 딜레이 후 스크롤 실행 (상태 업데이트 후)
-    setTimeout(() => {
-      if (formSectionRef.current) {
-        const formRect = formSectionRef.current.getBoundingClientRect();
-        const formPosition = window.scrollY + formRect.top + formRect.height;
-        const offset = -50; // 폼 위쪽으로 더 올리기 (음수값)
-        
-        window.scrollTo({
-          top: formPosition + offset,
-          behavior: 'smooth'
-        });
-      }
-    }, 100); // 100ms 딜레이
+    // 페이지 제일 위로 즉시 이동 (애니메이션 없이)
+    window.scrollTo(0, 0);
   };
 
   // 작성자명 포커스 핸들러
