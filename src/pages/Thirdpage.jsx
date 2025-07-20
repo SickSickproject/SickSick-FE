@@ -503,7 +503,7 @@ const PlatesStrip = styled.div`
   padding: 0;
   overflow: hidden;
   position: relative;
-  height: 28.06vh;
+  height: 32vh;
 `;
 
 const PlatesContainer = styled.div`
@@ -513,7 +513,7 @@ const PlatesContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 28.06vh;
+  height: 32vh;
   padding: 0;
 `;
 
@@ -526,9 +526,9 @@ const PlatesRow = styled.div`
 `;
 
 const PlateItem = styled.div`
-  width: 11.46vw;
-  height: 20.37vh;
-  margin: 0 1.82vw;
+  width: 15vw;
+  height: 26.67vh;
+  margin: 0 1vw;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -536,8 +536,8 @@ const PlateItem = styled.div`
 `;
 
 const MovingPlateImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 15vw;
+  height: 15vw;
   border-radius: 50%;
   object-fit: contain;
   background-color: white;
@@ -592,7 +592,7 @@ const InputLabel = styled.div`
   font-weight: 800;
   padding: 1.11vh 1.04vw;
   background-color: white;
-  border: 3px solid black;
+  border: 1.5px solid black;
   text-align: center;
   white-space: nowrap;
 `;
@@ -807,8 +807,8 @@ const PlateGridItem = styled.div`
 `;
 
 const PlateCircle = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 28.44vw;
+  height: 28.44vw;
   border-radius: 50%;
   object-fit: contain;
   object-position: center;
@@ -819,10 +819,11 @@ const PlateCircle = styled.img`
 
 const PlateMessageOverlay = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28.44vw;
+  height: 28.44vw;
   border-radius: 50%;
   background-color: white;
   display: flex;
@@ -834,15 +835,16 @@ const PlateMessageOverlay = styled.div`
   padding: 8% 10%;
   box-sizing: border-box;
   border: 1px solid grey;
+  aspect-ratio: 1;
   
   &::after {
     content: '';
     position: absolute;
-    top: 6.5%;
-    left: 6.5%;
-    right: 6.5%;
-    bottom: 6.5%;
-    border: 2px solid #444;
+    top: 6.3%;
+    left: 6.3%;
+    right: 6.3%;
+    bottom: 6.3%;
+    border: 1.3px solid black;
     border-radius: 50%;
     pointer-events: none;
   }
@@ -850,7 +852,7 @@ const PlateMessageOverlay = styled.div`
 
 const PlateWriter = styled.div`
   color: black;
-  font-size: clamp(16px, 1.04vw, 20px);
+  font-size: clamp(14px, 0.9vw, 18px);
   font-weight: 600;
   text-align: center;
   width: 100%;
@@ -860,22 +862,22 @@ const PlateWriter = styled.div`
 
 const PlateMessage = styled.div`
   color: black;
-  font-size: clamp(14px, 0.94vw, 18px);
+  font-size: clamp(11px, 0.7vw, 14px);
   text-align: center;
   word-break: break-word;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 12;
+  -webkit-line-clamp: 14;
   -webkit-box-orient: vertical;
   max-height: 65%;
   width: 100%;
-  line-height: 1.4;
+  line-height: 1.3;
   margin: 0 auto;
 `;
 
 const PlateDate = styled.div`
   color: black;
-  font-size: clamp(12px, 0.83vw, 16px);
+  font-size: clamp(10px, 0.65vw, 13px);
   text-align: center;
   width: 100%;
   margin-top: auto;
@@ -899,7 +901,7 @@ const PageNumber = styled.div`
   border-radius: 50%;
   margin: 1.11vh 0.83vw;
   background-color: #ffff00;
-  border: 2px solid #000;
+  border: 1.5px solid black;
   font-size: 0.94vw;
   cursor: pointer;
   
