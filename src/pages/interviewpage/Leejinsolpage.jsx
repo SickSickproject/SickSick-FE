@@ -5,6 +5,10 @@ import leejinsoltitle from "../../assets/interview_title_img/title_Leejinsol.svg
 import leejinsolhoverimg from "../../assets/Hoverimg/leejinsolhoverimg.png";
 import { useRef, useEffect } from "react";
 import recbtn from "../../assets/changebtnimg/ractanglebtn.png"
+import comment1 from "../../assets/commentimg/진솔_코멘트1.svg"
+import comment2 from "../../assets/commentimg/진솔_코멘트2.svg"
+import comment3 from "../../assets/commentimg/진솔_코멘트3.svg"
+import comment4 from "../../assets/commentimg/진솔_코멘트4.svg"
 
 
 const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
@@ -217,10 +221,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                             )}
                         </AnimatePresence>
                         {mouseenter1 && <div style={{ position: "absolute", left: "32%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "53%" }}></div>}
-                        {mouseenter1 && <Infobox1 style={{ width: `${leftPos * 0.15}px`, height: `${leftPos * 0.04}px`, left: "35%" }}>
-                            <Infobox1_sub>논문 기재 이후 2024년 현재,
-                                박사과정을 지내고 있다.</Infobox1_sub>
-                        </Infobox1>}
+                        {mouseenter1 && <img src={comment4} style={{left:"35%",top:"53%",position:"absolute",width:"50%"}}></img>}
 
 
                         <AnimatePresence>
@@ -293,10 +294,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                             )}
                         </AnimatePresence>
                         {mouseenter2 && <div style={{ position: "absolute", left: "102%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "38%" }}></div>}
-                        {mouseenter2 && <Infobox2 style={{ width: `${leftPos * 0.13}px`, height: `${leftPos * 0.03}px`, left: "105%" }}>
-                            <Infobox2_sub>섭식장애에 대한
-                                논문을 기재한 바 있다.</Infobox2_sub>
-                        </Infobox2>}
+                        {mouseenter2 && <img src={comment3} style={{left:"105%",top:"38%",position:"absolute",width:"45%"}}></img>}
 
                         <AnimatePresence>
                             {isClicked && (
@@ -368,9 +366,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                             )}
                         </AnimatePresence>
                         {mouseenter3 && <div style={{ position: "absolute", left: "83%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "79%" }}></div>}
-                        {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.13}px`, height: `${leftPos * 0.05}px`, left: "86%" }}>
-                            <Infobox3_sub>'여기서는 진솔하게'라는 섭식장애 개인 유투브를 운영중이다.</Infobox3_sub>
-                        </Infobox3>}
+                        {mouseenter3 && <img src={comment2} style={{left:"86%",top:"79%",position:"absolute",width:"45%"}}></img>}
 
 
                         <AnimatePresence>
@@ -443,12 +439,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                             )}
                         </AnimatePresence>
                         {mouseenter4 && <div style={{ position: "absolute", left: "68%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "-1%" }}></div>}
-                        {mouseenter4 && <Infobox4 style={{ width: `${leftPos * 0.11}px`, height: `${leftPos * 0.02}px`, left: "71%" }}>
-                            <Infobox4_sub>
-                                섭식장애 상담자이자
-                                경험자이다.
-                            </Infobox4_sub>
-                        </Infobox4>}
+                        {mouseenter4 && <img src={comment1} style={{left:"71%",top:"-1%",position:"absolute",width:"40%"}}></img>}
 
                     </Personimg>
 
@@ -813,7 +804,7 @@ export default Leejinsolpage
 
 const Container = styled.div`
     width: calc(100vw - 316px);
-    height: calc(100vh - 95px);
+    height: calc(100vh - 95px - 82px);
     background-color: black;
     position: relative;
     overflow: hidden;
@@ -914,9 +905,10 @@ const Personimg = styled.div`
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
     &:hover {
-        transform: ${({ move }) => `translateY(${move}px) scale(1.1)`};
-        opacity: 0.8;
-    }
+    transform: ${({ move, isClicked }) => 
+      isClicked ? `translateY(${move}px) scale(1)` : `translateY(${move}px) scale(1.1)`};
+    opacity: ${({ isClicked }) => (isClicked ? 0.9 : 0.9)};
+  }
     
 `;
 

@@ -5,6 +5,10 @@ import leesunminhoverimg from "../../assets/Hoverimg/leesunminhoverimg.png";
 import leesunmintitle from "../../assets/interview_title_img/title_Leesunmin.svg"
 import { useRef, useEffect } from "react";
 import recbtn from "../../assets/changebtnimg/ractanglebtn.png"
+import comment1 from "../../assets/commentimg/선민_코멘트1.svg"
+import comment2 from "../../assets/commentimg/선민_코멘트2.svg"
+import comment3 from "../../assets/commentimg/선민_코멘트3.svg"
+
 
 
 const Leesunminpage = ({ setpagestate, setbtnclick }) => {
@@ -216,11 +220,9 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                         )}
                     </AnimatePresence>
                     {mouseenter1 && <div style={{ position: "absolute", left:"27.5%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "72%" }}></div>}
-                    {mouseenter1 && <Infobox1 style={{ width: `${leftPos * 0.13}px`, height: `${leftPos * 0.04}px`, left: "32%" }}>
-                        <Infobox1_sub>예술로서 섭식장애를
-                            이야기 하는 방법을
-                            찾아가고 있다.</Infobox1_sub>
-                    </Infobox1>}
+                    
+                     {mouseenter1 && <img src={comment3} style={{left:"32%",top:"72%",position:"absolute" ,width:"40%"}}></img>}
+                    
 
 
                     <AnimatePresence>
@@ -293,10 +295,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                         )}
                     </AnimatePresence>
                     {mouseenter2 && <div style={{ position: "absolute", left: "103.5%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "38%" }}></div>}
-                    {mouseenter2 && <Infobox2 style={{ width: `${leftPos * 0.17}px`, height: `${leftPos * 0.03}px`, left: "108%" }}>
-                        <Infobox2_sub>최근에 아이를 출산해 한 아이의
-                            엄마가 되었다.</Infobox2_sub>
-                    </Infobox2>}
+                    {mouseenter2 && <img src={comment2} style={{left:"108%",top:"38%",position:"absolute",width:"60%"}}></img>}
 
                     <AnimatePresence>
                         {isClicked && (
@@ -368,9 +367,7 @@ const Leesunminpage = ({ setpagestate, setbtnclick }) => {
                         )}
                     </AnimatePresence>
                     {mouseenter3 && <div style={{ position: "absolute", left: "91.5%", borderTop: "3px solid black", width: `${leftPos * 0.02}px`, height: "50px", top: "5%" }}></div>}
-                    {mouseenter3 && <Infobox3 style={{ width: `${leftPos * 0.08}px`, height: `${leftPos * 0.02}px`, left:"96%" }}>
-                        <Infobox3_sub>예술기획자로 일하고 있다.</Infobox3_sub>
-                    </Infobox3>}
+                    {mouseenter3 && <img src={comment1} style={{left:"96%",top:"5%",position:"absolute", width:"30%"}}></img>}
                         
                     </Personimg>
 
@@ -735,7 +732,7 @@ export default Leesunminpage
 
 const Container = styled.div`
     width: calc(100vw - 316px);
-    height: calc(100vh - 95px);
+    height: calc(100vh - 95px - 82px);
     background-color: black;
     position: relative;
     overflow: hidden;
@@ -836,9 +833,10 @@ const Personimg = styled.div`
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     cursor: pointer;
     &:hover {
-        transform: ${({ move }) => `translateY(${move}px) scale(1.1)`};
-        opacity: 0.8;
-    }
+    transform: ${({ move, isClicked }) => 
+      isClicked ? `translateY(${move}px) scale(1)` : `translateY(${move}px) scale(1.1)`};
+    opacity: ${({ isClicked }) => (isClicked ? 0.9 : 0.9)};
+  }
     
 `;
 
