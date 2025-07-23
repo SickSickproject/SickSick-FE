@@ -836,7 +836,9 @@ const SubmitButton = styled.button`
 
 const ButtonDot = styled.span`
   width: clamp(12px, 1.25vw, 18px);
-  height: clamp(20px, 2.22vh, 26px);
+  height: clamp(12px, 1.25vw, 18px);
+  min-width: 12px;
+  min-height: 12px;
   background-color: black;
   border-radius: 50%;
   margin-right: 0.83vw;
@@ -922,17 +924,19 @@ const PlateCircle = styled.img`
   object-fit: contain;
   object-position: center;
   background-color: white;
-  border: 3px solid #ffff00;
+  border: 0.2vw solid #ffff00;
   aspect-ratio: 1;
   
   @media (max-width: 768px) {
     width: 40vw;
     height: 40vw;
+    border: 0.25vw solid #ffff00;
   }
   
   @media (max-width: 480px) {
     width: 70vw;
     height: 70vw;
+    border: 0.4vw solid #ffff00;
   }
 `;
 
@@ -953,17 +957,19 @@ const PlateMessageOverlay = styled.div`
   transition: opacity 0.3s ease;
   padding: 10% 12%;
   box-sizing: border-box;
-  border: 1px solid grey;
+  border: 0.07vw solid grey;
   aspect-ratio: 1;
   
   @media (max-width: 768px) {
     width: 40vw;
     height: 40vw;
+    border: 0.1vw solid grey;
   }
   
   @media (max-width: 480px) {
     width: 70vw;
     height: 70vw;
+    border: 0.15vw solid grey;
   }
   
   &::after {
@@ -973,9 +979,17 @@ const PlateMessageOverlay = styled.div`
     left: 6.3%;
     right: 6.3%;
     bottom: 6.3%;
-    border: 1.3px solid black;
+    border: 0.1vw solid black;
     border-radius: 50%;
     pointer-events: none;
+    
+    @media (max-width: 768px) {
+      border: 0.13vw solid black;
+    }
+    
+    @media (max-width: 480px) {
+      border: 0.2vw solid black;
+    }
   }
 `;
 
