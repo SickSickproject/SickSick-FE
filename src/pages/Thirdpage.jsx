@@ -462,7 +462,7 @@ const Thirdpage = () => {
 
 export default Thirdpage;
 
-// 뷰포트 단위 기반 스타일 컴포넌트들
+// 개선된 반응형 스타일 컴포넌트들
 const Container = styled.div`
   width: 100vw;
   height: auto;
@@ -480,15 +480,30 @@ const HeaderSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 9.26vh 0 7.41vh;
+  padding: 8vh 0 6vh;
+  margin-top: 30px;
+  
+  @media (max-width: 768px) {
+    padding: 10vh 5vw 5vh;
+    margin-top: 40px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 8vh 5vw 4vh;
+    margin-top: 50px;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 5.21vw;
+  font-size: clamp(24px, 5.21vw, 60px);
   font-weight: 800;
   margin-bottom: 5.56vh;
   text-align: center;
   color: #000;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 4vh;
+  }
 `;
 
 const SubtitleWrapper = styled.div`
@@ -499,7 +514,7 @@ const SubtitleWrapper = styled.div`
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.88vw;
+  font-size: clamp(14px, 1.88vw, 22px);
   font-weight: 500;
   line-height: 1.3;
   margin: 0;
@@ -515,6 +530,10 @@ const PlatesStrip = styled.div`
   overflow: hidden;
   position: relative;
   height: 32vh;
+  
+  @media (max-width: 768px) {
+    height: 25vh;
+  }
 `;
 
 const PlatesContainer = styled.div`
@@ -526,6 +545,10 @@ const PlatesContainer = styled.div`
   justify-content: center;
   height: 32vh;
   padding: 0;
+  
+  @media (max-width: 768px) {
+    height: 25vh;
+  }
 `;
 
 const PlatesRow = styled.div`
@@ -537,18 +560,23 @@ const PlatesRow = styled.div`
 `;
 
 const PlateItem = styled.div`
-  width: 15vw;
+  width: clamp(80px, 15vw, 180px);
   height: 26.67vh;
   margin: 0 1vw;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    height: 20vh;
+    margin: 0 0.5vw;
+  }
 `;
 
 const MovingPlateImage = styled.img`
-  width: 15vw;
-  height: 15vw;
+  width: clamp(80px, 15vw, 180px);
+  height: clamp(80px, 15vw, 180px);
   border-radius: 50%;
   object-fit: contain;
   background-color: white;
@@ -579,16 +607,22 @@ const DownArrowWrapper = styled.div`
 `;
 
 const DownArrow = styled.img`
-  width: 2.5vw;
+  width: clamp(20px, 2.5vw, 40px);
   height: auto;
 `;
 
 const MainContent = styled.div`
-  width: 83.33vw;
+  width: min(83.33vw, 1200px);
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 0 7.41vh;
+  
+  @media (max-width: 768px) {
+    width: 90vw;
+    padding: 0 0 5vh;
+  }
 `;
 
 const InputLabelBox = styled.div`
@@ -596,10 +630,14 @@ const InputLabelBox = styled.div`
   justify-content: center;
   margin-bottom: 5.56vh;
   margin-top: 0;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 4vh;
+  }
 `;
 
 const InputLabel = styled.div`
-  font-size: 1.15vw;
+  font-size: clamp(12px, 1.15vw, 16px);
   font-weight: 800;
   padding: 1.11vh 1.04vw;
   background-color: white;
@@ -614,6 +652,10 @@ const FormInstructions = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 5vh;
+  }
 `;
 
 const InstructionWrapper = styled.div`
@@ -624,19 +666,25 @@ const InstructionWrapper = styled.div`
 `;
 
 const Instruction = styled.div`
-  font-size: 1.15vw;
+  font-size: clamp(12px, 1.15vw, 16px);
   font-weight: 600;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    padding: 0 2vw;
+  }
 `;
 
 const NumberImage = styled.img`
-  width: 1.15vw;
-  height: 2.04vh;
+  width: clamp(12px, 1.15vw, 18px);
+  height: clamp(18px, 2.04vh, 24px);
   margin-right: 0.63vw;
   vertical-align: middle;
+  flex-shrink: 0;
 `;
 
 const FormSection = styled.div`
@@ -647,8 +695,9 @@ const FormSection = styled.div`
 `;
 
 const FormContainer = styled.div`
-  width: 73.96vw;
+  width: min(80vw, 1000px);
   height: 46.30vh;
+  min-height: 400px;
   background-color: white;
   border: 1px solid #000;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -656,34 +705,41 @@ const FormContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  
+  @media (max-width: 768px) {
+    width: 92vw;
+    min-height: 350px;
+  }
 `;
 
 const FormHeader = styled.div`
   color: #000;
   display: flex;
   align-items: center;
-  padding: 2.22vh 1.67vw;
-  font-size: 1.25vw;
+  padding: 2.22vh clamp(12px, 1.67vw, 24px);
+  font-size: clamp(14px, 1.25vw, 18px);
   position: relative;
 `;
 
 const WriterLabel = styled.div`
   margin-right: 0.83vw;
   font-weight: 800;
+  flex-shrink: 0;
 `;
 
 const Divider = styled.span`
   margin: 0 0.63vw;
   color: solid #000000;
-  font-size: 1.25vw;
+  font-size: clamp(14px, 1.25vw, 18px);
   display: inline-flex;
   align-items: center;
   transform: scaleY(0.9) scaleX(0.9);
+  flex-shrink: 0;
 `;
 
 const WriterNameInput = styled.input`
   color: #000;
-  font-size: 1.25vw;
+  font-size: clamp(14px, 1.25vw, 18px);
   font-weight: 400;
   border: none;
   outline: none;
@@ -691,6 +747,8 @@ const WriterNameInput = styled.input`
   padding: 0;
   margin: 0;
   margin-left: 0.63vw;
+  flex: 1;
+  min-width: 0;
   
   &:focus {
     color: #000;
@@ -699,19 +757,20 @@ const WriterNameInput = styled.input`
 
 const WriterNameCount = styled.div`
   position: absolute;
-  right: 1.67vw;
-  font-size: 0.83vw;
+  right: clamp(12px, 1.67vw, 24px);
+  font-size: clamp(10px, 0.83vw, 14px);
   color: #777;
+  white-space: nowrap;
 `;
 
 const FormTextarea = styled.textarea`
   width: 100%;
   min-height: 25.93vh;
-  padding: 1.67vw;
+  padding: clamp(12px, 1.67vw, 24px);
   border: none;
   resize: vertical;
   font-family: "Gothic A1", sans-serif;
-  font-size: 1.25vw;
+  font-size: clamp(14px, 1.25vw, 18px);
   line-height: 1.6;
   margin: 0;
   box-sizing: border-box;
@@ -728,23 +787,27 @@ const FormTextarea = styled.textarea`
 const CharacterCount = styled.div`
   position: absolute;
   bottom: 7.41vh;
-  right: 1.67vw;
-  font-size: 0.83vw;
+  right: clamp(12px, 1.67vw, 24px);
+  font-size: clamp(10px, 0.83vw, 14px);
   color: #777;
+  
+  @media (max-width: 768px) {
+    bottom: 6vh;
+  }
 `;
 
 const FormDivider = styled.div`
-  width: calc(100% - 3.33vw);
+  width: calc(100% - clamp(24px, 3.34vw, 48px));
   height: 1px;
   background-color: #000;
-  margin: 0 1.67vw;
+  margin: 0 clamp(12px, 1.67vw, 24px);
   margin-top: auto;
 `;
 
 const SubmitButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 1.67vw;
+  padding: clamp(12px, 1.67vw, 24px);
   margin: 0;
 `;
 
@@ -756,9 +819,10 @@ const SubmitButton = styled.button`
   background-color: transparent;
   color: black;
   border: none;
-  font-size: 1.25vw;
+  font-size: clamp(14px, 1.25vw, 18px);
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
   
   &:hover {
     opacity: 0.7;
@@ -771,26 +835,39 @@ const SubmitButton = styled.button`
 `;
 
 const ButtonDot = styled.span`
-  width: 1.25vw;
-  height: 2.22vh;
+  width: clamp(12px, 1.25vw, 18px);
+  height: clamp(20px, 2.22vh, 26px);
   background-color: black;
   border-radius: 50%;
   margin-right: 0.83vw;
   display: inline-block;
+  flex-shrink: 0;
 `;
 
 const LoadingMessage = styled.div`
   width: 100%;
   text-align: center;
-  font-size: 1.25vw;
+  font-size: clamp(14px, 1.25vw, 18px);
   font-weight: 600;
   color: #000;
   margin: 5.56vh 0;
+  
+  @media (max-width: 768px) {
+    margin: 4vh 0;
+  }
 `;
 
 const PlatesGridSection = styled.div`
   width: 100%;
   margin: 9.26vh 0 5.56vh;
+  
+  @media (max-width: 768px) {
+    margin: 4vw 0 4vh;
+  }
+  
+  @media (max-width: 480px) {
+    margin: 6vw 0 4vh;  
+  }
 `;
 
 const PlatesGrid = styled.div`
@@ -799,6 +876,16 @@ const PlatesGrid = styled.div`
   gap: 2.08vw;
   width: 100%;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 40vw);
+    gap: 4vw;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 6vw;
+  }
 `;
 
 const PlateGridItem = styled.div`
@@ -808,7 +895,18 @@ const PlateGridItem = styled.div`
   position: relative;
   cursor: pointer;
   width: 28.44vw;
-  height: 50.56vh;
+  height: 28.44vw;
+  
+  @media (max-width: 768px) {
+    width: 40vw;
+    height: 40vw;
+  }
+  
+  @media (max-width: 480px) {
+    width: 70vw;
+    height: 70vw;
+    margin: 0 auto;
+  }
   
   &:hover {
     > div {
@@ -826,6 +924,16 @@ const PlateCircle = styled.img`
   background-color: white;
   border: 3px solid #ffff00;
   aspect-ratio: 1;
+  
+  @media (max-width: 768px) {
+    width: 40vw;
+    height: 40vw;
+  }
+  
+  @media (max-width: 480px) {
+    width: 70vw;
+    height: 70vw;
+  }
 `;
 
 const PlateMessageOverlay = styled.div`
@@ -843,10 +951,20 @@ const PlateMessageOverlay = styled.div`
   align-items: center;
   opacity: ${props => props.$isClicked ? 1 : 0};
   transition: opacity 0.3s ease;
-  padding: 8% 10%;
+  padding: 10% 12%;
   box-sizing: border-box;
   border: 1px solid grey;
   aspect-ratio: 1;
+  
+  @media (max-width: 768px) {
+    width: 40vw;
+    height: 40vw;
+  }
+  
+  @media (max-width: 480px) {
+    width: 70vw;
+    height: 70vw;
+  }
   
   &::after {
     content: '';
@@ -863,36 +981,62 @@ const PlateMessageOverlay = styled.div`
 
 const PlateWriter = styled.div`
   color: black;
-  font-size: clamp(14px, 0.9vw, 18px);
+  font-size: 1.2vw;
   font-weight: 600;
   text-align: center;
   width: 100%;
   margin-bottom: auto;
   margin-top: 6%;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6vw;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2.8vw;
+  }
 `;
 
 const PlateMessage = styled.div`
   color: black;
-  font-size: clamp(11px, 0.7vw, 14px);
+  font-size: 0.8vw;
   text-align: center;
   word-break: break-word;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 14;
+  -webkit-line-clamp: 12;
   -webkit-box-orient: vertical;
-  max-height: 65%;
+  max-height: 60%;
   width: 100%;
-  line-height: 1.3;
+  line-height: 1.2;
   margin: 0 auto;
+  padding: 0 5%;
+  box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    font-size: 1.1vw;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2vw;
+  }
 `;
 
 const PlateDate = styled.div`
   color: black;
-  font-size: clamp(10px, 0.65vw, 13px);
+  font-size: 0.6vw;
   text-align: center;
   width: 100%;
   margin-top: auto;
   margin-bottom: 6%;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8vw;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.5vw;
+  }
 `;
 
 const Pagination = styled.div`
@@ -901,24 +1045,37 @@ const Pagination = styled.div`
   align-items: center;
   margin-top: 5.56vh;
   flex-wrap: wrap;
+  gap: clamp(8px, 0.5vw, 12px);
+  
+  @media (max-width: 768px) {
+    margin-top: 4vh;
+    gap: 1.5vw;
+  }
 `;
 
 const PageNumber = styled.div`
-  width: 2.5vw;
-  height: 4.44vh;
+  width: clamp(35px, 2.5vw, 45px);
+  height: clamp(35px, 2.5vw, 45px);
+  min-width: 35px;
+  min-height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  margin: 1.11vh 0.83vw;
+  margin: 0.5vh 0.2vw;
   background-color: #ffff00;
   border: 1.5px solid black;
-  font-size: 0.94vw;
+  font-size: clamp(12px, 0.94vw, 16px);
   cursor: pointer;
+  flex-shrink: 0;
   
   &.active {
     background-color: #000;
     color: #ffff00;
+  }
+  
+  &:hover {
+    opacity: 0.8;
   }
 `;
 
@@ -926,22 +1083,29 @@ const ArrowButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1.11vh 0.83vw;
+  margin: 0.5vh 0.5vw;
   background: transparent;
   border: none;
   cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
   
   &:hover {
     opacity: 0.7;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: not-allowed;
+    
+    &:hover {
+      background-color: transparent;
+    }
   }
 `;
 
 const ArrowImage = styled.img`
-  width: 1.25vw;
-  height: 2.22vh;
+  width: clamp(16px, 1.25vw, 20px);
+  height: clamp(20px, 2.22vh, 28px);
 `;
