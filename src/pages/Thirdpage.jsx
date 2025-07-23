@@ -1,5 +1,7 @@
 const pagesPerGroup = 5;
-  const itemsPerPage = 12;import { useState, useRef, useEffect, useCallback } from "react";
+const itemsPerPage = 12;
+
+import { useState, useRef, useEffect, useCallback } from "react";
 import styled, { keyframes } from "styled-components";
 import { supabase } from "../SupabaseClient";
 import { useLocation } from "react-router-dom";
@@ -265,15 +267,24 @@ const Thirdpage = () => {
     }
   };
 
-  // 페이지 변경 핸들러
+  // 페이지 변경 핸들러 (수정됨)
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     
     // 페이지 변경 시 클릭된 접시 상태 초기화
     setClickedPlates({});
     
-    // 페이지 제일 위로 즉시 이동 (애니메이션 없이)
-    window.scrollTo(0, 0);
+    // 접시들의 상단 부분까지만 보이도록 스크롤 이동
+    if (formSectionRef.current) {
+      const formRect = formSectionRef.current.getBoundingClientRect();
+      const formBottom = window.scrollY + formRect.bottom;
+      const offset = -80; // 조금만 더 내려서 접시 상단 부분이 적당히 보이도록
+      
+      window.scrollTo({
+        top: formBottom + offset,
+        behavior: 'smooth'
+      });
+    }
   };
 
   // 작성자명 포커스 핸들러
