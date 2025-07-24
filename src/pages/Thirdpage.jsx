@@ -21,7 +21,7 @@ const slideAnimation = keyframes`
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-33.333% - 1.04vw));
+    transform: translateX(-100%);
   }
 `;
 
@@ -324,8 +324,20 @@ const Thirdpage = () => {
       <PlatesStrip>
         <PlatesContainer>
           <PlatesRow>
-            {Array.from({ length: 18 }, (_, index) => (
-              <PlateItem key={index}>
+            {/* 첫 번째 그룹 */}
+            {Array.from({ length: 15 }, (_, index) => (
+              <PlateItem key={`group1-${index}`}>
+                <MovingPlateImage 
+                  src={index % 3 === 0 ? plate1 : index % 3 === 1 ? plate2 : plate3} 
+                  alt={`Plate ${(index % 3) + 1}`} 
+                />
+              </PlateItem>
+            ))}
+          </PlatesRow>
+          {/* 중복된 그룹 (스크린 리더에서 숨김) */}
+          <PlatesRow aria-hidden="true">
+            {Array.from({ length: 15 }, (_, index) => (
+              <PlateItem key={`group2-${index}`}>
                 <MovingPlateImage 
                   src={index % 3 === 0 ? plate1 : index % 3 === 1 ? plate2 : plate3} 
                   alt={`Plate ${(index % 3) + 1}`} 
@@ -538,11 +550,11 @@ const PlatesStrip = styled.div`
 
 const PlatesContainer = styled.div`
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 32vh;
   padding: 0;
   
@@ -554,15 +566,16 @@ const PlatesContainer = styled.div`
 const PlatesRow = styled.div`
   display: flex;
   align-items: center;
-  width: 450%;
-  animation: ${slideAnimation} 35s linear infinite;
+  gap: 2vw;
+  padding-right: 2vw;
+  will-change: transform;
+  animation: ${slideAnimation} 25s linear infinite;
   height: auto;
 `;
 
 const PlateItem = styled.div`
   width: clamp(80px, 15vw, 180px);
   height: 26.67vh;
-  margin: 0 1vw;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -570,7 +583,6 @@ const PlateItem = styled.div`
   
   @media (max-width: 768px) {
     height: 20vh;
-    margin: 0 0.5vw;
   }
 `;
 
