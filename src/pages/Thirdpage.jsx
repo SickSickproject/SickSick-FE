@@ -575,14 +575,20 @@ const PlatesRow = styled.div`
 
 const PlateItem = styled.div`
   width: clamp(80px, 15vw, 180px);
-  height: 26.67vh;
+  height: clamp(80px, 15vw, 180px);
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   
   @media (max-width: 768px) {
-    height: 20vh;
+    width: clamp(60px, 12vw, 120px);
+    height: clamp(60px, 12vw, 120px);
+  }
+  
+  @media (max-width: 480px) {
+    width: clamp(50px, 10vw, 100px);
+    height: clamp(50px, 10vw, 100px);
   }
 `;
 
@@ -590,11 +596,22 @@ const MovingPlateImage = styled.img`
   width: clamp(80px, 15vw, 180px);
   height: clamp(80px, 15vw, 180px);
   border-radius: 50%;
-  object-fit: contain;
+  object-fit: cover;
   background-color: white;
   border: 2px solid #232323;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    width: clamp(60px, 12vw, 120px);
+    height: clamp(60px, 12vw, 120px);
+  }
+  
+  @media (max-width: 480px) {
+    width: clamp(50px, 10vw, 100px);
+    height: clamp(50px, 10vw, 100px);
+  }
 `;
 
 const DownArrowSection = styled.div`
