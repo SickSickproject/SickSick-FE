@@ -67,7 +67,7 @@ const Thirdpage = () => {
         text: item.text,
         writer: item.name || "익명",
         plateType: (index % 3) + 1,
-        date: new Date(item.created_at).toISOString().split('T')[0]
+        date: new Date(new Date(item.created_at).getTime() + (9 * 60 * 60 * 1000)).toISOString().split('T')[0] // 한국 시간으로 조정
       }));
       
       console.log('변환된 데이터:', transformedData);
@@ -172,7 +172,7 @@ const Thirdpage = () => {
           text: data[0].text,
           writer: data[0].name || "익명",
           plateType: Math.floor(Math.random() * 3) + 1,
-          date: new Date(data[0].created_at).toISOString().split('T')[0]
+          date: new Date(new Date(data[0].created_at).getTime() + (9 * 60 * 60 * 1000)).toISOString().split('T')[0] // 한국 시간으로 조정
         };
         
         console.log('로컬 상태에 추가할 메시지:', newMessage);
@@ -569,7 +569,7 @@ const PlatesRow = styled.div`
   gap: 2vw;
   padding-right: 2vw;
   will-change: transform;
-  animation: ${slideAnimation} 25s linear infinite;
+  animation: ${slideAnimation} 35s linear infinite;
   height: auto;
 `;
 
