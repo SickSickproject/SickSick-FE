@@ -569,7 +569,7 @@ const PlatesRow = styled.div`
   gap: 2vw;
   padding-right: 2vw;
   will-change: transform;
-  animation: ${slideAnimation} 35s linear infinite;
+  animation: ${slideAnimation} 45s linear infinite;
   height: auto;
 `;
 
