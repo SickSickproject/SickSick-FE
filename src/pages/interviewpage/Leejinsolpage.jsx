@@ -26,7 +26,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
         // 마우스가 올라가면 1초마다 콜백 호출
         if (isHovered) {
             intervalRef.current = window.setInterval(() => {
-                console.log(divIndex)
+                // console.log(divIndex)
                 setdivIndex(prev => (prev + 1) % 4);
             }, 700);
         } else {
@@ -119,6 +119,13 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
         }
     }
 
+    const alloverlay = ()=>{
+        if(isClicked){
+            setIsClicked(!isClicked)
+            moving(!isClicked)
+        }
+    }
+
     return (
         <>
 
@@ -131,7 +138,7 @@ const Leejinsolpage = ({ setpagestate, setbtnclick }) => {
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
                     style={{ userSelect: "none", display: "flex", alignItems: "center" }}
                 >
-                    <Container clicked={isClicked} ref={containerRef}>
+                    <Container clicked={isClicked} ref={containerRef} onClick={()=>{alloverlay()}}>
                         <Namebar>이진솔</Namebar>
                         <Titlebar move2={move2} src={leejinsoltitle}></Titlebar>
 

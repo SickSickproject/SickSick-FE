@@ -15,10 +15,10 @@ const Mainpage = () => {
 
     // 경로에서 마지막 부분만 추출 ("/main/one" -> "one")
     const lastSegment = path.split("/").pop();
-    console.log(lastSegment)
+    // console.log(lastSegment)
 
     const [btnclick, setbtnclick] = useState([1, 0, 0])
-    console.log(btnclick)
+    // console.log(btnclick)
     const [Left, setLeft] = useState(window.innerWidth * 0.8)
     const navigate = useNavigate();
 

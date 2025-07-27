@@ -87,7 +87,7 @@ const Secondpage = () => {
     const btnchange = (i) => {
         const newarr = [0, 0, 0, 0]
         newarr[i] = 1;
-        console.log(newarr)
+        // console.log(newarr)
         setbtnclick(newarr)
     }
 

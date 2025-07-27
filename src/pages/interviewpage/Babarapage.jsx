@@ -24,7 +24,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
         // 마우스가 올라가면 1초마다 콜백 호출
         if (isHovered) {
             intervalRef.current = window.setInterval(() => {
-                console.log(divIndex)
+                // console.log(divIndex)
                 setdivIndex(prev => (prev + 1) % 4);
             }, 700);
         } else {
@@ -114,6 +114,13 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
         }
     }
 
+    const alloverlay = ()=>{
+        if(isClicked){
+            setIsClicked(!isClicked)
+            moving(!isClicked)
+        }
+    }
+
     return (
         <>
 
@@ -126,7 +133,7 @@ const Babarapage = ({ setpagestate, setbtnclick }) => {
                     className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
                     style={{ userSelect: "none", display: "flex", alignItems: "center" }}
                 >
-                    <Container clicked={isClicked} ref={containerRef}>
+                    <Container clicked={isClicked} ref={containerRef} onClick={()=>{alloverlay()}}>
                         <Namebar>바바라</Namebar>
                         <Titlebar move2={move2} src={babaratitleimg}></Titlebar>
 
@@ -817,7 +824,7 @@ const Discriptbar = styled.div`
 // 이미지 스타일 (클릭했을 때 강조)
 const Personimg = styled.div`
      left: ${({ left }) => `calc(316px + ${left * 0.325}px)`};
-    width:35%;
+    width:30%;
     aspect-ratio:741/759;
     position:absolute;
     transform-origin: top left;
